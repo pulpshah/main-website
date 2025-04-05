@@ -195,7 +195,7 @@ export function Header() {
                       </DrawerDescription>
                     </DrawerHeader>
 
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3 max-w-5xl mx-auto">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-5xl mx-auto">
                       {offerItems.map((offer, index) => (
                         <Link 
                           key={offer.title} 

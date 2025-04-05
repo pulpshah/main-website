@@ -1,0 +1,269 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import CountUp from "react-countup";
+
+interface StatItem {
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  title: string;
+  description: string;
+  isPositive?: boolean;
+  duration?: number;
+}
+
+interface StatsSectionProps {
+  title: string;
+  subtitle: string;
+  description: string;
+  stats: StatItem[];
+}
+
+export default function StatsSection({
+  title = "Just Use Your Words",
+  subtitle = "The Benefits of Language Accelerated Automation",
+  description = "Pulp's natural language AI improves the comprehension and efficiency for both technical and non-technical teams.",
+  stats = [
+    {
+      value: 200,
+      prefix: "+",
+      suffix: "%",
+      title: "Faster Engagement Insights",
+      description: "Capitalize on audience behavior sooner with fewer resources.",
+      isPositive: true,
+      duration: 2.5
+    },
+    {
+      value: 70,
+      prefix: "-",
+      suffix: "%",
+      title: "Decrease in Time-to-Value",
+      description: "Let users experience value faster, without the learning curve.",
+      isPositive: false,
+      duration: 2
+    },
+    {
+      value: 15,
+      prefix: "+",
+      suffix: "%",
+      title: "Avg. Revenue per User",
+      description: "Higher engagement & smarter monetization strategies.",
+      isPositive: true,
+      duration: 1.5
+    },
+    {
+      value: 10,
+      prefix: "-",
+      suffix: "%",
+      title: "Decrease in Lost Customers",
+      description: "Boost retention with deeper insights and proactive action.",
+      isPositive: false,
+      duration: 1.5
+    },
+    {
+      value: 10,
+      prefix: "+",
+      suffix: "%",
+      title: "Net Promoter Score",
+      description: "Happier teams & customers, leading to stronger retention.",
+      isPositive: true,
+      duration: 1.5
+    },
+    {
+      value: 50,
+      prefix: "-",
+      suffix: "%",
+      title: "Decrease in Data Costs",
+      description: "Automate analysis, cut overhead, and reduce software spend.",
+      isPositive: false,
+      duration: 2
+    }
+  ]
+}: Partial<StatsSectionProps>) {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <div ref={sectionRef} className="py-16 relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div 
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-amber-600/10 to-orange-500/10 rounded-full blur-3xl"
+          style={{
+            opacity: isVisible ? 0.3 : 0,
+            transition: 'opacity 1s ease'
+          }}
+        ></div>
+      </div>
+      
+      {/* Section heading */}
+      <div className="text-center relative z-10 mb-16 px-4">
+        <div className="inline-flex items-center justify-center bg-amber-900/20 backdrop-blur-sm px-5 py-1.5 rounded-full mb-6 border border-amber-500/30">
+          <span className="text-amber-300 text-sm font-medium tracking-wider">BUSINESS IMPACT</span>
+        </div>
+        
+        <h2 
+          className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'opacity 0.6s ease, transform 0.6s ease'
+          }}
+        >
+          {title}
+        </h2>
+        
+        <div 
+          className="w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-400 mx-auto mb-6"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            width: isVisible ? '96px' : '20px',
+            transition: 'opacity 0.6s ease, width 0.8s ease'
+          }}
+        ></div>
+        
+        <h3 
+          className="text-xl md:text-2xl font-semibold text-amber-200 mb-6"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s'
+          }}
+        >
+          {subtitle}
+        </h3>
+        
+        <p 
+          className="text-lg text-gray-300 max-w-2xl mx-auto"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s'
+          }}
+        >
+          {description}
+        </p>
+      </div>
+      
+      {/* Stats grid */}
+      <div className="w-full max-w-6xl mx-auto relative z-10 overflow-hidden px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
+          {stats.map((stat, index) => (
+            <StatCard 
+              key={index} 
+              stat={stat}
+              index={index}
+              isVisible={isVisible}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StatCard({ 
+  stat, 
+  index,
+  isVisible
+}: { 
+  stat: StatItem; 
+  index: number;
+  isVisible: boolean;
+}) {
+  // Determine colors based on whether the stat is positive or negative
+  const accentColor = stat.isPositive 
+    ? "from-amber-500 to-orange-400" 
+    : "from-amber-700 to-amber-500";
+  
+  const iconColor = stat.isPositive ? "text-amber-400" : "text-amber-600";
+  const hoverTextColor = stat.isPositive ? "group-hover:text-amber-200" : "group-hover:text-amber-300";
+  
+  // Icon based on positive/negative stat
+  const icon = stat.isPositive ? (
+    <svg className={`w-5 h-5 ${iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+    </svg>
+  ) : (
+    <svg className={`w-5 h-5 ${iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+    </svg>
+  );
+
+  return (
+    <div 
+      className="bg-black/30 backdrop-blur-sm border border-amber-900/20 rounded-xl p-6 flex flex-col group relative overflow-hidden"
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+        transition: `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`
+      }}
+    >
+      {/* Background glow effect */}
+      <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${accentColor} rounded-bl-full opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
+      
+      {/* Top decorative line */}
+      <div className={`w-12 h-1 bg-gradient-to-r ${accentColor} rounded-full mb-4`}></div>
+      
+      {/* Icon in top-right */}
+      <div className="absolute top-4 right-4">
+        {icon}
+      </div>
+      
+      {/* Stat value */}
+      <div className={`font-bold text-4xl md:text-5xl mb-2 bg-gradient-to-r ${accentColor} bg-clip-text text-transparent flex items-center`}>
+        {isVisible ? (
+          <>
+            <span>{stat.prefix}</span>
+            <CountUp
+              end={stat.value}
+              duration={stat.duration || 2}
+              decimals={stat.value % 1 !== 0 ? 1 : 0}
+              suffix={stat.suffix || ''}
+              className="tabular-nums"
+            />
+          </>
+        ) : (
+          <span>{stat.prefix || ''}0{stat.suffix || ''}</span>
+        )}
+      </div>
+      
+      {/* Stat title and description */}
+      <h3 className={`text-xl font-bold text-white mb-2 ${hoverTextColor} transition-colors duration-300`}>
+        {stat.title}
+      </h3>
+      
+      <p className="text-gray-400 text-sm leading-relaxed flex-grow">
+        {stat.description}
+      </p>
+      
+      {/* Bottom accent */}
+      <div className={`absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r ${accentColor} group-hover:w-full transition-all duration-500`}></div>
+    </div>
+  );
+} 

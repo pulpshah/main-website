@@ -1,103 +1,84 @@
-import Image from "next/image";
+import HeroSection from "@/components/hero-section";
+import FeaturesSection from "@/components/features-section";
+import StatsSection from "@/components/stats-section";
+import RiskSection from "@/components/risk-section";
+import CoverageSection from "@/components/coverage-section";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-black text-white relative pb-20 overflow-x-hidden" suppressHydrationWarning>
+      {/* Background Pattern */}
+      <div className="absolute inset-0 overflow-hidden z-0 opacity-30" suppressHydrationWarning>
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[radial-gradient(#8A3FFC_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" suppressHydrationWarning></div>
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[radial-gradient(#8A3FFC_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" suppressHydrationWarning></div>
+      </div>
+      
+      <div className="relative z-10 w-full overflow-hidden" suppressHydrationWarning>
+        {/* Hero Section */}
+        <div className="w-full max-w-full mx-auto py-8 md:py-12" suppressHydrationWarning>
+          <HeroSection />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        
+        {/* Section Separator - Purple */}
+        <div className="w-full py-4 md:py-6 relative" suppressHydrationWarning>
+          <div className="max-w-sm mx-auto bg-gradient-to-r from-transparent via-purple-500/40 to-transparent h-[2px] shadow-[0_0_8px_rgba(168,85,247,0.5)]" suppressHydrationWarning></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-black border-2 border-purple-500/30 rounded-full flex items-center justify-center" suppressHydrationWarning>
+            <div className="w-3 h-3 bg-purple-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.8)]" suppressHydrationWarning></div>
+          </div>
+        </div>
+        
+        {/* Features Section - Blue */}
+        <div className="py-6 md:py-10 w-full" suppressHydrationWarning>
+          <div className="max-w-full mx-auto" suppressHydrationWarning>
+            <FeaturesSection />
+          </div>
+        </div>
+        
+        {/* Section Separator - Blue */}
+        <div className="w-full py-4 md:py-6 relative" suppressHydrationWarning>
+          <div className="max-w-sm mx-auto bg-gradient-to-r from-transparent via-blue-500/40 to-transparent h-[2px] shadow-[0_0_8px_rgba(59,130,246,0.5)]" suppressHydrationWarning></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-black border-2 border-blue-500/30 rounded-full flex items-center justify-center" suppressHydrationWarning>
+            <div className="w-3 h-3 bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.8)]" suppressHydrationWarning></div>
+          </div>
+        </div>
+        
+        {/* Stats Section - Amber/Orange */}
+        <div className="py-6 md:py-10 w-full" suppressHydrationWarning>
+          <div className="max-w-full mx-auto" suppressHydrationWarning>
+            <StatsSection />
+          </div>
+        </div>
+        
+        {/* Section Separator - Amber */}
+        <div className="w-full py-4 md:py-6 relative" suppressHydrationWarning>
+          <div className="max-w-sm mx-auto bg-gradient-to-r from-transparent via-amber-500/40 to-transparent h-[2px] shadow-[0_0_8px_rgba(245,158,11,0.5)]" suppressHydrationWarning></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-black border-2 border-amber-500/30 rounded-full flex items-center justify-center" suppressHydrationWarning>
+            <div className="w-3 h-3 bg-amber-500 rounded-full shadow-[0_0_8px_rgba(245,158,11,0.8)]" suppressHydrationWarning></div>
+          </div>
+        </div>
+        
+        {/* Risk Section - Red/Purple */}
+        <div className="py-6 md:py-10 w-full" suppressHydrationWarning>
+          <div className="max-w-full mx-auto" suppressHydrationWarning>
+            <RiskSection />
+          </div>
+        </div>
+        
+        {/* Section Separator - Red */}
+        <div className="w-full py-4 md:py-6 relative" suppressHydrationWarning>
+          <div className="max-w-sm mx-auto bg-gradient-to-r from-transparent via-red-500/40 to-transparent h-[2px] shadow-[0_0_8px_rgba(239,68,68,0.5)]" suppressHydrationWarning></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-black border-2 border-red-500/30 rounded-full flex items-center justify-center" suppressHydrationWarning>
+            <div className="w-3 h-3 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.8)]" suppressHydrationWarning></div>
+          </div>
+        </div>
+        
+        {/* Coverage Section - Green */}
+        <div className="py-6 md:py-10 w-full" suppressHydrationWarning>
+          <div className="max-w-full mx-auto" suppressHydrationWarning>
+            <CoverageSection />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

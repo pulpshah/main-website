@@ -1,0 +1,92 @@
+<svg width="500" height="400" viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  
+  <!-- Shield Container -->
+  <g>
+    <!-- Shield shape -->
+    <path d="M250,100 L350,120 C350,120 360,250 250,320 C140,250 150,120 150,120 L250,100 Z" fill="#111111" stroke="url(#shield-gradient)" stroke-width="2" />
+    
+    <text x="250" y="150" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="16" font-family="sans-serif" font-weight="bold">CONTENT</text>
+    <text x="250" y="180" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="16" font-family="sans-serif" font-weight="bold">MODERATION</text>
+    
+    <!-- Shield checkmark -->
+    <path d="M220,200 L240,230 L280,170" stroke="#06B6D4" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+  
+  <!-- Content pieces -->
+  <g>
+    <!-- Content pieces arranged around the shield -->
+    <g transform="translate(120, 90)">
+      <rect width="60" height="20" rx="3" fill="#222222" stroke="#555555" stroke-width="1" />
+      <rect width="20" height="20" rx="3" fill="#EF4444" />
+      <text x="40" y="14" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">HARMFUL</text>
+    </g>
+    
+    <g transform="translate(320, 90)">
+      <rect width="60" height="20" rx="3" fill="#222222" stroke="#555555" stroke-width="1" />
+      <rect width="20" height="20" rx="3" fill="#22C55E" />
+      <text x="40" y="14" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">SAFE</text>
+    </g>
+    
+    <g transform="translate(100, 240)">
+      <rect width="70" height="20" rx="3" fill="#222222" stroke="#555555" stroke-width="1" />
+      <rect width="20" height="20" rx="3" fill="#EAB308" />
+      <text x="45" y="14" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">REVIEW</text>
+    </g>
+    
+    <g transform="translate(330, 240)">
+      <rect width="80" height="20" rx="3" fill="#222222" stroke="#555555" stroke-width="1" />
+      <rect width="20" height="20" rx="3" fill="#3B82F6" />
+      <text x="50" y="14" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">CONTEXT</text>
+    </g>
+  </g>
+  
+  <!-- Analysis Paths -->
+  <g>
+    <path d="M150,120 C100,140 80,200 100,240" stroke="#3B82F6" stroke-width="1" stroke-opacity="0.6" stroke-dasharray="4,2" fill="none" />
+    <path d="M350,120 C400,140 420,200 400,240" stroke="#3B82F6" stroke-width="1" stroke-opacity="0.6" stroke-dasharray="4,2" fill="none" />
+    
+    <circle cx="100" cy="240" r="4" fill="#3B82F6" fill-opacity="0.6" />
+    <circle cx="400" cy="240" r="4" fill="#3B82F6" fill-opacity="0.6" />
+  </g>
+  
+  <!-- Policy Frameworks -->
+  <g>
+    <rect x="180" y="280" width="140" height="30" rx="5" fill="#111111" stroke="#3B82F6" stroke-width="1" />
+    <text x="250" y="300" text-anchor="middle" fill="white" font-size="12" font-family="sans-serif">POLICY FRAMEWORK</text>
+    
+    <!-- Decision nodes -->
+    <g transform="translate(250, 330)">
+      <circle cx="-50" cy="0" r="15" fill="#111111" stroke="#3B82F6" stroke-width="1" />
+      <text x="-50" y="4" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">1</text>
+      <circle cx="0" cy="0" r="15" fill="#111111" stroke="#3B82F6" stroke-width="1" />
+      <text x="0" y="4" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">2</text>
+      <circle cx="50" cy="0" r="15" fill="#111111" stroke="#3B82F6" stroke-width="1" />
+      <text x="50" y="4" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">3</text>
+      
+      <line x1="-35" y1="0" x2="-15" y2="0" stroke="#3B82F6" stroke-width="1" />
+      <line x1="15" y1="0" x2="35" y2="0" stroke="#3B82F6" stroke-width="1" />
+    </g>
+    
+    <line x1="250" y1="310" x2="250" y2="315" stroke="#3B82F6" stroke-width="1" />
+  </g>
+  
+  <!-- AI Scanning Beams -->
+  <g opacity="0.7">
+    <path d="M250,100 L180,50" stroke="#06B6D4" stroke-width="1" stroke-dasharray="2,2" />
+    <path d="M250,100 L320,50" stroke="#06B6D4" stroke-width="1" stroke-dasharray="2,2" />
+    <path d="M150,120 L80,100" stroke="#06B6D4" stroke-width="1" stroke-dasharray="2,2" />
+    <path d="M350,120 L420,100" stroke="#06B6D4" stroke-width="1" stroke-dasharray="2,2" />
+    
+    <circle cx="180" cy="50" r="3" fill="#06B6D4" />
+    <circle cx="320" cy="50" r="3" fill="#06B6D4" />
+    <circle cx="80" cy="100" r="3" fill="#06B6D4" />
+    <circle cx="420" cy="100" r="3" fill="#06B6D4" />
+  </g>
+  
+  <!-- Governance label -->
+  <g transform="translate(400, 30)">
+    <rect x="-5" y="-15" width="75" height="20" rx="10" fill="#111111" stroke="#3B82F6" stroke-width="1" />
+    <text x="32" y="0" text-anchor="middle" fill="#3B82F6" font-size="10" font-family="sans-serif" font-weight="bold">GOVERNANCE</text>
+  </g>
+</svg> 

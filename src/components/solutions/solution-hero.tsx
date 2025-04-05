@@ -7,9 +7,9 @@ interface SolutionHeroProps {
   badge: string;
   title: string;
   description: string;
-  primaryColor: "purple" | "pink" | "green" | "blue";
-  accentColor: "purple" | "pink" | "green" | "blue";
-  tertiaryColor: "purple" | "pink" | "green" | "blue";
+  primaryColor: "purple" | "pink" | "green" | "blue" | "red";
+  accentColor: "purple" | "pink" | "green" | "blue" | "red";
+  tertiaryColor: "purple" | "pink" | "green" | "blue" | "red";
   imagePath: string;
 }
 
@@ -56,6 +56,17 @@ const colorMap = {
     border: "border-blue-500/30",
     bg: "bg-blue-500/10",
     fill: "#3B82F6",
+    fillOpacity: "0.15",
+  },
+  red: {
+    text: "text-red-400",
+    gradient: "from-red-600 to-red-400",
+    gradientAlt: "from-red-900/20 to-red-800/0",
+    gradientOverlay: "from-red-900/60 to-red-800/30",
+    glow: "rgba(239,68,68,0.5)",
+    border: "border-red-500/30",
+    bg: "bg-red-500/10",
+    fill: "#EF4444",
     fillOpacity: "0.15",
   },
 };

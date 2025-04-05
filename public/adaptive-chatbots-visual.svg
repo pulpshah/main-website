@@ -1,0 +1,233 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Elements -->
+  <defs>
+    <linearGradient id="chatGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0.4" />
+    </linearGradient>
+    <linearGradient id="pulseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#059669" stop-opacity="0.8" />
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Neural Network Background Pattern -->
+  <g opacity="0.15">
+    <!-- Neural nodes -->
+    <circle cx="200" cy="100" r="10" fill="#10B981" />
+    <circle cx="300" cy="150" r="10" fill="#10B981" />
+    <circle cx="400" cy="120" r="10" fill="#10B981" />
+    <circle cx="500" cy="170" r="10" fill="#10B981" />
+    <circle cx="600" cy="130" r="10" fill="#10B981" />
+    <circle cx="150" cy="210" r="10" fill="#10B981" />
+    <circle cx="250" cy="250" r="10" fill="#10B981" />
+    <circle cx="350" cy="230" r="10" fill="#10B981" />
+    <circle cx="450" cy="280" r="10" fill="#10B981" />
+    <circle cx="550" cy="240" r="10" fill="#10B981" />
+    <circle cx="650" cy="260" r="10" fill="#10B981" />
+    <circle cx="180" cy="340" r="10" fill="#10B981" />
+    <circle cx="280" cy="390" r="10" fill="#10B981" />
+    <circle cx="380" cy="360" r="10" fill="#10B981" />
+    <circle cx="480" cy="410" r="10" fill="#10B981" />
+    <circle cx="580" cy="370" r="10" fill="#10B981" />
+    <circle cx="680" cy="390" r="10" fill="#10B981" />
+    <circle cx="210" cy="470" r="10" fill="#10B981" />
+    <circle cx="310" cy="520" r="10" fill="#10B981" />
+    <circle cx="410" cy="490" r="10" fill="#10B981" />
+    <circle cx="510" cy="540" r="10" fill="#10B981" />
+    <circle cx="610" cy="500" r="10" fill="#10B981" />
+
+    <!-- Neural connections -->
+    <line x1="200" y1="100" x2="300" y2="150" stroke="#10B981" stroke-width="1" />
+    <line x1="300" y1="150" x2="400" y2="120" stroke="#10B981" stroke-width="1" />
+    <line x1="400" y1="120" x2="500" y2="170" stroke="#10B981" stroke-width="1" />
+    <line x1="500" y1="170" x2="600" y2="130" stroke="#10B981" stroke-width="1" />
+    <line x1="150" y1="210" x2="250" y2="250" stroke="#10B981" stroke-width="1" />
+    <line x1="250" y1="250" x2="350" y2="230" stroke="#10B981" stroke-width="1" />
+    <line x1="350" y1="230" x2="450" y2="280" stroke="#10B981" stroke-width="1" />
+    <line x1="450" y1="280" x2="550" y2="240" stroke="#10B981" stroke-width="1" />
+    <line x1="550" y1="240" x2="650" y2="260" stroke="#10B981" stroke-width="1" />
+    <line x1="180" y1="340" x2="280" y2="390" stroke="#10B981" stroke-width="1" />
+    <line x1="280" y1="390" x2="380" y2="360" stroke="#10B981" stroke-width="1" />
+    <line x1="380" y1="360" x2="480" y2="410" stroke="#10B981" stroke-width="1" />
+    <line x1="480" y1="410" x2="580" y2="370" stroke="#10B981" stroke-width="1" />
+    <line x1="580" y1="370" x2="680" y2="390" stroke="#10B981" stroke-width="1" />
+    <line x1="210" y1="470" x2="310" y2="520" stroke="#10B981" stroke-width="1" />
+    <line x1="310" y1="520" x2="410" y2="490" stroke="#10B981" stroke-width="1" />
+    <line x1="410" y1="490" x2="510" y2="540" stroke="#10B981" stroke-width="1" />
+    <line x1="510" y1="540" x2="610" y2="500" stroke="#10B981" stroke-width="1" />
+    
+    <!-- Cross-level connections -->
+    <line x1="200" y1="100" x2="250" y2="250" stroke="#10B981" stroke-width="1" />
+    <line x1="300" y1="150" x2="350" y2="230" stroke="#10B981" stroke-width="1" />
+    <line x1="400" y1="120" x2="450" y2="280" stroke="#10B981" stroke-width="1" />
+    <line x1="500" y1="170" x2="550" y2="240" stroke="#10B981" stroke-width="1" />
+    <line x1="150" y1="210" x2="180" y2="340" stroke="#10B981" stroke-width="1" />
+    <line x1="250" y1="250" x2="280" y2="390" stroke="#10B981" stroke-width="1" />
+    <line x1="350" y1="230" x2="380" y2="360" stroke="#10B981" stroke-width="1" />
+    <line x1="450" y1="280" x2="480" y2="410" stroke="#10B981" stroke-width="1" />
+    <line x1="550" y1="240" x2="580" y2="370" stroke="#10B981" stroke-width="1" />
+    <line x1="180" y1="340" x2="210" y2="470" stroke="#10B981" stroke-width="1" />
+    <line x1="280" y1="390" x2="310" y2="520" stroke="#10B981" stroke-width="1" />
+    <line x1="380" y1="360" x2="410" y2="490" stroke="#10B981" stroke-width="1" />
+    <line x1="480" y1="410" x2="510" y2="540" stroke="#10B981" stroke-width="1" />
+  </g>
+
+  <!-- Central AI/Chatbot Element -->
+  <g filter="url(#glow)">
+    <circle cx="400" cy="300" r="80" fill="url(#chatGradient)" stroke="#10B981" stroke-width="3" />
+    
+    <!-- Pulsing rings to show adaptability -->
+    <circle cx="400" cy="300" r="110" fill="none" stroke="#10B981" stroke-width="2" stroke-dasharray="10,5" opacity="0.6">
+      <animate attributeName="r" values="110;120;110" dur="4s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.6;0.2;0.6" dur="4s" repeatCount="indefinite" />
+    </circle>
+    
+    <circle cx="400" cy="300" r="140" fill="none" stroke="#10B981" stroke-width="1.5" stroke-dasharray="8,4" opacity="0.4">
+      <animate attributeName="r" values="140;150;140" dur="6s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.4;0.1;0.4" dur="6s" repeatCount="indefinite" />
+    </circle>
+  </g>
+  
+  <!-- AI Brain/Circuit Pattern in Core -->
+  <g transform="translate(400,300)">
+    <path d="M-30,-30 L30,-30 L15,0 L30,30 L-30,30 L-15,0 Z" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.8" />
+    <path d="M-20,-20 L20,-20 L10,0 L20,20 L-20,20 L-10,0 Z" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.6" />
+    <circle cx="0" cy="0" r="10" fill="#FFFFFF" opacity="0.9" />
+    <line x1="-30" y1="-30" x2="-20" y2="-20" stroke="#FFFFFF" stroke-width="1.5" />
+    <line x1="30" y1="-30" x2="20" y2="-20" stroke="#FFFFFF" stroke-width="1.5" />
+    <line x1="30" y1="30" x2="20" y2="20" stroke="#FFFFFF" stroke-width="1.5" />
+    <line x1="-30" y1="30" x2="-20" y2="20" stroke="#FFFFFF" stroke-width="1.5" />
+  </g>
+  
+  <!-- Conversation Elements -->
+  <g>
+    <!-- User Messages -->
+    <rect x="160" y="200" width="140" height="60" rx="30" fill="#333333" stroke="#10B981" stroke-width="1.5">
+      <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" />
+    </rect>
+    <text x="230" y="235" font-family="Arial" font-size="14" fill="white" text-anchor="middle">User Input</text>
+    
+    <rect x="130" y="320" width="160" height="60" rx="30" fill="#333333" stroke="#10B981" stroke-width="1.5">
+      <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" begin="1s" />
+    </rect>
+    <text x="210" y="355" font-family="Arial" font-size="14" fill="white" text-anchor="middle">Follow-up Question</text>
+    
+    <!-- Bot Responses - Showing adaptation -->
+    <rect x="500" y="230" width="180" height="70" rx="30" fill="url(#pulseGradient)" stroke="#FFFFFF" stroke-width="1.5">
+      <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" begin="0.5s" />
+    </rect>
+    <text x="590" y="265" font-family="Arial" font-size="14" fill="white" text-anchor="middle">Contextual Response</text>
+    <text x="590" y="285" font-family="Arial" font-size="10" fill="white" text-anchor="middle">Adapting to user needs...</text>
+    
+    <rect x="510" y="350" width="200" height="80" rx="30" fill="url(#pulseGradient)" stroke="#FFFFFF" stroke-width="1.5">
+      <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" begin="1.5s" />
+    </rect>
+    <text x="610" y="380" font-family="Arial" font-size="14" fill="white" text-anchor="middle">Personalized Suggestion</text>
+    <text x="610" y="400" font-family="Arial" font-size="10" fill="white" text-anchor="middle">Based on your preferences...</text>
+    
+    <!-- Connection lines showing interaction flow -->
+    <line x1="300" y1="230" x2="500" y2="265" stroke="#10B981" stroke-width="2" stroke-dasharray="5,3">
+      <animate attributeName="stroke-dashoffset" values="8;0" dur="1s" begin="0.2s" fill="freeze" />
+    </line>
+    
+    <line x1="290" y1="350" x2="510" y2="390" stroke="#10B981" stroke-width="2" stroke-dasharray="5,3">
+      <animate attributeName="stroke-dashoffset" values="8;0" dur="1s" begin="1.2s" fill="freeze" />
+    </line>
+  </g>
+  
+  <!-- Personalization Elements -->
+  <g>
+    <!-- User Profile Nodes -->
+    <g transform="translate(180,120)">
+      <circle cx="0" cy="0" r="15" fill="#10B981" opacity="0.8" />
+      <text x="0" y="5" font-family="Arial" font-size="14" fill="white" text-anchor="middle">U1</text>
+      <line x1="15" y1="15" x2="170" y2="170" stroke="#10B981" stroke-width="1.5" opacity="0.6" stroke-dasharray="3,2" />
+    </g>
+    
+    <g transform="translate(620,120)">
+      <circle cx="0" cy="0" r="15" fill="#10B981" opacity="0.8" />
+      <text x="0" y="5" font-family="Arial" font-size="14" fill="white" text-anchor="middle">U2</text>
+      <line x1="-15" y1="15" x2="-170" y2="170" stroke="#10B981" stroke-width="1.5" opacity="0.6" stroke-dasharray="3,2" />
+    </g>
+    
+    <g transform="translate(180,480)">
+      <circle cx="0" cy="0" r="15" fill="#10B981" opacity="0.8" />
+      <text x="0" y="5" font-family="Arial" font-size="14" fill="white" text-anchor="middle">U3</text>
+      <line x1="15" y1="-15" x2="170" y2="-170" stroke="#10B981" stroke-width="1.5" opacity="0.6" stroke-dasharray="3,2" />
+    </g>
+    
+    <g transform="translate(620,480)">
+      <circle cx="0" cy="0" r="15" fill="#10B981" opacity="0.8" />
+      <text x="0" y="5" font-family="Arial" font-size="14" fill="white" text-anchor="middle">U4</text>
+      <line x1="-15" y1="-15" x2="-170" y2="-170" stroke="#10B981" stroke-width="1.5" opacity="0.6" stroke-dasharray="3,2" />
+    </g>
+  </g>
+  
+  <!-- Learning & Evolution Elements -->
+  <g>
+    <!-- Data Flow Particles - Showing learning -->
+    <g>
+      <circle cx="0" cy="0" r="3" fill="#FFFFFF">
+        <animate attributeName="cx" values="200;400" dur="3s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="100;300" dur="3s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite" />
+      </circle>
+      
+      <circle cx="0" cy="0" r="3" fill="#FFFFFF">
+        <animate attributeName="cx" values="600;400" dur="4s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="120;300" dur="4s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite" />
+      </circle>
+      
+      <circle cx="0" cy="0" r="3" fill="#FFFFFF">
+        <animate attributeName="cx" values="180;400" dur="3.5s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="480;300" dur="3.5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;1;0" dur="3.5s" repeatCount="indefinite" />
+      </circle>
+      
+      <circle cx="0" cy="0" r="3" fill="#FFFFFF">
+        <animate attributeName="cx" values="620;400" dur="4.5s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="480;300" dur="4.5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;1;0" dur="4.5s" repeatCount="indefinite" />
+      </circle>
+    </g>
+    
+    <!-- Evolution Indicator -->
+    <g transform="translate(400,450)">
+      <rect x="-100" y="0" width="200" height="20" rx="10" fill="#333333" />
+      <rect x="-100" y="0" width="140" height="20" rx="10" fill="url(#pulseGradient)">
+        <animate attributeName="width" values="0;140" dur="2s" fill="freeze" />
+      </rect>
+      <text x="0" y="35" font-family="Arial" font-size="12" fill="white" text-anchor="middle">CONTINUOUS LEARNING</text>
+    </g>
+  </g>
+  
+  <!-- Automation Elements -->
+  <g transform="translate(400,530)">
+    <rect x="-150" y="0" width="300" height="30" rx="15" fill="#333333" stroke="#10B981" stroke-width="1" />
+    
+    <!-- Workflow Steps -->
+    <circle cx="-120" cy="15" r="10" fill="#10B981" />
+    <circle cx="-60" cy="15" r="10" fill="#10B981" />
+    <circle cx="0" cy="15" r="10" fill="#10B981" />
+    <circle cx="60" cy="15" r="10" fill="#10B981" />
+    <circle cx="120" cy="15" r="10" fill="#10B981" />
+    
+    <!-- Connection Lines -->
+    <line x1="-110" y1="15" x2="-70" y2="15" stroke="#FFFFFF" stroke-width="2" />
+    <line x1="-50" y1="15" x2="-10" y2="15" stroke="#FFFFFF" stroke-width="2" />
+    <line x1="10" y1="15" x2="50" y2="15" stroke="#FFFFFF" stroke-width="2" />
+    <line x1="70" y1="15" x2="110" y2="15" stroke="#FFFFFF" stroke-width="2" />
+    
+    <text x="0" y="-10" font-family="Arial" font-size="12" fill="white" text-anchor="middle">SEAMLESS AUTOMATION</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="400" y="60" font-family="Arial" font-size="24" font-weight="bold" fill="white" text-anchor="middle">ADAPTIVE CHATBOTS</text>
+  <text x="400" y="90" font-family="Arial" font-size="16" fill="#10B981" text-anchor="middle">EVOLVING WITH EVERY INTERACTION</text>
+</svg> 

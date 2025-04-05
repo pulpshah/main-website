@@ -80,12 +80,12 @@ const offerItems = [
   {
     title: "Knowledge Synthesis & Summarization",
     description: "Extract insights from large volumes of data",
-    icon: <BookOpen className="h-5 w-5 text-red-500" />,
-    color: "from-red-600 to-red-400",
-    colorFaded: "bg-red-500/10",
-    borderColor: "red-500/20",
-    hoverBorder: "red-500/40",
-    iconBg: "bg-red-500/10",
+    icon: <BookOpen className="h-5 w-5 text-amber-500" />,
+    color: "from-amber-600 to-amber-400",
+    colorFaded: "bg-amber-500/10",
+    borderColor: "amber-500/20",
+    hoverBorder: "amber-500/40",
+    iconBg: "bg-amber-500/10",
     href: "/solutions/knowledge-synthesis"
   },
   {
@@ -102,12 +102,12 @@ const offerItems = [
   {
     title: "Automated Analysis & Decision Support",
     description: "Automate data analysis and decision-making",
-    icon: <Bot className="h-5 w-5 text-amber-500" />,
-    color: "from-amber-600 to-amber-400",
-    colorFaded: "bg-amber-500/10",
-    borderColor: "amber-500/20",
-    hoverBorder: "amber-500/40",
-    iconBg: "bg-amber-500/10",
+    icon: <Bot className="h-5 w-5 text-red-500" />,
+    color: "from-red-600 to-red-400",
+    colorFaded: "bg-red-500/10",
+    borderColor: "red-500/20",
+    hoverBorder: "red-500/40",
+    iconBg: "bg-red-500/10",
     href: "/solutions/automated-analysis"
   }
 ];

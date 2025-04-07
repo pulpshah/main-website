@@ -65,32 +65,32 @@ export function Footer() {
               <h3 className="text-white font-medium mb-4">USE CASES</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/use-cases/engagement-intelligence" className="text-zinc-400 hover:text-white text-sm">
-                    Engagement Intelligence
+                  <Link href="/solutions/intelligent-communication" className="text-zinc-400 hover:text-white text-sm">
+                    Intelligent Communication
                   </Link>
                 </li>
                 <li>
-                  <Link href="/use-cases/automated-analysis" className="text-zinc-400 hover:text-white text-sm">
+                  <Link href="/solutions/automated-analysis" className="text-zinc-400 hover:text-white text-sm">
                     Automated Analysis
                   </Link>
                 </li>
                 <li>
-                  <Link href="/use-cases/audience-simulations" className="text-zinc-400 hover:text-white text-sm">
+                  <Link href="/solutions/audience-simulations" className="text-zinc-400 hover:text-white text-sm">
                     Audience Simulations
                   </Link>
                 </li>
                 <li>
-                  <Link href="/use-cases/content-moderation" className="text-zinc-400 hover:text-white text-sm">
+                  <Link href="/solutions/content-moderation" className="text-zinc-400 hover:text-white text-sm">
                     Content Moderation
                   </Link>
                 </li>
                 <li>
-                  <Link href="/use-cases/knowledge-synthesis" className="text-zinc-400 hover:text-white text-sm">
+                  <Link href="/solutions/knowledge-synthesis" className="text-zinc-400 hover:text-white text-sm">
                     Knowledge Synthesis
                   </Link>
                 </li>
                 <li>
-                  <Link href="/use-cases/adaptive-chatbots" className="text-zinc-400 hover:text-white text-sm">
+                  <Link href="/solutions/adaptive-chatbots" className="text-zinc-400 hover:text-white text-sm">
                     Adaptive Chatbots
                   </Link>
                 </li>

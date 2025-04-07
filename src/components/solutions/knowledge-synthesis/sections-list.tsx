@@ -3,45 +3,35 @@
 import { JSX, useRef } from "react";
 import { useInView } from "framer-motion";
 import { 
-  FileSearch, 
+  FileText, 
+  ListChecks, 
   Network, 
-  Library, 
-  Rocket, 
-  BookOpen, 
-  Database,
-  FileText,
-  GitBranch,
-  BookMarked,
-  Lightbulb,
-  BrainCircuit,
-  BarChart,
-  Compass,
-  Brain
+  Zap,
+  FileDigit,
+  BookOpen,
+  FileSearch,
+  Scroll,
+  Clock
 } from "lucide-react";
 
 interface SectionProps {
   title: string;
   description: string;
   imageSide: "left" | "right";
-  color: "purple" | "pink" | "green" | "blue" | "red";
+  color: "purple" | "pink" | "green" | "blue" | "red" | "amber";
   icon: string;
 }
 
 const iconMap: Record<string, JSX.Element> = {
-  FileSearch: <FileSearch className="h-full w-full" />,
-  Network: <Network className="h-full w-full" />,
-  Library: <Library className="h-full w-full" />,
-  Rocket: <Rocket className="h-full w-full" />,
-  BookOpen: <BookOpen className="h-full w-full" />,
-  Database: <Database className="h-full w-full" />,
   FileText: <FileText className="h-full w-full" />,
-  GitBranch: <GitBranch className="h-full w-full" />,
-  BookMarked: <BookMarked className="h-full w-full" />,
-  Lightbulb: <Lightbulb className="h-full w-full" />,
-  BrainCircuit: <BrainCircuit className="h-full w-full" />,
-  BarChart: <BarChart className="h-full w-full" />,
-  Compass: <Compass className="h-full w-full" />,
-  Brain: <Brain className="h-full w-full" />,
+  ListChecks: <ListChecks className="h-full w-full" />,
+  Network: <Network className="h-full w-full" />,
+  Zap: <Zap className="h-full w-full" />,
+  FileDigit: <FileDigit className="h-full w-full" />,
+  BookOpen: <BookOpen className="h-full w-full" />,
+  FileSearch: <FileSearch className="h-full w-full" />,
+  Scroll: <Scroll className="h-full w-full" />,
+  Clock: <Clock className="h-full w-full" />
 };
 
 const colorMap = {
@@ -65,8 +55,18 @@ const colorMap = {
     fill: "#FF66C4",
     shadowColor: "rgba(236,72,153,0.2)",
   },
+  amber: {
+    gradient: "from-amber-600 to-amber-400",
+    gradientAlt: "from-amber-900/20 to-amber-900/5",
+    border: "border-amber-500/20",
+    borderHover: "border-amber-500/40",
+    bg: "bg-amber-500/10",
+    text: "text-amber-400",
+    fill: "#F59E0B",
+    shadowColor: "rgba(245,158,11,0.2)",
+  },
   green: {
-    gradient: "from-green-600 to-green-400",
+    gradient: "from-green-600 to-emerald-400",
     gradientAlt: "from-green-900/20 to-green-900/5",
     border: "border-green-500/20",
     borderHover: "border-green-500/40",
@@ -131,7 +131,7 @@ function Section({
 }: SectionProps & { index: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-  const colorConfig = colorMap[color];
+  const colorConfig = colorMap[color as keyof typeof colorMap];
 
   return (
     <div 
@@ -179,7 +179,7 @@ function Section({
         }}
       >
         <div 
-          className={`aspect-[4/3] p-1 bg-black rounded-xl overflow-hidden border ${colorConfig.border} hover:${colorConfig.borderHover} transition-all`}
+          className={`aspect-2 p-1 bg-black rounded-xl overflow-hidden border ${colorConfig.border} hover:${colorConfig.borderHover} transition-all`}
           style={{
             boxShadow: `0 0 30px ${colorConfig.shadowColor}`
           }}
@@ -207,754 +207,492 @@ interface VisualProps {
 function KnowledgeSynthesisVisual({ index, color, isInView }: VisualProps) {
   const colorConfig = colorMap[color as keyof typeof colorMap];
   
-  // Simple placeholder visuals for now
-  return (
-    <>
-      <style jsx global>{knowledgeAnimationStyles}</style>
-      <div className="w-full h-full flex items-center justify-center">
-        <div className="relative w-full max-w-[400px] h-full flex items-center justify-center">
-          {index === 0 && (
-            <svg viewBox="0 0 300 200" className="w-full h-auto">
-              <defs>
-                <linearGradient id="dataGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor={colorConfig.fill} stopOpacity="0.1" />
-                  <stop offset="100%" stopColor={colorConfig.fill} stopOpacity="0.4" />
-                </linearGradient>
-              </defs>
+  // Visualization based on section index
+  switch(index) {
+    case 0: // Summarize Without Losing Substance
+      return (
+        <div className="w-full max-w-[400px]">
+          <div className="flex flex-col space-y-6">
+            {/* Original Document */}
+            <div 
+              className={`p-4 border ${colorConfig.border} rounded-lg bg-black/50 backdrop-blur-sm`}
+              style={{
+                opacity: isInView ? 1 : 0,
+                transform: isInView ? "none" : "translateY(20px)",
+                transition: "all 0.6s ease 0.8s",
+                boxShadow: `0 0 20px ${colorConfig.shadowColor}`
+              }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <FileText className={`h-4 w-4 ${colorConfig.text}`} />
+                <span className="text-sm text-white font-medium">Original Document</span>
+                <span className="text-xs text-gray-400 ml-auto">2,450 words</span>
+              </div>
               
-              {/* Central Knowledge Framework */}
-              <polygon 
-                points="150,70 200,100 150,130 100,100" 
-                fill="url(#dataGradient)" 
-                stroke={colorConfig.fill} 
-                strokeWidth="1.5" 
-                className={isInView ? "animate-pulse" : ""}
-              />
-              
-              {/* Scattered Data Points */}
-              {[
-                { x: 40, y: 40, size: 12, delay: 0.2, label: "DOCS" },
-                { x: 260, y: 40, size: 8, delay: 0.5, label: "API" },
-                { x: 60, y: 160, size: 10, delay: 0.3, label: "MESSAGES" },
-                { x: 240, y: 160, size: 14, delay: 0.1, label: "RESEARCH" },
-                { x: 30, y: 100, size: 7, delay: 0.4, label: "METRICS" },
-                { x: 270, y: 100, size: 9, delay: 0.6, label: "INSIGHTS" },
-                { x: 80, y: 30, size: 11, delay: 0.25, label: "VIDEOS" },
-                { x: 220, y: 30, size: 9, delay: 0.45, label: "PODCASTS" },
-                { x: 40, y: 180, size: 12, delay: 0.35, label: "WIKIPEDIA" },
-                { x: 260, y: 180, size: 10, delay: 0.55, label: "SOCIAL" },
-                { x: 100, y: 190, size: 8, delay: 0.3, label: "NEWS" },
-                { x: 200, y: 190, size: 9, delay: 0.5, label: "BLOGS" },
-                { x: 150, y: 35, size: 10, delay: 0.4, label: "BOOKS" },
-                { x: 85, y: 70, size: 9, delay: 0.35, label: "PAPERS" },
-                { x: 215, y: 70, size: 8, delay: 0.25, label: "FORUMS" }
-              ].map((point, i) => (
-                <g key={i}>
-                  {/* Connection lines from data points to central framework */}
-                  <line 
-                    x1={point.x} 
-                    y1={point.y} 
-                    x2="150" 
-                    y2="100" 
-                    stroke={colorConfig.fill} 
-                    strokeWidth="0.8" 
-                    strokeDasharray="3,2" 
-                    strokeOpacity="0.6" 
+              <div className="space-y-1.5">
+                {[...Array(10)].map((_, i) => (
+                  <div suppressHydrationWarning
+                    key={i} 
+                    className="h-2 bg-gray-800 rounded-full"
                     style={{
-                      animation: isInView ? `pulse 2s infinite ease-in-out ${point.delay}s` : "none"
+                      width: `${85 + Math.random() * 15}%`,
+                      opacity: 0.5 + Math.random() * 0.5
                     }}
-                  />
-                  
-                  {/* Data point */}
-                  <circle 
-                    cx={point.x} 
-                    cy={point.y} 
-                    r={point.size / 2} 
-                    fill={colorConfig.fill} 
-                    fillOpacity="0.7" 
-                    style={{
-                      animation: isInView ? `float 3s infinite ease-in-out ${point.delay}s` : "none"
-                    }}
-                  />
-                  
-                  {/* Data source label */}
-                  <text 
-                    x={point.x} 
-                    y={point.y - (point.size / 2) - 3} 
-                    textAnchor="middle" 
-                    fill="white" 
-                    fontSize="6"
-                    style={{
-                      animation: isInView ? `float 3s infinite ease-in-out ${point.delay}s` : "none"
-                    }}
-                  >
-                    {point.label}
-                  </text>
-                </g>
-              ))}
+                  ></div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Processing Animation */}
+            <div 
+              className="flex justify-center"
+              style={{
+                opacity: isInView ? 1 : 0,
+                transition: "opacity 0.6s ease 1.2s"
+              }}
+            >
+              <div className="relative h-8 w-8">
+                <div className={`absolute inset-0 ${colorConfig.bg} rounded-full opacity-50 animate-ping`}></div>
+                <div className={`absolute inset-0 flex items-center justify-center ${colorConfig.bg} rounded-full`}>
+                  <FileSearch className="h-4 w-4 text-white" />
+                </div>
+              </div>
+            </div>
+            
+            {/* Summarized Content */}
+            <div 
+              className={`p-4 border ${colorConfig.border} rounded-lg bg-black/50 backdrop-blur-sm`}
+              style={{
+                opacity: isInView ? 1 : 0,
+                transform: isInView ? "none" : "translateY(-20px)",
+                transition: "all 0.6s ease 1.6s",
+                boxShadow: `0 0 20px ${colorConfig.shadowColor}`
+              }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <Scroll className={`h-4 w-4 ${colorConfig.text}`} />
+                <span className="text-sm text-white font-medium">Precise Summary</span>
+                <span className="text-xs text-gray-400 ml-auto">325 words</span>
+              </div>
               
-              {/* Knowledge Framework Labels */}
-              <text x="150" y="100" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">SYNTHESIS</text>
-              
-              {/* Actionable Knowledge Arrow */}
-              <g transform="translate(150, 150)">
-                <rect x="-45" y="-10" width="90" height="20" rx="5" fill="#111" stroke={colorConfig.fill} strokeWidth="1" strokeOpacity="0.8" />
-                <text x="0" y="4" textAnchor="middle" fill="white" fontSize="8">ACTIONABLE KNOWLEDGE</text>
-                <path d="M0,15 L0,30 L10,20 L-10,20 Z" fill={colorConfig.fill} />
-              </g>
-            </svg>
-          )}
-          
-          {index === 1 && (
-            <svg viewBox="0 0 300 200" className="w-full h-auto">
-              <defs>
-                <linearGradient id="patternGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor={colorConfig.fill} stopOpacity="0.1" />
-                  <stop offset="100%" stopColor={colorConfig.fill} stopOpacity="0.4" />
-                </linearGradient>
+              <div className="space-y-2">
+                <div 
+                  className={`w-full h-6 bg-gradient-to-r ${colorConfig.gradient} rounded opacity-70`}
+                ></div>
                 
-                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="2" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-              </defs>
-              
-              
-              {/* Topic/Data clusters */}
-              {[
-                { x: 75, y: 50, radius: 30, label: "TOPIC A", connections: [1, 2, 3] },
-                { x: 225, y: 50, radius: 30, label: "TOPIC B", connections: [0, 3, 4] },
-                { x: 50, y: 150, radius: 30, label: "TOPIC C", connections: [0, 4] },
-                { x: 150, y: 130, radius: 30, label: "TOPIC D", connections: [0, 1] },
-                { x: 250, y: 150, radius: 30, label: "TOPIC E", connections: [1, 2] }
-              ].map((node, i) => (
-                <g key={i}>
-                  {/* Circle for each topic cluster */}
-                  <circle
-                    cx={node.x}
-                    cy={node.y}
-                    r={node.radius}
-                    fill="transparent"
-                    stroke={colorConfig.fill}
-                    strokeWidth="1"
-                    strokeOpacity="0.6"
-                    strokeDasharray="2,1"
-                    style={{
-                      animation: isInView ? `pulse 3s infinite ease-in-out ${i * 0.2}s` : "none"
-                    }}
-                  />
-                  
-                  {/* Inner data points for each topic */}
-                  {Array.from({ length: 5 + i }).map((_, j) => {
-                    const angle = (Math.PI * 2 * j) / (5 + i);
-                    const distance = (Math.random() * 0.6 + 0.2) * node.radius;
-                    const x = node.x + Math.cos(angle) * distance;
-                    const y = node.y + Math.sin(angle) * distance;
-                    return (
-                      <circle
-                        key={`${i}-${j}`}
-                        cx={x}
-                        cy={y}
-                        r="2"
-                        fill={colorConfig.fill}
-                        fillOpacity="0.8"
-                        style={{
-                          animation: isInView ? `float 2s infinite ease-in-out ${i * 0.1 + j * 0.05}s` : "none"
-                        }}
-                      />
-                    );
-                  })}
-                  
-                  {/* Topic labels */}
-                  <text
-                    x={node.x}
-                    y={node.y}
-                    textAnchor="middle"
-                    fill="white"
-                    fontSize="8"
-                    fontWeight="bold"
-                  >
-                    {node.label}
-                  </text>
-                </g>
-              ))}
-              
-              {/* Non-obvious connections revealed by algorithm */}
-              {[
-                { from: 0, to: 2, discovered: true },
-                { from: 0, to: 1, discovered: false },
-                { from: 1, to: 4, discovered: false },
-                { from: 2, to: 4, discovered: true },
-                { from: 0, to: 3, discovered: false },
-                { from: 1, to: 3, discovered: false },
-                { from: 3, to: 4, discovered: true },
-                { from: 2, to: 3, discovered: true }
-              ].map((connection, i) => {
-                const nodes = [
-                  { x: 75, y: 50 },
-                  { x: 225, y: 50 },
-                  { x: 50, y: 150 },
-                  { x: 150, y: 130 },
-                  { x: 250, y: 150 }
-                ];
-                
-                const startNode = nodes[connection.from];
-                const endNode = nodes[connection.to];
-                
-                return (
-                  <g key={i}>
-                    <line
-                      x1={startNode.x}
-                      y1={startNode.y}
-                      x2={endNode.x}
-                      y2={endNode.y}
-                      stroke={connection.discovered ? colorConfig.fill : "#555"}
-                      strokeWidth={connection.discovered ? "1.5" : "0.8"}
-                      strokeOpacity={connection.discovered ? "0.8" : "0.3"}
-                      strokeDasharray={connection.discovered ? "none" : "1,2"}
+                <div className="space-y-1.5">
+                  {[...Array(4)].map((_, i) => (
+                    <div suppressHydrationWarning
+                      key={i} 
+                      className="h-2 bg-gray-800 rounded-full"
                       style={{
-                        filter: connection.discovered ? "url(#glow)" : "none",
-                        animation: connection.discovered && isInView ? "pulse 3s infinite ease-in-out" : "none"
+                        width: `${85 + Math.random() * 15}%`,
+                        opacity: 0.8
                       }}
-                    />
-                    
-                    {/* Connection indicators for discovered connections */}
-                    {connection.discovered && (
-                      <g>
-                        <circle
-                          cx={(startNode.x + endNode.x) / 2}
-                          cy={(startNode.y + endNode.y) / 2}
-                          r="4"
-                          fill={colorConfig.fill}
-                          fillOpacity="0.8"
-                          style={{
-                            animation: isInView ? "pulse 2s infinite ease-in-out" : "none"
-                          }}
-                        />
-                        <text
-                          x={(startNode.x + endNode.x) / 2}
-                          y={(startNode.y + endNode.y) / 2 - 8}
-                          textAnchor="middle"
-                          fill="white"
-                          fontSize="6"
-                          fontWeight="bold"
-                          style={{
-                            animation: isInView ? "float 3s infinite ease-in-out" : "none"
-                          }}
-                        >
-                          DISCOVERED
-                        </text>
-                      </g>
-                    )}
-                  </g>
-                );
-              })}
-              
-              {/* Algorithm visualization */}
-              <g transform="translate(150, 90)">
-                <polygon
-                  points="0,-20 15,10 -15,10"
-                  fill="url(#patternGradient)"
-                  stroke={colorConfig.fill}
-                  strokeWidth="1"
-                  style={{
-                    animation: isInView ? "pulse 2s infinite ease-in-out" : "none"
-                  }}
-                />
-                <text
-                  x="0"
-                  y="2"
-                  textAnchor="middle"
-                  fill="white"
-                  fontSize="6"
-                  fontWeight="bold"
-                >
-                  AI
-                </text>
-              </g>
-              
-              {/* Label */}
-              <g transform="translate(150, 180)">
-                <rect
-                  x="-50"
-                  y="-12"
-                  width="100"
-                  height="24"
-                  rx="5"
-                  fill="#111"
-                  stroke={colorConfig.fill}
-                  strokeWidth="1"
-                  strokeOpacity="0.5"
-                />
-                <text
-                  x="0"
-                  y="0"
-                  textAnchor="middle"
-                  fill="white"
-                  fontSize="8"
-                  fontWeight="bold"
-                >
-                  HIDDEN CONNECTIONS
-                </text>
-                <text
-                  x="0"
-                  y="10"
-                  textAnchor="middle"
-                  fill="white"
-                  fontSize="6"
-                >
-                  REVEALED BY ALGORITHMS
-                </text>
-              </g>
-            </svg>
-          )}
-          
-          {index === 2 && (
-            <svg viewBox="0 0 300 200" className="w-full h-auto">
-              <defs>
-                <linearGradient id="insightGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor={colorConfig.fill} stopOpacity="0.1" />
-                  <stop offset="100%" stopColor={colorConfig.fill} stopOpacity="0.5" />
-                </linearGradient>
-                <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="1.5" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-              </defs>
-              
-              {/* Information Overload Side (Left) */}
-              <g transform="translate(70, 100)">
-                {/* Information Noise */}
-                {Array.from({ length: 40 }).map((_, i) => {
-                  const angle = Math.random() * Math.PI * 2;
-                  const distance = Math.random() * 40;
-                  const x = Math.cos(angle) * distance;
-                  const y = Math.sin(angle) * distance;
-                  const size = Math.random() * 2 + 1;
-                  
-                  return (
-                    <circle
-                      key={`noise-${i}`}
-                      cx={x}
-                      cy={y}
-                      r={size}
-                      fill="#aaa"
-                      fillOpacity={0.4 + Math.random() * 0.3}
-                      style={{
-                        animation: isInView ? `float ${1 + Math.random()}s infinite ease-in-out ${Math.random()}s` : "none"
-                      }}
-                    />
-                  );
-                })}
-                
-                {/* Information Overflow Label */}
-                <text x="0" y="-45" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">
-                  INFORMATION OVERLOAD
-                </text>
-              </g>
-              
-              {/* Transformation Process (Middle) */}
-              <g transform="translate(150, 100)">
-                {/* Process Flow Arrow */}
-                <path
-                  d="M-50,0 C-30,-15 -10,-15 10,-15 C30,-15 50,0 70,0"
-                  fill="none"
-                  stroke={colorConfig.fill}
-                  strokeWidth="2"
-                  strokeDasharray="4,2"
-                  strokeLinecap="round"
-                  style={{
-                    animation: isInView ? "pulse 2s infinite ease-in-out" : "none"
-                  }}
-                />
-                
-                {/* Filter/Transform Symbol */}
-                <g filter="url(#glowFilter)">
-                  <path
-                    d="M-10,-20 L10,-20 L5,0 L-5,0 Z"
-                    fill="url(#insightGradient)"
-                    stroke={colorConfig.fill}
-                    strokeWidth="1"
-                  />
-                  
-                  <path
-                    d="M-5,0 L5,0 L3,15 L-3,15 Z"
-                    fill="url(#insightGradient)"
-                    stroke={colorConfig.fill}
-                    strokeWidth="1"
-                  />
-                </g>
-                
-                {/* Process Label */}
-                <text x="0" y="-30" textAnchor="middle" fill="white" fontSize="8">
-                  SYNTHESIS PROCESS
-                </text>
-              </g>
-              
-              {/* Strategic Knowledge Side (Right) */}
-              <g transform="translate(230, 100)">
-                {/* Strategic Hexagon Structure */}
-                <g style={{
-                  animation: isInView ? "pulse 3s infinite ease-in-out" : "none"
-                }}>
-                  <polygon
-                    points="0,-30 26,-15 26,15 0,30 -26,15 -26,-15"
-                    fill="url(#insightGradient)"
-                    stroke={colorConfig.fill}
-                    strokeWidth="1.5"
-                  />
-                  
-                  <line x1="0" y1="-30" x2="0" y2="30" stroke={colorConfig.fill} strokeWidth="1" />
-                  <line x1="-26" y1="-15" x2="26" y2="15" stroke={colorConfig.fill} strokeWidth="1" />
-                  <line x1="-26" y1="15" x2="26" y2="-15" stroke={colorConfig.fill} strokeWidth="1" />
-                  
-                  {/* Center Node */}
-                  <circle cx="0" cy="0" r="6" fill={colorConfig.fill} fillOpacity="0.9" />
-                  
-                  {/* Strategic Points */}
-                  {[
-                    { x: 0, y: -30, label: "GOALS" },
-                    { x: 26, y: -15, label: "OPPORTUNITIES" }, 
-                    { x: 26, y: 15, label: "RESOURCES" },
-                    { x: 0, y: 30, label: "METRICS" },
-                    { x: -26, y: 15, label: "RISKS" },
-                    { x: -26, y: -15, label: "CONTEXT" }
-                  ].map((point, i) => (
-                    <g key={i}>
-                      <circle 
-                        cx={point.x} 
-                        cy={point.y} 
-                        r="4" 
-                        fill={colorConfig.fill} 
-                        fillOpacity="0.8"
-                      />
-                      <text 
-                        x={point.x} 
-                        y={point.y + (point.y < 0 ? -6 : 12)} 
-                        textAnchor="middle" 
-                        fill="white" 
-                        fontSize="5"
-                        fontWeight="bold"
-                      >
-                        {point.label}
-                      </text>
-                    </g>
+                    ></div>
                   ))}
-                </g>
+                </div>
                 
-                {/* Strategic Knowledge Label */}
-                <text x="0" y="-45" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">
-                  STRATEGIC KNOWLEDGE
-                </text>
-              </g>
-              
-              {/* Bottom Benefit Labels */}
-              <g transform="translate(150, 175)">
-                <rect x="-80" y="-10" width="160" height="20" rx="5" fill="#111" stroke={colorConfig.fill} strokeWidth="1" strokeOpacity="0.5" />
-                <text x="0" y="2" textAnchor="middle" fill="white" fontSize="8">
-                  CONFIDENT DECISION-MAKING
-                </text>
-              </g>
-            </svg>
-          )}
-          
-          {index === 3 && (
-            <svg viewBox="0 0 300 200" className="w-full h-auto">
-              <defs>
-                <linearGradient id="researchGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor={colorConfig.fill} stopOpacity="0.2" />
-                  <stop offset="100%" stopColor={colorConfig.fill} stopOpacity="0.6" />
-                </linearGradient>
-                <filter id="researchGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="2" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-              </defs>
-              
-              {/* Siloed Research Repositories */}
-              {[
-                { x: 75, y: 130, width: 40, height: 30, label: "DATASET A" },
-                { x: 125, y: 130, width: 40, height: 30, label: "PAPERS" },
-                { x: 175, y: 130, width: 40, height: 30, label: "PATENTS" },
-                { x: 225, y: 130, width: 40, height: 30, label: "DATASET B" }
-              ].map((repo, i) => (
-                <g key={i}>
-                  <rect
-                    x={repo.x - repo.width/2}
-                    y={repo.y - repo.height/2}
-                    width={repo.width}
-                    height={repo.height}
-                    rx="3"
-                    fill="#333"
-                    stroke={colorConfig.fill}
-                    strokeWidth="1"
-                    strokeOpacity="0.5"
-                  />
+                <div className="flex items-center mt-3 pt-2 border-t border-gray-800">
+                  <div className="flex space-x-2">
+                    <div className={`px-2 py-1 rounded text-xs ${colorConfig.bg} ${colorConfig.text}`}>Key Insight</div>
+                    <div className={`px-2 py-1 rounded text-xs ${colorConfig.bg} ${colorConfig.text}`}>Preserved Nuance</div>
+                  </div>
                   
-                  {/* Document Lines */}
-                  {Array.from({ length: 3 }).map((_, j) => (
-                    <line
-                      key={`line-${i}-${j}`}
-                      x1={repo.x - repo.width/2 + 5}
-                      y1={repo.y - repo.height/2 + 8 + j * 6}
-                      x2={repo.x + repo.width/2 - 5}
-                      y2={repo.y - repo.height/2 + 8 + j * 6}
-                      stroke="#666"
-                      strokeWidth="1"
-                    />
-                  ))}
-                  
-                  <text
-                    x={repo.x}
-                    y={repo.y + repo.height/2 + 10}
-                    textAnchor="middle"
-                    fill="white"
-                    fontSize="6"
-                    fontWeight="bold"
-                  >
-                    {repo.label}
-                  </text>
-                </g>
-              ))}
-              
-              {/* Silos Label */}
-              <text
-                x="50"
-                y="180"
-                textAnchor="start"
-                fill="white"
-                fontSize="7"
-              >
-                SILOED INFORMATION
-              </text>
-              
-              {/* Extraction and Connection Process - Animated Particles */}
-              {[0, 1, 2, 3].map((sourceIndex) => {
-                const source = [60, 110, 160, 210][sourceIndex];
-                
-                return Array.from({ length: 3 }).map((_, i) => (
-                  <circle
-                    key={`particle-${sourceIndex}-${i}`}
-                    cx={source}
-                    cy={150}
-                    r="2"
-                    fill={colorConfig.fill}
-                    style={{
-                      animation: isInView ? 
-                        `particleFlow ${1.5 + Math.random() * 0.5}s infinite ${0.2 * sourceIndex + 0.1 * i}s` : 
-                        "none"
-                    }}
-                  />
-                ));
-              })}
-              
-              {/* Knowledge Extraction and Connection System */}
-              <g transform="translate(150, 90)">
-                {/* Connection Framework */}
-                <rect
-                  x="-100"
-                  y="-15"
-                  width="200"
-                  height="30"
-                  rx="15"
-                  fill="url(#researchGradient)"
-                  stroke={colorConfig.fill}
-                  strokeWidth="1.5"
-                  filter="url(#researchGlow)"
-                  style={{
-                    animation: isInView ? "pulse 3s infinite ease-in-out" : "none"
-                  }}
-                />
-                
-                <text
-                  x="0"
-                  y="0"
-                  textAnchor="middle"
-                  fill="white"
-                  fontSize="8"
-                  fontWeight="bold"
-                >
-                  AUTOMATED EXTRACTION
-                </text>
-                
-                <text
-                  x="0"
-                  y="10"
-                  textAnchor="middle"
-                  fill="white"
-                  fontSize="6"
-                >
-                  & CONNECTION
-                </text>
-              </g>
-              
-              {/* Accelerated Research Path */}
-              <g>
-                <path
-                  d="M150,70 L150,40"
-                  stroke={colorConfig.fill}
-                  strokeWidth="2"
-                  strokeDasharray="none"
-                  markerEnd="url(#arrowMarker)"
-                  style={{
-                    animation: isInView ? "extendArrow 1.5s ease-out forwards" : "none"
-                  }}
-                />
-                
-                <polygon
-                  points="150,30 140,45 160,45"
-                  fill={colorConfig.fill}
-                  style={{
-                    animation: isInView ? "pulse 2s infinite ease-in-out 1s" : "none"
-                  }}
-                />
-              </g>
-              
-              {/* Breakthrough/Discovery */}
-              <g transform="translate(150, 30)">
-                <circle
-                  cx="0"
-                  cy="0"
-                  r="15"
-                  fill="url(#researchGradient)"
-                  stroke={colorConfig.fill}
-                  strokeWidth="1.5"
-                  filter="url(#researchGlow)"
-                  style={{
-                    animation: isInView ? "pulse 2s infinite ease-in-out" : "none"
-                  }}
-                />
-                
-                {/* Burst/Star shape for "breakthrough" */}
-                {Array.from({ length: 8 }).map((_, i) => {
-                  const angle = (Math.PI * 2 * i) / 8;
-                  const x1 = Math.cos(angle) * 15;
-                  const y1 = Math.sin(angle) * 15;
-                  const x2 = Math.cos(angle) * 20;
-                  const y2 = Math.sin(angle) * 20;
-                  
-                  return (
-                    <line
-                      key={`burst-${i}`}
-                      x1={x1}
-                      y1={y1}
-                      x2={x2}
-                      y2={y2}
-                      stroke={colorConfig.fill}
-                      strokeWidth="1"
-                      style={{
-                        animation: isInView ? `burstOut 2s ease-out forwards ${i * 0.1}s` : "none"
-                      }}
-                    />
-                  );
-                })}
-                
-                <text
-                  x="0"
-                  y="3"
-                  textAnchor="middle"
-                  fill="white"
-                  fontSize="7"
-                  fontWeight="bold"
-                >
-                  BREAKTHROUGH
-                </text>
-              </g>
-              
-              {/* Labels */}
-              <text
-                x="250"
-                y="180"
-                textAnchor="end"
-                fill="white"
-                fontSize="7"
-              >
-                INCREASED EFFICIENCY
-              </text>
-              
-              {/* Add required markers and animations */}
-              <defs>
-                <marker
-                  id="arrowMarker"
-                  viewBox="0 0 10 10"
-                  refX="5"
-                  refY="5"
-                  markerWidth="6"
-                  markerHeight="6"
-                  orient="auto-start-reverse"
-                >
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill={colorConfig.fill} />
-                </marker>
-                
-                <style>
-                  {`
-                    @keyframes particleFlow {
-                      0% {
-                        transform: translate(0, 0);
-                        opacity: 0;
-                      }
-                      20% {
-                        opacity: 1;
-                      }
-                      100% {
-                        transform: translate(0, -120px);
-                        opacity: 0;
-                      }
-                    }
-                    
-                    @keyframes extendArrow {
-                      0% {
-                        stroke-dasharray: 0, 40;
-                        stroke-dashoffset: 40;
-                      }
-                      100% {
-                        stroke-dasharray: 40, 0;
-                        stroke-dashoffset: 0;
-                      }
-                    }
-                    
-                    @keyframes burstOut {
-                      0% {
-                        opacity: 0;
-                        stroke-width: 0;
-                      }
-                      100% {
-                        opacity: 1;
-                        stroke-width: 1;
-                      }
-                    }
-                  `}
-                </style>
-              </defs>
-            </svg>
-          )}
+                  <div className="ml-auto flex items-center">
+                    <div className="h-2 w-2 bg-green-500 rounded-full mr-1"></div>
+                    <span className="text-xs text-gray-400">85% context preserved</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </>
-  );
+      );
+      
+    case 1: // Turn Meetings Into Actionable Next Steps
+      return (
+        <div className="w-full max-w-[400px]">
+          <div className="flex flex-col space-y-6">
+            {/* Meeting Transcript */}
+            <div 
+              className={`p-4 border ${colorConfig.border} rounded-lg bg-black/50 backdrop-blur-sm`}
+              style={{
+                opacity: isInView ? 1 : 0,
+                transform: isInView ? "none" : "translateY(20px)",
+                transition: "all 0.6s ease 0.8s",
+                boxShadow: `0 0 20px ${colorConfig.shadowColor}`
+              }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-sm text-white font-medium">Meeting Transcript</span>
+                <span className="text-xs text-gray-400 ml-auto">1h 24m</span>
+              </div>
+              
+              {/* Conversation snippets */}
+              <div className="space-y-2">
+                <div className="flex gap-2">
+                  <div className="flex-shrink-0 h-6 w-6 rounded-full bg-gray-700 flex items-center justify-center">
+                    <span className="text-xs text-white">A</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="h-2 bg-gray-700 rounded-full w-4/5"></div>
+                    <div className="h-2 bg-gray-700 rounded-full w-3/5 mt-1"></div>
+                  </div>
+                </div>
+                
+                <div className="flex gap-2">
+                  <div className="flex-shrink-0 h-6 w-6 rounded-full bg-gray-700 flex items-center justify-center">
+                    <span className="text-xs text-white">B</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="h-2 bg-gray-700 rounded-full w-3/4"></div>
+                    <div className="h-2 bg-gray-700 rounded-full w-2/3 mt-1"></div>
+                  </div>
+                </div>
+                
+                <div className="flex gap-2">
+                  <div className="flex-shrink-0 h-6 w-6 rounded-full bg-gray-700 flex items-center justify-center">
+                    <span className="text-xs text-white">C</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="h-2 bg-gray-700 rounded-full w-5/6"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Action Items */}
+            <div 
+              className={`p-4 border ${colorConfig.border} rounded-lg bg-black/50 backdrop-blur-sm`}
+              style={{
+                opacity: isInView ? 1 : 0,
+                transform: isInView ? "none" : "translateY(-20px)",
+                transition: "all 0.6s ease 1.6s",
+                boxShadow: `0 0 20px ${colorConfig.shadowColor}`
+              }}
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <ListChecks className={`h-4 w-4 ${colorConfig.text}`} />
+                <span className="text-sm text-white font-medium">Actionable Next Steps</span>
+              </div>
+              
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <div className={`h-5 w-5 rounded-full ${colorConfig.bg} flex items-center justify-center`}>
+                    <span className="text-xs text-white">1</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="h-2 bg-gray-700 rounded-full w-5/6"></div>
+                    <div className="flex items-center mt-1">
+                      <span className="text-xs text-gray-400">Owner: Alex</span>
+                      <span className="text-xs text-gray-400 ml-auto">Due: April 15</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <div className={`h-5 w-5 rounded-full ${colorConfig.bg} flex items-center justify-center`}>
+                    <span className="text-xs text-white">2</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="h-2 bg-gray-700 rounded-full w-2/3"></div>
+                    <div className="flex items-center mt-1">
+                      <span className="text-xs text-gray-400">Owner: Taylor</span>
+                      <span className="text-xs text-gray-400 ml-auto">Due: April 20</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <div className={`h-5 w-5 rounded-full ${colorConfig.bg} flex items-center justify-center`}>
+                    <span className="text-xs text-white">3</span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="h-2 bg-gray-700 rounded-full w-4/5"></div>
+                    <div className="flex items-center mt-1">
+                      <span className="text-xs text-gray-400">Owner: Jordan</span>
+                      <span className="text-xs text-gray-400 ml-auto">Due: April 22</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-3 pt-2 border-t border-gray-800">
+                <div className="flex justify-between text-xs text-gray-400">
+                  <span>Key Decisions: 4</span>
+                  <span>Agreements: 2</span>
+                  <span>Questions: 3</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+      
+    case 2: // Map Hidden Connections
+      return (
+        <div className="w-full max-w-[400px] h-[200px] relative">
+          <svg
+            viewBox="0 0 400 200"
+            className="w-full h-full"
+            style={{
+              opacity: isInView ? 1 : 0,
+              transition: "opacity 0.8s ease-in-out 0.5s"
+            }}
+          >
+            <defs>
+              <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor={colorConfig.fill} stopOpacity="0.3" />
+                <stop offset="100%" stopColor={colorConfig.fill} stopOpacity="0.7" />
+              </linearGradient>
+            </defs>
+            
+            {/* Connection Lines */}
+            <g>
+              <path 
+                d="M50,100 C120,50 200,50 270,100" 
+                fill="none" 
+                stroke={colorConfig.fill} 
+                strokeWidth="1" 
+                strokeDasharray="4,2" 
+                opacity="0.6"
+                strokeLinecap="round"
+              />
+              <path 
+                d="M50,100 C100,150 150,150 200,100" 
+                fill="none" 
+                stroke={colorConfig.fill} 
+                strokeWidth="1" 
+                strokeDasharray="4,2" 
+                opacity="0.6"
+                strokeLinecap="round"
+              />
+              <path 
+                d="M200,100 C250,150 300,150 350,100" 
+                fill="none" 
+                stroke={colorConfig.fill} 
+                strokeWidth="1" 
+                strokeDasharray="4,2" 
+                opacity="0.6"
+                strokeLinecap="round"
+              />
+              <path 
+                d="M50,100 L110,60" 
+                fill="none" 
+                stroke={colorConfig.fill} 
+                strokeWidth="1" 
+                opacity="0.8"
+                strokeLinecap="round"
+              />
+              <path 
+                d="M110,60 L200,100" 
+                fill="none" 
+                stroke={colorConfig.fill} 
+                strokeWidth="1" 
+                opacity="0.8"
+                strokeLinecap="round"
+              />
+              <path 
+                d="M200,100 L290,60" 
+                fill="none" 
+                stroke={colorConfig.fill} 
+                strokeWidth="1" 
+                opacity="0.8"
+                strokeLinecap="round"
+              />
+              <path 
+                d="M290,60 L350,100" 
+                fill="none" 
+                stroke={colorConfig.fill} 
+                strokeWidth="1" 
+                opacity="0.8"
+                strokeLinecap="round"
+              />
+              <path 
+                d="M110,60 L290,60" 
+                fill="none" 
+                stroke={colorConfig.fill} 
+                strokeWidth="1" 
+                opacity="0.8"
+                strokeLinecap="round"
+              />
+            </g>
+            
+            {/* Nodes */}
+            <g>
+              <circle cx="50" cy="100" r="15" fill="url(#nodeGradient)" stroke="#333" strokeWidth="1" />
+              <circle cx="110" cy="60" r="10" fill="url(#nodeGradient)" stroke="#333" strokeWidth="1" />
+              <circle cx="200" cy="100" r="18" fill="url(#nodeGradient)" stroke="#333" strokeWidth="1" />
+              <circle cx="290" cy="60" r="10" fill="url(#nodeGradient)" stroke="#333" strokeWidth="1" />
+              <circle cx="350" cy="100" r="15" fill="url(#nodeGradient)" stroke="#333" strokeWidth="1" />
+            </g>
+            
+            {/* Labels */}
+            <g>
+              <text x="50" y="100" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">Source 1</text>
+              <text x="110" cy="60" y="60" textAnchor="middle" fill="white" fontSize="6">Theme A</text>
+              <text x="200" y="100" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Key Insight</text>
+              <text x="290" y="60" textAnchor="middle" fill="white" fontSize="6">Theme B</text>
+              <text x="350" y="100" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">Source 2</text>
+            </g>
+            
+            {/* Animated Connection Points */}
+            <g>
+              <circle cx="80" cy="80" r="3" fill="white">
+                <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" />
+              </circle>
+              <circle cx="155" cy="80" r="3" fill="white">
+                <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" begin="0.3s" />
+              </circle>
+              <circle cx="245" cy="80" r="3" fill="white">
+                <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" begin="0.6s" />
+              </circle>
+              <circle cx="320" cy="80" r="3" fill="white">
+                <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" begin="0.9s" />
+              </circle>
+            </g>
+            
+            {/* Connection Strength */}
+            <g>
+              <rect x="200" y="150" width="120" height="20" rx="10" fill="#222" stroke={colorConfig.fill} strokeWidth="0.5" />
+              <text x="260" y="163" textAnchor="middle" fill="white" fontSize="8">Connection Strength</text>
+              <rect x="210" y="170" width="100" height="4" rx="2" fill="#333" />
+              <rect x="210" y="170" width="80" height="4" rx="2" fill={colorConfig.fill} opacity="0.8">
+                <animate attributeName="width" values="0;80" dur="1.5s" fill="freeze" begin="0.5s" />
+              </rect>
+            </g>
+          </svg>
+        </div>
+      );
+      
+    case 3: // Accelerate Research & Decision-Making
+      return (
+        <div className="w-full max-w-[400px]">
+          <div className="flex flex-col space-y-6">
+            {/* Research Dashboard */}
+            <div 
+              className={`p-4 border ${colorConfig.border} rounded-lg bg-black/50 backdrop-blur-sm`}
+              style={{
+                opacity: isInView ? 1 : 0,
+                transform: isInView ? "none" : "translateY(20px)",
+                transition: "all 0.6s ease 0.8s",
+                boxShadow: `0 0 20px ${colorConfig.shadowColor}`
+              }}
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <Zap className={`h-4 w-4 ${colorConfig.text}`} />
+                <span className="text-sm text-white font-medium">Research Acceleration</span>
+                <span className="text-xs text-gray-400 ml-auto">
+                  <Clock className="h-3 w-3 inline mr-1" />
+                  Time Saved: 8.5 hours
+                </span>
+              </div>
+              
+              {/* Research Metrics */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-2 bg-black/30 rounded border border-gray-800">
+                  <div className="text-xs text-gray-400">Documents Analyzed</div>
+                  <div className="text-xl text-white font-bold">348</div>
+                </div>
+                
+                <div className="p-2 bg-black/30 rounded border border-gray-800">
+                  <div className="text-xs text-gray-400">Key Insights</div>
+                  <div className="text-xl text-white font-bold">27</div>
+                </div>
+                
+                <div className="p-2 bg-black/30 rounded border border-gray-800">
+                  <div className="text-xs text-gray-400">Emerging Trends</div>
+                  <div className="text-xl text-white font-bold">5</div>
+                </div>
+                
+                <div className="p-2 bg-black/30 rounded border border-gray-800">
+                  <div className="text-xs text-gray-400">Conflicts Identified</div>
+                  <div className="text-xl text-white font-bold">12</div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Decision Support */}
+            <div 
+              className={`p-4 border ${colorConfig.border} rounded-lg bg-black/50 backdrop-blur-sm`}
+              style={{
+                opacity: isInView ? 1 : 0,
+                transform: isInView ? "none" : "translateY(-20px)",
+                transition: "all 0.6s ease 1.6s",
+                boxShadow: `0 0 20px ${colorConfig.shadowColor}`
+              }}
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-sm text-white font-medium">Decision Support</span>
+              </div>
+              
+              <div className="space-y-3">
+                <div>
+                  <div className="text-xs text-gray-400 mb-1">Option A Confidence</div>
+                  <div className="w-full h-3 bg-gray-800 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full bg-gradient-to-r ${colorConfig.gradient} rounded-full`}
+                      style={{
+                        width: isInView ? "65%" : "0%",
+                        transition: "width 1s ease 1.8s"
+                      }}
+                    ></div>
+                  </div>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>Supporting evidence: 18</span>
+                    <span>65%</span>
+                  </div>
+                </div>
+                
+                <div>
+                  <div className="text-xs text-gray-400 mb-1">Option B Confidence</div>
+                  <div className="w-full h-3 bg-gray-800 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full bg-gradient-to-r ${colorConfig.gradient} rounded-full`}
+                      style={{
+                        width: isInView ? "82%" : "0%",
+                        transition: "width 1s ease 2s"
+                      }}
+                    ></div>
+                  </div>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>Supporting evidence: 31</span>
+                    <span>82%</span>
+                  </div>
+                </div>
+                
+                <div>
+                  <div className="text-xs text-gray-400 mb-1">Option C Confidence</div>
+                  <div className="w-full h-3 bg-gray-800 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full bg-gradient-to-r ${colorConfig.gradient} rounded-full`}
+                      style={{
+                        width: isInView ? "42%" : "0%",
+                        transition: "width 1s ease 2.2s"
+                      }}
+                    ></div>
+                  </div>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>Supporting evidence: 7</span>
+                    <span>42%</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-3 pt-2 border-t border-gray-800">
+                <div className={`px-3 py-1.5 rounded ${colorConfig.bg} ${colorConfig.text} text-xs inline-block`}>
+                  Option B Recommended
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+      
+    default:
+      return <div className="text-white">Visual not available</div>;
+  }
 }
-
-// CSS animations for the knowledge synthesis visuals
-const knowledgeAnimationStyles = `
-  @keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
-  }
-  
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-  }
-  
-  .animate-pulse {
-    animation: pulse 2s infinite ease-in-out;
-  }
-  
-  .animate-float {
-    animation: float 3s infinite ease-in-out;
-  }
-`;
 
 export { KnowledgeSynthesisSections }; 

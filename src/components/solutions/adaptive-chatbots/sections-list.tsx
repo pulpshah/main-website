@@ -210,129 +210,297 @@ function AdaptiveChatsVisual({ index, color, isInView }: VisualProps) {
       <div className="w-full h-full flex items-center justify-center">
         <div className="w-full h-full p-2">
           {index === 0 && (
-            <svg viewBox="0 0 300 200" className="w-full h-full">
-              <defs>
-                <linearGradient id="gradientGreen" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor={colorConfig.fill} stopOpacity="0.2" />
-                  <stop offset="100%" stopColor={colorConfig.fill} stopOpacity="0.6" />
-                </linearGradient>
-                <linearGradient id="contextGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#6366F1" stopOpacity="0.1" />
-                  <stop offset="100%" stopColor={colorConfig.fill} stopOpacity="0.4" />
-                </linearGradient>
-                <linearGradient id="toneGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#F43F5E" stopOpacity="0.1" />
-                  <stop offset="100%" stopColor={colorConfig.fill} stopOpacity="0.4" />
-                </linearGradient>
-                <linearGradient id="intentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#F59E0B" stopOpacity="0.1" />
-                  <stop offset="100%" stopColor={colorConfig.fill} stopOpacity="0.4" />
-                </linearGradient>
-                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="3" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-              </defs>
-                
-              <rect width="300" height="200" fill="#111111" rx="5" />
-                
-                
-              {/* Chat bubbles to show natural conversation */}
-              <g className="chat-group">
-                {/* AI greeting with tone awareness */}
-                <rect x="40" y="35" width="130" height="35" rx="15" fill="#333" className={isInView ? "animate-fade-in" : ""} />
-                <text x="105" y="53" textAnchor="middle" fill="white" fontSize="9" className={isInView ? "animate-fade-in" : ""} fontWeight="medium">
-                  Hi Sarah, how can I help you?
-                </text>
-                <text x="105" y="63" textAnchor="middle" fill="white" fontSize="7" className={isInView ? "animate-fade-in" : ""} opacity="0.7">
-                  Friendly tone detected
-                </text>
-                
-                {/* Tone indicator */}
-                <circle cx="40" cy="35" r="6" fill="url(#toneGradient)" className={isInView ? "animate-fade-in" : ""} filter="url(#glow)" />
-                <text x="40" y="37" textAnchor="middle" fill="white" fontSize="5" className={isInView ? "animate-fade-in" : ""}>T</text>
-                
-                {/* User Message with intent recognition */}
-                <rect x="120" y="80" width="140" height="35" rx="15" fill={colorConfig.fill} fillOpacity="0.8" className={isInView ? "animate-fade-in-delay" : ""} />
-                <text x="190" y="95" textAnchor="middle" fill="white" fontSize="9" className={isInView ? "animate-fade-in-delay" : ""} fontWeight="medium">
-                  I need the quarterly report for
-                </text>
-                <text x="190" y="105" textAnchor="middle" fill="white" fontSize="9" className={isInView ? "animate-fade-in-delay" : ""} fontWeight="medium">
-                  the marketing team
-                </text>
-                
-                {/* Intent indicator */}
-                <circle cx="260" cy="80" r="6" fill="url(#intentGradient)" className={isInView ? "animate-fade-in-delay" : ""} filter="url(#glow)" />
-                <text x="260" y="82" textAnchor="middle" fill="white" fontSize="5" className={isInView ? "animate-fade-in-delay" : ""}>I</text>
-                
-                {/* AI thinking animation - shows processing */}
-                <g className={isInView ? "animate-fade-in-delay-2" : ""}>
-                  <circle cx="55" cy="130" r="3" fill="#666">
-                    <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="2" />
-                  </circle>
-                  <circle cx="65" cy="130" r="3" fill="#666">
-                    <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="2" begin="0.2s" />
-                  </circle>
-                  <circle cx="75" cy="130" r="3" fill="#666">
-                    <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="2" begin="0.4s" />
-                  </circle>
-                </g>
-                
-                {/* Context-aware personalized AI response */}
-                <rect x="40" y="140" width="210" height="50" rx="15" fill="#333" className={isInView ? "animate-fade-in-delay-3" : ""} />
-                <text x="145" y="157" textAnchor="middle" fill="white" fontSize="9" className={isInView ? "animate-fade-in-delay-3" : ""} fontWeight="medium">
-                  I see you&apos;re looking for the Q3 marketing report.
-                </text>
-                <text x="145" y="170" textAnchor="middle" fill="white" fontSize="9" className={isInView ? "animate-fade-in-delay-3" : ""} fontWeight="medium">
-                  Based on your recent presentation needs,
-                </text>
-                <text x="145" y="183" textAnchor="middle" fill="white" fontSize="9" className={isInView ? "animate-fade-in-delay-3" : ""} fontWeight="medium">
-                  I&apos;ll include the campaign performance graphs.
-                </text>
-                
-                {/* Context indicator */}
-                <circle cx="40" cy="140" r="6" fill="url(#contextGradient)" className={isInView ? "animate-fade-in-delay-3" : ""} filter="url(#glow)" />
-                <text x="40" y="142" textAnchor="middle" fill="white" fontSize="5" className={isInView ? "animate-fade-in-delay-3" : ""}>C</text>
+            <svg
+            viewBox="0 0 400 270"
+            style={{ width: '100%', height: 'auto' }}
+          >
+            <defs>
+              {/* === Gradients === */}
+              <linearGradient id="gradientGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#22C55E" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#22C55E" stopOpacity="0.6" />
+              </linearGradient>
+              <linearGradient id="contextGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#6366F1" stopOpacity="0.1" />
+                <stop offset="100%" stopColor="#22C55E" stopOpacity="0.4" />
+              </linearGradient>
+              <linearGradient id="toneGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#F43F5E" stopOpacity="0.1" />
+                <stop offset="100%" stopColor="#22C55E" stopOpacity="0.4" />
+              </linearGradient>
+              <linearGradient id="intentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#F59E0B" stopOpacity="0.1" />
+                <stop offset="100%" stopColor="#22C55E" stopOpacity="0.4" />
+              </linearGradient>
+          
+              {/* === Glow Filter === */}
+              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+
+            {/* === Chat Group === */}
+            <g>
+              {/* AI Greeting (Tone) */}
+              <rect
+                x="40"
+                y="70"
+                width="140"
+                height="35"
+                rx="15"
+                fill="#333"
+              />
+              <text
+                x="110"
+                y="88"
+                textAnchor="middle"
+                fill="white"
+                fontSize="9"
+                fontWeight="medium"
+              >
+                Hi Sarah, how can I help you?
+              </text>
+              <text
+                x="110"
+                y="98"
+                textAnchor="middle"
+                fill="white"
+                fontSize="7"
+                opacity="0.7"
+              >
+                Friendly tone detected
+              </text>
+              {/* Tone Indicator (T) */}
+              <circle
+                cx="40"
+                cy="70"
+                r="6"
+                fill="url(#toneGradient)"
+                filter="url(#glow)"
+              />
+              <text x="40" y="72" textAnchor="middle" fill="white" fontSize="5">
+                T
+              </text>
+          
+              {/* User Message (Intent) */}
+              <rect
+                x="140"
+                y="120"
+                width="160"
+                height="35"
+                rx="15"
+                fill="#22C55E"
+                fillOpacity="0.8"
+              />
+              <text
+                x="220"
+                y="135"
+                textAnchor="middle"
+                fill="white"
+                fontSize="9"
+                fontWeight="medium"
+              >
+                I need the quarterly report
+              </text>
+              <text
+                x="220"
+                y="147"
+                textAnchor="middle"
+                fill="white"
+                fontSize="9"
+                fontWeight="medium"
+              >
+                for the marketing team
+              </text>
+              {/* Intent Indicator (I) */}
+              <circle
+                cx="300"
+                cy="120"
+                r="6"
+                fill="url(#intentGradient)"
+                filter="url(#glow)"
+              />
+              <text x="300" y="122" textAnchor="middle" fill="white" fontSize="5">
+                I
+              </text>
+          
+              {/* AI "Thinking" Animation */}
+              <g>
+                <circle cx="70" cy="165" r="3" fill="#666">
+                  <animate
+                    attributeName="opacity"
+                    values="0.3;1;0.3"
+                    dur="1s"
+                    repeatCount="2"
+                  />
+                </circle>
+                <circle cx="80" cy="165" r="3" fill="#666">
+                  <animate
+                    attributeName="opacity"
+                    values="0.3;1;0.3"
+                    dur="1s"
+                    repeatCount="2"
+                    begin="0.2s"
+                  />
+                </circle>
+                <circle cx="90" cy="165" r="3" fill="#666">
+                  <animate
+                    attributeName="opacity"
+                    values="0.3;1;0.3"
+                    dur="1s"
+                    repeatCount="2"
+                    begin="0.4s"
+                  />
+                </circle>
               </g>
-                
-              {/* Central AI Understanding System */}
-              <g className={isInView ? "animate-fade-in-delay-2" : ""} filter="url(#glow)">
-                <circle cx="250" cy="45" r="18" fill="url(#gradientGreen)" strokeWidth="1" stroke={colorConfig.fill} opacity="0.9" />
-                <path 
-                  d="M242,38 C246,35 254,35 258,38 C262,42 262,48 258,52 C254,55 246,55 242,52 C238,48 238,42 242,38" 
-                  fill="none" 
-                  stroke="white" 
-                  strokeWidth="1.2"
+          
+              {/* AI Response (Context) */}
+              <rect
+                x="40"
+                y="180"
+                width="240"
+                height="50"
+                rx="15"
+                fill="#333"
+              />
+              <text
+                x="160"
+                y="197"
+                textAnchor="middle"
+                fill="white"
+                fontSize="9"
+                fontWeight="medium"
+              >
+                I see you&apos;re looking for the Q3 marketing report.
+              </text>
+              <text
+                x="160"
+                y="210"
+                textAnchor="middle"
+                fill="white"
+                fontSize="9"
+                fontWeight="medium"
+              >
+                Based on your recent presentation needs,
+              </text>
+              <text
+                x="160"
+                y="223"
+                textAnchor="middle"
+                fill="white"
+                fontSize="9"
+                fontWeight="medium"
+              >
+                I&apos;ll include the campaign performance graphs.
+              </text>
+              {/* Context Indicator (C) */}
+              <circle
+                cx="40"
+                cy="180"
+                r="6"
+                fill="url(#contextGradient)"
+                filter="url(#glow)"
+              />
+              <text x="40" y="182" textAnchor="middle" fill="white" fontSize="5">
+                C
+              </text>
+            </g>
+          
+            {/* === Central "AI Brain" Circle === */}
+            <g filter="url(#glow)">
+              <circle
+                cx="330"
+                cy="80"
+                r="18"
+                fill="url(#gradientGreen)"
+                strokeWidth="1"
+                stroke="#22C55E"
+                opacity="0.9"
+              />
+              {/* White decorative arc inside the circle */}
+              <path
+                d="M322,73 C326,70 334,70 338,73 C342,77 342,83 338,87 C334,90 326,90 322,87 C318,83 318,77 322,73"
+                fill="none"
+                stroke="white"
+                strokeWidth="1.2"
+              />
+              {/* Pulsing connections */}
+              <line
+                x1="312"
+                y1="80"
+                x2="180"
+                y2="80"
+                stroke="#22C55E"
+                strokeWidth="1"
+                strokeDasharray="2,1"
+                opacity="0.6"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="0.2;0.6;0.2"
+                  dur="3s"
+                  repeatCount="indefinite"
                 />
-                
-                {/* Small pulsing connections from central brain to each message */}
-                <line x1="235" y1="45" x2="170" y2="45" stroke={colorConfig.fill} strokeWidth="1" strokeDasharray="2,1" opacity="0.6">
-                  <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3s" repeatCount="indefinite" />
-                </line>
-                <line x1="235" y1="50" x2="210" y2="80" stroke={colorConfig.fill} strokeWidth="1" strokeDasharray="2,1" opacity="0.6">
-                  <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3s" repeatCount="indefinite" begin="0.5s" />
-                </line>
-                <line x1="235" y1="55" x2="200" y2="140" stroke={colorConfig.fill} strokeWidth="1" strokeDasharray="2,1" opacity="0.6">
-                  <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3s" repeatCount="indefinite" begin="1s" />
-                </line>
-              </g>
-                
-              {/* Legend for natural conversation elements */}
-              <g transform="translate(270, 120)" className={isInView ? "animate-fade-in-delay-4" : ""}>
-                <rect x="-20" y="0" width="40" height="60" rx="5" fill="#222" stroke="#333" strokeWidth="0.5" />
-                
-                <circle cx="-10" cy="10" r="4" fill="url(#contextGradient)" />
-                <text x="0" y="13" fontSize="6" fill="white" textAnchor="start">Context</text>
-                
-                <circle cx="-10" cy="25" r="4" fill="url(#toneGradient)" />
-                <text x="0" y="28" fontSize="6" fill="white" textAnchor="start">Tone</text>
-                
-                <circle cx="-10" cy="40" r="4" fill="url(#intentGradient)" />
-                <text x="0" y="43" fontSize="6" fill="white" textAnchor="start">Intent</text>
-                
-                <text x="0" y="58" fontSize="5" fill="white" textAnchor="middle" opacity="0.7">Natural AI</text>
-              </g>
-            </svg>
+              </line>
+              <line
+                x1="312"
+                y1="85"
+                x2="275"
+                y2="120"
+                stroke="#22C55E"
+                strokeWidth="1"
+                strokeDasharray="2,1"
+                opacity="0.6"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="0.2;0.6;0.2"
+                  dur="3s"
+                  repeatCount="indefinite"
+                  begin="0.5s"
+                />
+              </line>
+              <line
+                x1="312"
+                y1="90"
+                x2="250"
+                y2="200"
+                stroke="#22C55E"
+                strokeWidth="1"
+                strokeDasharray="2,1"
+                opacity="0.6"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="0.2;0.6;0.2"
+                  dur="3s"
+                  repeatCount="indefinite"
+                  begin="1s"
+                />
+              </line>
+            </g>
+          
+            {/* === Legend === */}
+            <g transform="translate(360, 150)">
+              <rect x="-20" y="0" width="40" height="60" rx="5" fill="#222" stroke="#333" strokeWidth="0.5" />
+              <circle cx="-10" cy="10" r="4" fill="url(#contextGradient)" />
+              <text x="0" y="13" fontSize="6" fill="white" textAnchor="start">
+                Context
+              </text>
+              <circle cx="-10" cy="25" r="4" fill="url(#toneGradient)" />
+              <text x="0" y="28" fontSize="6" fill="white" textAnchor="start">
+                Tone
+              </text>
+              <circle cx="-10" cy="40" r="4" fill="url(#intentGradient)" />
+              <text x="0" y="43" fontSize="6" fill="white" textAnchor="start">
+                Intent
+              </text>
+              <text x="0" y="58" fontSize="5" fill="white" textAnchor="middle" opacity="0.7">
+                Natural AI
+              </text>
+            </g>
+          </svg>          
           )}
           
           {index === 1 && (
@@ -359,9 +527,7 @@ function AdaptiveChatsVisual({ index, color, isInView }: VisualProps) {
                   <feComposite in="SourceGraphic" in2="blur" operator="over" />
                 </filter>
               </defs>
-                
-              <rect width="300" height="200" fill="#111111" rx="5" />
-                
+
               {/* Central AI Personalization Engine */}
               <g filter="url(#glow)">
                 <circle cx="150" cy="100" r="30" fill="url(#gradientGreen)" stroke={colorConfig.fill} strokeWidth="1.5" />
@@ -371,51 +537,47 @@ function AdaptiveChatsVisual({ index, color, isInView }: VisualProps) {
                 {/* Animated pulse ring */}
                 <circle cx="150" cy="100" r="40" fill="none" stroke={colorConfig.fill} strokeWidth="1" strokeDasharray="3,2" opacity="0.5" className="pulse-circle" />
               </g>
-                
+
               {/* User profiles - distinct personas */}
               <g className={isInView ? "animate-fade-in" : ""}>
                 {/* User 1 - Business Professional */}
-                <g transform="translate(60, 70)">
+                <g transform="translate(65, 45)">
                   <circle cx="0" cy="0" r="15" fill="url(#userGradient1)" stroke={colorConfig.fill} strokeWidth="1" />
                   <path d="M0,-7 C3,-7 5,-5 5,-2 C5,2 -5,2 -5,-2 C-5,-5 -3,-7 0,-7" fill="none" stroke="white" strokeWidth="1" />
                   <path d="M-5,5 C-5,2 5,2 5,5" fill="none" stroke="white" strokeWidth="1" />
-                  <rect x="-10" y="-15" width="20" height="5" rx="2" fill="#333" />
                   <text x="0" y="15" textAnchor="middle" fill="white" fontSize="5">BUSINESS</text>
                 </g>
-                
+
                 {/* User 2 - Technical User */}
-                <g transform="translate(60, 140)">
+                <g transform="translate(65, 155)">
                   <circle cx="0" cy="0" r="15" fill="url(#userGradient2)" stroke={colorConfig.fill} strokeWidth="1" />
                   <path d="M0,-7 C3,-7 5,-5 5,-2 C5,2 -5,2 -5,-2 C-5,-5 -3,-7 0,-7" fill="none" stroke="white" strokeWidth="1" />
                   <path d="M-5,5 C-5,2 5,2 5,5" fill="none" stroke="white" strokeWidth="1" />
-                  <path d="M-8,-12 L8,-12 L4,-18 L-4,-18 Z" fill="#333" />
                   <text x="0" y="15" textAnchor="middle" fill="white" fontSize="5">TECHNICAL</text>
                 </g>
-                
+
                 {/* User 3 - Casual User */}
-                <g transform="translate(240, 70)">
+                <g transform="translate(235, 45)">
                   <circle cx="0" cy="0" r="15" fill="url(#userGradient3)" stroke={colorConfig.fill} strokeWidth="1" />
                   <path d="M0,-7 C3,-7 5,-5 5,-2 C5,2 -5,2 -5,-2 C-5,-5 -3,-7 0,-7" fill="none" stroke="white" strokeWidth="1" />
                   <path d="M-5,5 C-5,2 5,2 5,5" fill="none" stroke="white" strokeWidth="1" />
-                  <circle cx="0" cy="-15" r="5" fill="#333" />
                   <text x="0" y="15" textAnchor="middle" fill="white" fontSize="5">CASUAL</text>
                 </g>
-                
+
                 {/* User 4 - Creative User */}
-                <g transform="translate(240, 140)">
+                <g transform="translate(235, 155)">
                   <circle cx="0" cy="0" r="15" fill="url(#userGradient1)" stroke={colorConfig.fill} strokeWidth="1" />
                   <path d="M0,-7 C3,-7 5,-5 5,-2 C5,2 -5,2 -5,-2 C-5,-5 -3,-7 0,-7" fill="none" stroke="white" strokeWidth="1" />
                   <path d="M-5,5 C-5,2 5,2 5,5" fill="none" stroke="white" strokeWidth="1" />
-                  <path d="M-5,-15 Q0,-20 5,-15" fill="none" stroke="#333" strokeWidth="2" />
                   <text x="0" y="15" textAnchor="middle" fill="white" fontSize="5">CREATIVE</text>
                 </g>
               </g>
-                
+
               {/* Personalization flows - dynamic content for each user */}
               <g>
                 {/* Flow to Business User */}
                 <path 
-                  d="M120,90 C130,85 135,80 140,70" 
+                  d="M130,80 C125,70 110,60 85,50" 
                   fill="none" 
                   stroke={colorConfig.fill} 
                   strokeWidth="1.5" 
@@ -423,15 +585,15 @@ function AdaptiveChatsVisual({ index, color, isInView }: VisualProps) {
                   className={isInView ? "animate-grow-delay-0" : ""}
                   opacity="0"
                 />
-                <g transform="translate(95, 55)" className={isInView ? "animate-fade-in-delay-2" : ""} opacity="0">
-                  <rect x="-25" y="-10" width="50" height="20" rx="5" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
-                  <text x="0" y="-2" fontSize="5" fill="white" textAnchor="middle">FORMAL MESSAGING</text>
-                  <text x="0" y="6" fontSize="5" fill="white" textAnchor="middle">ROI FOCUSED</text>
+                <g transform="translate(100, 40)" className={isInView ? "animate-fade-in-delay-2" : ""} opacity="0">
+                  <rect x="85" y="35" width="50" height="20" rx="5" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
+                  <text x="110" y="50" fontSize="5" fill="white" textAnchor="middle">FORMAL MESSAGING</text>
+                  <text x="110" y="40" fontSize="5" fill="white" textAnchor="middle">ROI FOCUSED</text>
                 </g>
                 
                 {/* Flow to Technical User */}
                 <path 
-                  d="M120,110 C130,115 135,125 140,140" 
+                  d="M130,120 C125,130 110,140 85,150" 
                   fill="none" 
                   stroke={colorConfig.fill} 
                   strokeWidth="1.5" 
@@ -439,15 +601,15 @@ function AdaptiveChatsVisual({ index, color, isInView }: VisualProps) {
                   className={isInView ? "animate-grow-delay-1" : ""}
                   opacity="0"
                 />
-                <g transform="translate(95, 155)" className={isInView ? "animate-fade-in-delay-3" : ""} opacity="0">
-                  <rect x="-25" y="-10" width="50" height="20" rx="5" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
-                  <text x="0" y="-2" fontSize="5" fill="white" textAnchor="middle">DETAILED SPECS</text>
-                  <text x="0" y="6" fontSize="5" fill="white" textAnchor="middle">TECH TERMINOLOGY</text>
+                <g transform="translate(100, 160)" className={isInView ? "animate-fade-in-delay-3" : ""} opacity="0">
+                  <rect x="85" y="145" width="50" height="20" rx="5" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
+                  <text x="110" y="160" fontSize="5" fill="white" textAnchor="middle">DETAILED SPECS</text>
+                  <text x="110" y="150" fontSize="5" fill="white" textAnchor="middle">TECH TERMINOLOGY</text>
                 </g>
                 
                 {/* Flow to Casual User */}
                 <path 
-                  d="M180,90 C170,85 165,80 160,70" 
+                  d="M170,80 C175,70 190,60 215,50" 
                   fill="none" 
                   stroke={colorConfig.fill} 
                   strokeWidth="1.5" 
@@ -455,15 +617,15 @@ function AdaptiveChatsVisual({ index, color, isInView }: VisualProps) {
                   className={isInView ? "animate-grow-delay-2" : ""}
                   opacity="0"
                 />
-                <g transform="translate(205, 55)" className={isInView ? "animate-fade-in-delay-4" : ""} opacity="0">
-                  <rect x="-25" y="-10" width="50" height="20" rx="5" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
-                  <text x="0" y="-2" fontSize="5" fill="white" textAnchor="middle">FRIENDLY TONE</text>
-                  <text x="0" y="6" fontSize="5" fill="white" textAnchor="middle">SIMPLE & DIRECT</text>
+                <g transform="translate(200, 40)" className={isInView ? "animate-fade-in-delay-4" : ""} opacity="0">
+                  <rect x="165" y="35" width="50" height="20" rx="5" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
+                  <text x="190" y="50" fontSize="5" fill="white" textAnchor="middle">FRIENDLY TONE</text>
+                  <text x="190" y="40" fontSize="5" fill="white" textAnchor="middle">SIMPLE & DIRECT</text>
                 </g>
                 
                 {/* Flow to Creative User */}
                 <path 
-                  d="M180,110 C170,115 165,125 160,140" 
+                  d="M170,120 C175,130 190,140 215,150" 
                   fill="none" 
                   stroke={colorConfig.fill} 
                   strokeWidth="1.5" 
@@ -471,50 +633,50 @@ function AdaptiveChatsVisual({ index, color, isInView }: VisualProps) {
                   className={isInView ? "animate-grow-delay-3" : ""}
                   opacity="0"
                 />
-                <g transform="translate(205, 155)" className={isInView ? "animate-fade-in-delay-5" : ""} opacity="0">
-                  <rect x="-25" y="-10" width="50" height="20" rx="5" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
-                  <text x="0" y="-2" fontSize="5" fill="white" textAnchor="middle">VISUAL EXAMPLES</text>
-                  <text x="0" y="6" fontSize="5" fill="white" textAnchor="middle">EXPRESSIVE STYLE</text>
+                <g transform="translate(200, 160)" className={isInView ? "animate-fade-in-delay-5" : ""} opacity="0">
+                  <rect x="165" y="145" width="50" height="20" rx="5" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
+                  <text x="190" y="160" fontSize="5" fill="white" textAnchor="middle">VISUAL EXAMPLES</text>
+                  <text x="190" y="150" fontSize="5" fill="white" textAnchor="middle">EXPRESSIVE STYLE</text>
                 </g>
               </g>
-                
+
               {/* User behavior and preference indicators */}
               <g className={isInView ? "animate-fade-in-delay" : ""}>
                 {/* User 1 preferences */}
-                <g transform="translate(40, 50)">
-                  <circle cx="0" cy="0" r="5" fill="#333" />
-                  <text x="0" y="2" textAnchor="middle" fill="white" fontSize="4">P</text>
-                  <text x="10" y="2" textAnchor="start" fill="white" fontSize="5">Data-driven</text>
+                <g transform="translate(35, 30)">
+                  <circle cx="-20" cy="0" r="5" fill="#333" />
+                  <text x="-20" y="2" textAnchor="middle" fill="white" fontSize="4">P</text>
+                  <text x="-10" y="2" textAnchor="start" fill="white" fontSize="5">Data-driven</text>
                 </g>
                 
                 {/* User 2 preferences */}
-                <g transform="translate(40, 160)">
-                  <circle cx="0" cy="0" r="5" fill="#333" />
-                  <text x="0" y="2" textAnchor="middle" fill="white" fontSize="4">P</text>
-                  <text x="10" y="2" textAnchor="start" fill="white" fontSize="5">Detail-oriented</text>
+                <g transform="translate(35, 170)">
+                  <circle cx="-20" cy="3" r="5" fill="#333" />
+                  <text x="-20" y="5" textAnchor="middle" fill="white" fontSize="4">P</text>
+                  <text x="-10" y="5" textAnchor="start" fill="white" fontSize="5">Detail-oriented</text>
                 </g>
                 
                 {/* User 3 preferences */}
-                <g transform="translate(260, 50)">
-                  <circle cx="0" cy="0" r="5" fill="#333" />
-                  <text x="0" y="2" textAnchor="middle" fill="white" fontSize="4">P</text>
-                  <text x="-10" y="2" textAnchor="end" fill="white" fontSize="5">Convenience</text>
+                <g transform="translate(265, 30)">
+                  <circle cx="20" cy="0" r="5" fill="#333" />
+                  <text x="20" y="2" textAnchor="middle" fill="white" fontSize="4">P</text>
+                  <text x="10" y="2" textAnchor="end" fill="white" fontSize="5">Convenience</text>
                 </g>
                 
                 {/* User 4 preferences */}
-                <g transform="translate(260, 160)">
-                  <circle cx="0" cy="0" r="5" fill="#333" />
-                  <text x="0" y="2" textAnchor="middle" fill="white" fontSize="4">P</text>
-                  <text x="-10" y="2" textAnchor="end" fill="white" fontSize="5">Inspirational</text>
+                <g transform="translate(265, 170)">
+                  <circle cx="20" cy="3" r="5" fill="#333" />
+                  <text x="20" y="5" textAnchor="middle" fill="white" fontSize="4">P</text>
+                  <text x="10" y="5" textAnchor="end" fill="white" fontSize="5">Inspirational</text>
                 </g>
               </g>
-                
+                 
               {/* Legend and title */}
               <g transform="translate(150, 25)">
                 <rect x="-70" y="-15" width="140" height="20" rx="10" fill="url(#gradientGreen)" fillOpacity="0.3" stroke={colorConfig.fill} strokeWidth="1" />
                 <text x="0" y="2" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">PERSONALIZATION AT SCALE</text>
               </g>
-                
+                 
               <g transform="translate(150, 180)">
                 <text x="0" y="0" textAnchor="middle" fill="white" fontSize="6">Each interaction uniquely tailored to user preferences</text>
                 <line x1="-70" y1="5" x2="70" y2="5" stroke={colorConfig.fill} strokeWidth="0.5" opacity="0.5" />
@@ -523,487 +685,347 @@ function AdaptiveChatsVisual({ index, color, isInView }: VisualProps) {
           )}
           
           {index === 2 && (
-            <div className="w-full max-w-[500px]">
-              <svg viewBox="0 0 300 200" className="w-full h-auto">
-                <defs>
-                  <linearGradient id="gradientGreen" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor={colorConfig.fill} stopOpacity="0.2" />
-                    <stop offset="100%" stopColor={colorConfig.fill} stopOpacity="0.6" />
-                  </linearGradient>
-                  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="2" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                  </filter>
-                </defs>
+            <svg viewBox="0 0 400 240" className="w-full h-full">
+              <defs>
+                <linearGradient id="pulpGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor={colorConfig.fill} stopOpacity="0.5" />
+                  <stop offset="100%" stopColor={colorConfig.fill} stopOpacity="0.8" />
+                </linearGradient>
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="2" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill={colorConfig.fill} />
+                </marker>
+              </defs>
+              
+              
+              {/* Title */}
+              <g transform="translate(200, 20)">
+                <text x="0" y="0" fontSize="14" fill="white" textAnchor="middle" fontWeight="bold">SEAMLESS AUTOMATION</text>
+                <line x1="-120" y1="10" x2="120" y2="10" stroke={colorConfig.fill} strokeWidth="1" opacity="1" />
+              </g>
+              
+              {/* Before & After Labels */}
+              <g>
+                <text x="100" y="50" fontSize="12" fill={colorConfig.fill} textAnchor="middle" fontWeight="bold">BEFORE</text>
+                <text x="300" y="50" fontSize="12" fill={colorConfig.fill} textAnchor="middle" fontWeight="bold">AFTER</text>
+              </g>
+
+              {/* Manual tasks section - BEFORE */}
+              <g transform="translate(100, 125)">
+                <rect x="-70" y="-60" width="140" height="120" rx="8" fill="#222" stroke={colorConfig.fill} strokeWidth="1" opacity="1" />
                 
-                <rect width="300" height="200" fill="#111111" rx="5" />
-                
-                {/* Top section - Before Automation (Manual Tasks) */}
-                <g transform="translate(150, 35)">
-                  <rect x="-120" y="-15" width="240" height="30" rx="5" fill="#333" strokeWidth="1" stroke="#444" />
-                  <text x="0" y="0" fontSize="8" fill="white" textAnchor="middle" fontWeight="bold">MANUAL REPETITIVE TASKS</text>
-                  
-                  {/* Manual workload visualization */}
-                  <g className={isInView ? "animate-fade-in" : ""}>
-                    {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
-                      <g key={i} transform={`translate(${-100 + i * 30}, 0)`}>
-                        <rect x="-8" y="-8" width="16" height="16" rx="2" fill="#666" />
-                        <text x="0" y="1" fontSize="7" fill="white" textAnchor="middle">!</text>
-                      </g>
-                    ))}
-                  </g>
-                </g>
-                
-                {/* Central AI Automation System */}
-                <g transform="translate(150, 100)" filter="url(#glow)" className={isInView ? "animate-fade-in-delay" : ""}>
-                  <circle cx="0" cy="0" r="25" fill="url(#gradientGreen)" stroke={colorConfig.fill} strokeWidth="1.5" />
-                  <text x="0" y="-5" fontSize="7" fill="white" textAnchor="middle" fontWeight="bold">PULP AI</text>
-                  <text x="0" y="5" fontSize="6" fill="white" textAnchor="middle">AUTOMATION</text>
-                  
-                  {/* Rotating dots to show processing */}
-                  <g className="pulse-circle">
-                    <circle cx="0" cy="-30" r="3" fill={colorConfig.fill} />
-                    <circle cx="21.2" cy="-21.2" r="3" fill={colorConfig.fill} opacity="0.9" />
-                    <circle cx="30" cy="0" r="3" fill={colorConfig.fill} opacity="0.8" />
-                    <circle cx="21.2" cy="21.2" r="3" fill={colorConfig.fill} opacity="0.7" />
-                    <circle cx="0" cy="30" r="3" fill={colorConfig.fill} opacity="0.6" />
-                    <circle cx="-21.2" cy="21.2" r="3" fill={colorConfig.fill} opacity="0.5" />
-                    <circle cx="-30" cy="0" r="3" fill={colorConfig.fill} opacity="0.4" />
-                    <circle cx="-21.2" cy="-21.2" r="3" fill={colorConfig.fill} opacity="0.3" />
-                  </g>
-                </g>
-                
-                {/* Automation Workflow Categories */}
+                {/* Tasks */}
                 <g>
-                  {/* Knowledge Retrieval */}
-                  <g transform="translate(70, 75)" className={isInView ? "animate-fade-in-delay-2" : ""}>
-                    <rect x="-30" y="-15" width="60" height="30" rx="5" fill="url(#gradientGreen)" fillOpacity="0.3" stroke={colorConfig.fill} strokeWidth="1" />
-                    <text x="0" y="-5" fontSize="6" fill="white" textAnchor="middle" fontWeight="bold">KNOWLEDGE</text>
-                    <text x="0" y="5" fontSize="6" fill="white" textAnchor="middle">RETRIEVAL</text>
-                    
-                    {/* Connection to AI */}
-                    <path d="M30,0 C45,0 60,15 80,25" stroke={colorConfig.fill} strokeWidth="1.5" strokeDasharray="3,2" />
-                    
-                    {/* Automation effects - documents being found */}
-                    <g>
-                      <rect x="-20" y="-30" width="12" height="15" rx="1" fill="#666" />
-                      <rect x="-18" y="-28" width="8" height="1" fill="white" opacity="0.6" />
-                      <rect x="-18" y="-25" width="8" height="1" fill="white" opacity="0.6" />
-                      <rect x="-18" y="-22" width="8" height="1" fill="white" opacity="0.6" />
-                      
-                      <rect x="-5" y="-25" width="12" height="15" rx="1" fill="#666" />
-                      <rect x="-3" y="-23" width="8" height="1" fill="white" opacity="0.6" />
-                      <rect x="-3" y="-20" width="8" height="1" fill="white" opacity="0.6" />
-                      <rect x="-3" y="-17" width="8" height="1" fill="white" opacity="0.6" />
-                      
-                      <rect x="10" y="-28" width="12" height="15" rx="1" fill="#666" />
-                      <rect x="12" y="-26" width="8" height="1" fill="white" opacity="0.6" />
-                      <rect x="12" y="-23" width="8" height="1" fill="white" opacity="0.6" />
-                      <rect x="12" y="-20" width="8" height="1" fill="white" opacity="0.6" />
-                      
-                      {/* Animation for document search */}
-                      <circle cx="15" cy="-20" r="8" fill="none" stroke={colorConfig.fill} strokeWidth="1" className="pulse-circle" opacity="0.7" />
-                    </g>
+                  {/* Task stack 1 */}
+                  <g transform="translate(-35, -30)">
+                    <rect x="-15" y="-10" width="30" height="20" rx="3" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
+                    <line x1="-10" y1="-5" x2="10" y2="-5" stroke="#999" strokeWidth="1" />
+                    <line x1="-10" y1="0" x2="5" y2="0" stroke="#999" strokeWidth="1" />
+                    <line x1="-10" y1="5" x2="8" y2="5" stroke="#999" strokeWidth="1" />
                   </g>
                   
-                  {/* Onboarding */}
-                  <g transform="translate(70, 125)" className={isInView ? "animate-fade-in-delay-3" : ""}>
-                    <rect x="-30" y="-15" width="60" height="30" rx="5" fill="url(#gradientGreen)" fillOpacity="0.3" stroke={colorConfig.fill} strokeWidth="1" />
-                    <text x="0" y="-5" fontSize="6" fill="white" textAnchor="middle" fontWeight="bold">ONBOARDING</text>
-                    <text x="0" y="5" fontSize="6" fill="white" textAnchor="middle">AUTOMATION</text>
-                    
-                    {/* Connection to AI */}
-                    <path d="M30,0 C45,0 60,-15 80,-25" stroke={colorConfig.fill} strokeWidth="1.5" strokeDasharray="3,2" />
-                    
-                    {/* Automation effects - onboarding user & progress */}
-                    <g>
-                      <circle cx="-15" cy="-5" r="5" fill="#666" />
-                      <path d="M-15,-8 C-13,-8 -11,-6 -11,-4 C-11,-1 -19,-1 -19,-4 C-19,-6 -17,-8 -15,-8" fill="none" stroke="white" strokeWidth="0.8" />
-                      <path d="M-18,0 C-18,-2 -12,-2 -12,0" fill="none" stroke="white" strokeWidth="0.8" />
-                      
-                      <rect x="-5" y="-7" width="20" height="4" rx="2" fill="#555" />
-                      <rect x="-5" y="-7" width="15" height="4" rx="2" fill={colorConfig.fill} opacity="0.7" />
-                      <text x="5" y="4" fontSize="4" fill="white" textAnchor="middle">AUTO-PROGRESS</text>
-                    </g>
+                  {/* Task stack 2 */}
+                  <g transform="translate(0, -15)">
+                    <rect x="-15" y="-10" width="30" height="20" rx="3" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
+                    <line x1="-10" y1="-5" x2="10" y2="-5" stroke="#999" strokeWidth="1" />
+                    <line x1="-10" y1="0" x2="5" y2="0" stroke="#999" strokeWidth="1" />
+                    <line x1="-10" y1="5" x2="8" y2="5" stroke="#999" strokeWidth="1" />
                   </g>
                   
-                  {/* Internal Operations */}
-                  <g transform="translate(230, 75)" className={isInView ? "animate-fade-in-delay-4" : ""}>
-                    <rect x="-30" y="-15" width="60" height="30" rx="5" fill="url(#gradientGreen)" fillOpacity="0.3" stroke={colorConfig.fill} strokeWidth="1" />
-                    <text x="0" y="-5" fontSize="6" fill="white" textAnchor="middle" fontWeight="bold">INTERNAL</text>
-                    <text x="0" y="5" fontSize="6" fill="white" textAnchor="middle">OPERATIONS</text>
-                    
-                    {/* Connection to AI */}
-                    <path d="M-30,0 C-45,0 -60,15 -80,25" stroke={colorConfig.fill} strokeWidth="1.5" strokeDasharray="3,2" />
-                    
-                    {/* Automation effects - tasks being completed */}
-                    <g>
-                      <rect x="-20" y="-5" width="12" height="12" rx="1" fill="#555" />
-                      <path d="M-17,1 L-14,4 L-9,-2" stroke="white" strokeWidth="0.8" fill="none" />
-                      
-                      <rect x="-5" y="-5" width="12" height="12" rx="1" fill="#555" />
-                      <path d="M-2,1 L1,4 L6,-2" stroke="white" strokeWidth="0.8" fill="none" />
-                      
-                      <rect x="10" y="-5" width="12" height="12" rx="1" fill="#555" />
-                      <path d="M13,1 L16,4 L21,-2" stroke="white" strokeWidth="0.8" fill="none" />
-                    </g>
+                  {/* Task stack 3 */}
+                  <g transform="translate(35, -30)">
+                    <rect x="-15" y="-10" width="30" height="20" rx="3" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
+                    <line x1="-10" y1="-5" x2="10" y2="-5" stroke="#999" strokeWidth="1" />
+                    <line x1="-10" y1="0" x2="5" y2="0" stroke="#999" strokeWidth="1" />
+                    <line x1="-10" y1="5" x2="8" y2="5" stroke="#999" strokeWidth="1" />
                   </g>
                   
-                  {/* Strategic Focus */}
-                  <g transform="translate(230, 125)" className={isInView ? "animate-fade-in-delay-5" : ""}>
-                    <rect x="-30" y="-15" width="60" height="30" rx="5" fill="url(#gradientGreen)" fillOpacity="0.3" stroke={colorConfig.fill} strokeWidth="1" />
-                    <text x="0" y="-5" fontSize="6" fill="white" textAnchor="middle" fontWeight="bold">STRATEGIC</text>
-                    <text x="0" y="5" fontSize="6" fill="white" textAnchor="middle">FOCUS</text>
+                  {/* Person icon struggling with tasks */}
+                  <g transform="translate(0, 25)">
+                    <circle cx="0" cy="-5" r="8" fill="#666" stroke={colorConfig.fill} strokeWidth="0.5" />
+                    <path d="M0,3 L0,15 M-8,7 L0,15 L8,7" stroke="#666" strokeWidth="2" strokeLinecap="round" />
+                    <path d="M-3,-7 L-1,-5 M3,-7 L1,-5" stroke="#333" strokeWidth="1" />
+                    <path d="M-2,-2 C-2,0 2,0 2,-2" stroke="#333" strokeWidth="1" />
                     
-                    {/* Connection to AI */}
-                    <path d="M-30,0 C-45,0 -60,-15 -80,-25" stroke={colorConfig.fill} strokeWidth="1.5" strokeDasharray="3,2" />
-                    
-                    {/* Automation effects - strategic thinking */}
-                    <g>
-                      <path d="M-15,-5 L-5,5 M-15,5 L-5,-5" stroke="#666" strokeWidth="1.5" />
-                      <path d="M5,-5 L15,5 M5,5 L15,-5" stroke="#666" strokeWidth="1.5" />
-                      <circle cx="0" cy="0" r="5" fill={colorConfig.fill} opacity="0.7" />
-                      <text x="0" y="1" fontSize="4" fill="white" textAnchor="middle">IDEA</text>
-                    </g>
+                    {/* Thought bubble showing frustration */}
+                    <path d="M10,-10 C15,-12 20,-10 20,-5 C20,0 15,0 15,-5 C15,-8 12,-10 10,-10" fill="#444" stroke={colorConfig.fill} strokeWidth="0.5" />
+                    <circle cx="8" cy="-12" r="2" fill="#444" stroke={colorConfig.fill} strokeWidth="0.5" />
+                    <text x="15" y="-5" fontSize="7" fill="white" textAnchor="middle">!</text>
                   </g>
+                  
+                  {/* Label */}
+                  <text x="0" y="-45" fontSize="8" fill="white" textAnchor="middle" fontWeight="bold">REPETITIVE TASKS</text>
+                  <text x="0" y="45" fontSize="7" fill="white" textAnchor="middle">TIME CONSUMING</text>
+                </g>
+              </g>
+              
+              {/* Central AI Automation Engine */}
+              <g transform="translate(200, 125)" filter="url(#glow)">
+                <circle cx="0" cy="0" r="25" fill="url(#pulpGradient)" stroke={colorConfig.fill} strokeWidth="2" />
+                <text x="0" y="-5" fontSize="10" fill="white" textAnchor="middle" fontWeight="bold">PULP AI</text>
+                <text x="0" y="8" fontSize="7" fill="white" textAnchor="middle">AUTOMATION</text>
+                
+                {/* Pulse effect */}
+                <circle cx="0" cy="0" r="35" fill="none" stroke={colorConfig.fill} strokeWidth="1.5" strokeDasharray="3,2" opacity="0.8" className="pulse-circle" />
+              </g>
+              
+              {/* Strategic focus section - AFTER */}
+              <g transform="translate(300, 125)">
+                <rect x="-70" y="-60" width="140" height="120" rx="8" fill="#222" stroke={colorConfig.fill} strokeWidth="1" opacity="1" />
+                
+                {/* Strategic elements */}
+                <g>
+                  {/* Strategy board */}
+                  <g transform="translate(0, -30)">
+                    <rect x="-35" y="-15" width="70" height="30" rx="3" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
+                    <line x1="-30" y1="-10" x2="30" y2="-10" stroke={colorConfig.fill} strokeWidth="1" opacity="0.9" />
+                    <line x1="-30" y1="0" x2="20" y2="0" stroke="#999" strokeWidth="1" />
+                    <line x1="-30" y1="10" x2="30" y2="10" stroke="#999" strokeWidth="1" />
+                    
+                    {/* Checkpoints on strategy */}
+                    <circle cx="-20" cy="-10" r="2" fill={colorConfig.fill} />
+                    <circle cx="0" cy="-10" r="2" fill={colorConfig.fill} />
+                    <circle cx="20" cy="-10" r="2" fill={colorConfig.fill} />
+                  </g>
+                  
+                  {/* Team collaboration */}
+                  <g transform="translate(0, 20)">
+                    {/* Person 1 */}
+                    <g transform="translate(-20, 0)">
+                      <circle cx="0" cy="-5" r="6" fill="#666" stroke={colorConfig.fill} strokeWidth="0.5" />
+                      <path d="M0,1 L0,10 M-5,5 L0,10 L5,5" stroke="#666" strokeWidth="1.5" strokeLinecap="round" />
+                    </g>
+                    
+                    {/* Person 2 */}
+                    <g transform="translate(0, 0)">
+                      <circle cx="0" cy="-5" r="6" fill="#666" stroke={colorConfig.fill} strokeWidth="0.5" />
+                      <path d="M0,1 L0,10 M-5,5 L0,10 L5,5" stroke="#666" strokeWidth="1.5" strokeLinecap="round" />
+                    </g>
+                    
+                    {/* Person 3 */}
+                    <g transform="translate(20, 0)">
+                      <circle cx="0" cy="-5" r="6" fill="#666" stroke={colorConfig.fill} strokeWidth="0.5" />
+                      <path d="M0,1 L0,10 M-5,5 L0,10 L5,5" stroke="#666" strokeWidth="1.5" strokeLinecap="round" />
+                    </g>
+                    
+                    {/* Connection lines */}
+                    <line x1="-20" y1="-10" x2="0" y2="-10" stroke={colorConfig.fill} strokeWidth="1" strokeDasharray="2,1" />
+                    <line x1="0" y1="-10" x2="20" y2="-10" stroke={colorConfig.fill} strokeWidth="1" strokeDasharray="2,1" />
+                    
+                    <text x="0" y="20" fontSize="7" fill="white" textAnchor="middle">TEAM COLLABORATION</text>
+                  </g>
+                  
+                  {/* Label */}
+                  <text x="0" y="-45" fontSize="8" fill="white" textAnchor="middle" fontWeight="bold">STRATEGIC FOCUS</text>
+                  <text x="0" y="45" fontSize="7" fill="white" textAnchor="middle">VALUE CREATION</text>
+                </g>
+              </g>
+              
+              {/* Transformation arrows */}
+              <g>
+                {/* From manual to Pulp */}
+                <path d="M120,125 L155,125" stroke={colorConfig.fill} strokeWidth="2" markerEnd="url(#arrowhead)" />
+                
+                {/* From Pulp to strategic */}
+                <path d="M225,125 L260,125" stroke={colorConfig.fill} strokeWidth="2" markerEnd="url(#arrowhead)" />
+                
+                {/* Task reduction indicator */}
+                <g transform="translate(157, 110)">
+                  <path d="M0,0 L5,5 L0,10 L-5,5 Z" fill={colorConfig.fill} opacity="0.9" />
+                  <text x="0" y="4" fontSize="6" fill="white" textAnchor="middle" fontWeight="bold">-</text>
                 </g>
                 
-                {/* Bottom section - After Automation (Strategic Results) */}
-                <g transform="translate(150, 165)" className={isInView ? "animate-fade-in-delay-5" : ""}>
-                  <rect x="-120" y="-15" width="240" height="30" rx="5" fill="#333" strokeWidth="1" stroke={colorConfig.fill} />
-                  <text x="0" y="0" fontSize="8" fill="white" textAnchor="middle" fontWeight="bold">FOCUS ON STRATEGY, NOT BUSYWORK</text>
-                  
-                  {/* Results icons */}
-                  <g transform="translate(-90, 0)">
-                    <path d="M-5,-5 L0,5 L5,-5" stroke={colorConfig.fill} strokeWidth="1" fill="none" />
-                  </g>
-                  <g transform="translate(-60, 0)">
-                    <circle cx="0" cy="0" r="5" fill="none" stroke={colorConfig.fill} strokeWidth="1" />
-                    <circle cx="0" cy="0" r="2" fill={colorConfig.fill} />
-                  </g>
-                  <g transform="translate(-30, 0)">
-                    <rect x="-3" y="-3" width="6" height="6" fill="none" stroke={colorConfig.fill} strokeWidth="1" />
-                  </g>
-                  <g transform="translate(30, 0)">
-                    <polygon points="0,-5 5,3 -5,3" fill="none" stroke={colorConfig.fill} strokeWidth="1" />
-                  </g>
-                  <g transform="translate(60, 0)">
-                    <path d="M-5,-5 C-5,0 5,0 5,5 M-5,5 C-5,0 5,0 5,-5" stroke={colorConfig.fill} strokeWidth="1" fill="none" />
-                  </g>
-                  <g transform="translate(90, 0)">
-                    <path d="M-5,0 L5,0 M0,-5 L0,5" stroke={colorConfig.fill} strokeWidth="1" />
-                  </g>
+                {/* Value addition indicator */}
+                <g transform="translate(243, 110)">
+                  <path d="M0,0 L5,5 L0,10 L-5,5 Z" fill={colorConfig.fill} opacity="0.9" />
+                  <text x="0" y="4" fontSize="6" fill="white" textAnchor="middle" fontWeight="bold">+</text>
+                </g>
+              </g>
+              
+              {/* Automation capabilities */}
+              <g transform="translate(200, 200)">
+                <rect x="-160" y="-15" width="320" height="30" rx="5" fill="#222" stroke={colorConfig.fill} strokeWidth="1" opacity="1" />
+                
+                {/* Categories */}
+                <g transform="translate(-120, 0)">
+                  <circle cx="0" cy="0" r="10" fill="#333" stroke={colorConfig.fill} strokeWidth="1" />
+                  <text x="0" y="3" fontSize="6" fill="white" textAnchor="middle" fontWeight="bold">KR</text>
+                  <text x="0" y="15" fontSize="6" fill="white" textAnchor="middle">KNOWLEDGE</text>
                 </g>
                 
-                {/* Animated workers transitioning from manual to strategic work */}
-                <g className={isInView ? "animate-fade-in-delay-3" : ""}>
-                  {/* Transition arrow 1 */}
-                  <path 
-                    d="M80,35 Q110,70 110,100 Q110,130 80,165" 
-                    fill="none" 
-                    stroke={colorConfig.fill} 
-                    strokeWidth="1" 
-                    strokeDasharray="3,2" 
-                    opacity="0.6"
-                  >
-                    <animate attributeName="stroke-dashoffset" values="5;0" dur="3s" repeatCount="1" fill="freeze" />
-                  </path>
-                  <circle cx="80" cy="35" r="3" fill="#888">
-                    <animate attributeName="cx" values="80;80;110;110;80;80" dur="3s" repeatCount="1" fill="freeze" />
-                    <animate attributeName="cy" values="35;35;70;130;165;165" dur="3s" repeatCount="1" fill="freeze" />
-                  </circle>
-                  
-                  {/* Transition arrow 2 */}
-                  <path 
-                    d="M120,35 Q135,70 150,100 Q165,130 180,165" 
-                    fill="none" 
-                    stroke={colorConfig.fill} 
-                    strokeWidth="1" 
-                    strokeDasharray="3,2" 
-                    opacity="0.6"
-                  >
-                    <animate attributeName="stroke-dashoffset" values="5;0" dur="3.5s" repeatCount="1" fill="freeze" />
-                  </path>
-                  <circle cx="120" cy="35" r="3" fill="#888">
-                    <animate attributeName="cx" values="120;120;135;150;165;180;180" dur="3.5s" repeatCount="1" fill="freeze" />
-                    <animate attributeName="cy" values="35;35;70;100;130;165;165" dur="3.5s" repeatCount="1" fill="freeze" />
-                  </circle>
-                  
-                  {/* Transition arrow 3 */}
-                  <path 
-                    d="M220,35 Q190,70 190,100 Q190,130 220,165" 
-                    fill="none" 
-                    stroke={colorConfig.fill} 
-                    strokeWidth="1" 
-                    strokeDasharray="3,2" 
-                    opacity="0.6"
-                  >
-                    <animate attributeName="stroke-dashoffset" values="5;0" dur="4s" repeatCount="1" fill="freeze" />
-                  </path>
-                  <circle cx="220" cy="35" r="3" fill="#888">
-                    <animate attributeName="cx" values="220;220;190;190;220;220" dur="4s" repeatCount="1" fill="freeze" />
-                    <animate attributeName="cy" values="35;35;70;130;165;165" dur="4s" repeatCount="1" fill="freeze" />
-                  </circle>
+                <g transform="translate(-40, 0)">
+                  <circle cx="0" cy="0" r="10" fill="#333" stroke={colorConfig.fill} strokeWidth="1" />
+                  <text x="0" y="3" fontSize="6" fill="white" textAnchor="middle" fontWeight="bold">O</text>
+                  <text x="0" y="15" fontSize="6" fill="white" textAnchor="middle">ONBOARDING</text>
                 </g>
-              </svg>
-            </div>
+                
+                <g transform="translate(40, 0)">
+                  <circle cx="0" cy="0" r="10" fill="#333" stroke={colorConfig.fill} strokeWidth="1" />
+                  <text x="0" y="3" fontSize="6" fill="white" textAnchor="middle" fontWeight="bold">IO</text>
+                  <text x="0" y="15" fontSize="6" fill="white" textAnchor="middle">INTERNAL OPS</text>
+                </g>
+                
+                <g transform="translate(120, 0)">
+                  <circle cx="0" cy="0" r="10" fill="#333" stroke={colorConfig.fill} strokeWidth="1" />
+                  <text x="0" y="3" fontSize="6" fill="white" textAnchor="middle" fontWeight="bold">C</text>
+                  <text x="0" y="15" fontSize="6" fill="white" textAnchor="middle">COMPLIANCE</text>
+                </g>
+              </g>
+            </svg>
           )}
           
           {index === 3 && (
-            <div className="w-full max-w-[500px]">
-              <svg viewBox="0 0 300 200" className="w-full h-auto">
-                <defs>
-                  <linearGradient id="gradientGreen" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor={colorConfig.fill} stopOpacity="0.2" />
-                    <stop offset="100%" stopColor={colorConfig.fill} stopOpacity="0.6" />
-                  </linearGradient>
-                  <linearGradient id="engagementGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#FF4B4B" stopOpacity="0.7" />
-                    <stop offset="50%" stopColor="#FFDE59" stopOpacity="0.7" />
-                    <stop offset="100%" stopColor={colorConfig.fill} stopOpacity="0.7" />
-                  </linearGradient>
-                  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="2" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                  </filter>
-                </defs>
+            <svg viewBox="0 0 400 240" className="w-full h-full">
+              <defs>
+                <linearGradient id="learningGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor={colorConfig.fill} stopOpacity="0.5" />
+                  <stop offset="100%" stopColor={colorConfig.fill} stopOpacity="0.8" />
+                </linearGradient>
+              </defs>
+              
+              {/* Title */}
+              <g transform="translate(200, 25)">
+                <text x="0" y="0" fontSize="14" fill="white" textAnchor="middle" fontWeight="bold">ADAPTIVE LEARNING SYSTEM</text>
+                <line x1="-120" y1="10" x2="120" y2="10" stroke={colorConfig.fill} strokeWidth="1" />
+              </g>
+              
+              {/* Learning Styles Boxes */}
+              {/* Visual Learning - Top Left */}
+              <g transform="translate(120, 85)">
+                <rect x="-50" y="-20" width="100" height="40" rx="5" fill="transparent" stroke={colorConfig.fill} strokeWidth="1.5" />
+                <text x="0" y="-5" fontSize="10" fill="white" textAnchor="middle" fontWeight="bold">VISUAL</text>
+                <text x="0" y="10" fontSize="9" fill="white" textAnchor="middle">LEARNING</text>
                 
-                {/* Title */}
-                <g transform="translate(150, 15)">
-                  <text x="0" y="0" fontSize="10" fill="white" textAnchor="middle" fontWeight="bold">ADAPTIVE LEARNING SYSTEM</text>
-                  <line x1="-80" y1="5" x2="80" y2="5" stroke={colorConfig.fill} strokeWidth="0.5" opacity="0.7" />
+                {/* Icon */}
+                <g transform="translate(-75, 0)">
+                  <rect x="-15" y="-15" width="30" height="30" rx="3" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
+                  <rect x="-8" y="-8" width="16" height="16" fill={colorConfig.fill} opacity="0.5" />
                 </g>
+              </g>
+              
+              {/* Auditory Learning - Top Right */}
+              <g transform="translate(280, 85)">
+                <rect x="-50" y="-20" width="100" height="40" rx="5" fill="transparent" stroke={colorConfig.fill} strokeWidth="1.5" />
+                <text x="0" y="-5" fontSize="10" fill="white" textAnchor="middle" fontWeight="bold">AUDITORY</text>
+                <text x="0" y="10" fontSize="9" fill="white" textAnchor="middle">LEARNING</text>
                 
-                {/* Central AI Tutor */}
-                <g transform="translate(150, 90)" filter="url(#glow)" className={isInView ? "animate-fade-in" : ""}>
-                  <circle cx="0" cy="0" r="22" fill="url(#gradientGreen)" stroke={colorConfig.fill} strokeWidth="1.5" />
-                  <text x="0" y="-5" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">PULP AI</text>
-                  <text x="0" y="5" textAnchor="middle" fill="white" fontSize="6">TUTOR</text>
-                  
-                  {/* Radiating adaptive signals */}
-                  <g className="pulse-circle">
-                    <circle cx="0" cy="0" r="30" fill="none" stroke={colorConfig.fill} strokeWidth="0.5" strokeDasharray="1,2" />
-                    <circle cx="0" cy="0" r="38" fill="none" stroke={colorConfig.fill} strokeWidth="0.5" strokeDasharray="1,3" />
-                  </g>
+                {/* Icon */}
+                <g transform="translate(75, 0)">
+                  <rect x="-15" y="-15" width="30" height="30" rx="3" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
+                  <circle cx="0" cy="0" r="8" fill={colorConfig.fill} opacity="0.5" />
                 </g>
+              </g>
+              
+              {/* Kinesthetic Learning - Bottom Left */}
+              <g transform="translate(120, 165)">
+                <rect x="-50" y="-20" width="100" height="40" rx="5" fill="transparent" stroke={colorConfig.fill} strokeWidth="1.5" />
+                <text x="0" y="-5" fontSize="10" fill="white" textAnchor="middle" fontWeight="bold">KINESTHETIC</text>
+                <text x="0" y="10" fontSize="9" fill="white" textAnchor="middle">LEARNING</text>
                 
-                {/* Learning Modules */}
-                <g className={isInView ? "animate-fade-in-delay" : ""}>
-                  {/* Visual Learning Style */}
-                  <g transform="translate(75, 55)">
-                    <rect x="-25" y="-15" width="50" height="30" rx="5" fill="url(#gradientGreen)" fillOpacity="0.3" stroke={colorConfig.fill} strokeWidth="1" />
-                    <text x="0" y="-5" textAnchor="middle" fill="white" fontSize="6" fontWeight="bold">VISUAL</text>
-                    <text x="0" y="5" textAnchor="middle" fill="white" fontSize="6">LEARNING</text>
-                    
-                    {/* Visual learning elements */}
-                    <g transform="translate(0, -35)">
-                      <rect x="-20" y="-15" width="40" height="30" rx="3" fill="#333" />
-                      <rect x="-15" y="-10" width="10" height="10" fill={colorConfig.fill} opacity="0.7" />
-                      <rect x="5" y="-10" width="10" height="10" fill="#666" />
-                      <rect x="-15" y="5" width="30" height="5" fill="#555" />
-                    </g>
-                    
-                    {/* Connection to AI */}
-                    <path 
-                      d="M0,15 C0,35 40,50 75,35" 
-                      fill="none" 
-                      stroke={colorConfig.fill} 
-                      strokeWidth="1.5" 
-                      strokeDasharray="3,2"
-                      className={isInView ? "animate-grow-delay-0" : ""}
-                    />
-                  </g>
-                  
-                  {/* Auditory Learning Style */}
-                  <g transform="translate(225, 55)">
-                    <rect x="-25" y="-15" width="50" height="30" rx="5" fill="url(#gradientGreen)" fillOpacity="0.3" stroke={colorConfig.fill} strokeWidth="1" />
-                    <text x="0" y="-5" textAnchor="middle" fill="white" fontSize="6" fontWeight="bold">AUDITORY</text>
-                    <text x="0" y="5" textAnchor="middle" fill="white" fontSize="6">LEARNING</text>
-                    
-                    {/* Auditory learning elements */}
-                    <g transform="translate(0, -35)">
-                      <rect x="-20" y="-15" width="40" height="30" rx="3" fill="#333" />
-                      <path d="M-7,-7 C0,-14 0,-14 7,-7 C10,-4 10,4 7,7 C0,14 0,14 -7,7 C-10,4 -10,-4 -7,-7" fill="none" stroke="#666" strokeWidth="1.5" />
-                      <path d="M-3,-3 C0,-6 0,-6 3,-3 C6,0 6,0 3,3 C0,6 0,6 -3,3 C-6,0 -6,0 -3,-3" fill="none" stroke={colorConfig.fill} strokeWidth="1.5" />
-                    </g>
-                    
-                    {/* Connection to AI */}
-                    <path 
-                      d="M0,15 C0,35 -40,50 -75,35" 
-                      fill="none" 
-                      stroke={colorConfig.fill} 
-                      strokeWidth="1.5" 
-                      strokeDasharray="3,2"
-                      className={isInView ? "animate-grow-delay-1" : ""}
-                    />
-                  </g>
-                  
-                  {/* Kinesthetic Learning Style */}
-                  <g transform="translate(75, 125)">
-                    <rect x="-25" y="-15" width="50" height="30" rx="5" fill="url(#gradientGreen)" fillOpacity="0.3" stroke={colorConfig.fill} strokeWidth="1" />
-                    <text x="0" y="-5" textAnchor="middle" fill="white" fontSize="6" fontWeight="bold">KINESTHETIC</text>
-                    <text x="0" y="5" textAnchor="middle" fill="white" fontSize="6">LEARNING</text>
-                    
-                    {/* Kinesthetic learning elements */}
-                    <g transform="translate(0, 35)">
-                      <rect x="-20" y="-15" width="40" height="30" rx="3" fill="#333" />
-                      <circle cx="-5" cy="0" r="6" fill="#666" />
-                      <circle cx="10" cy="-5" r="4" fill={colorConfig.fill} opacity="0.8">
-                        <animate attributeName="cy" values="-5;5;-5" dur="3s" repeatCount="indefinite" />
-                      </circle>
-                    </g>
-                    
-                    {/* Connection to AI */}
-                    <path 
-                      d="M0,-15 C0,-35 40,-50 75,-35" 
-                      fill="none" 
-                      stroke={colorConfig.fill} 
-                      strokeWidth="1.5" 
-                      strokeDasharray="3,2"
-                      className={isInView ? "animate-grow-delay-2" : ""}
-                    />
-                  </g>
-                  
-                  {/* Reading/Writing Learning Style */}
-                  <g transform="translate(225, 125)">
-                    <rect x="-25" y="-15" width="50" height="30" rx="5" fill="url(#gradientGreen)" fillOpacity="0.3" stroke={colorConfig.fill} strokeWidth="1" />
-                    <text x="0" y="-5" textAnchor="middle" fill="white" fontSize="6" fontWeight="bold">ANALYTICAL</text>
-                    <text x="0" y="5" textAnchor="middle" fill="white" fontSize="6">LEARNING</text>
-                    
-                    {/* Reading/Writing learning elements */}
-                    <g transform="translate(0, 35)">
-                      <rect x="-20" y="-15" width="40" height="30" rx="3" fill="#333" />
-                      <line x1="-15" y1="-8" x2="15" y2="-8" stroke="#666" strokeWidth="1.5" />
-                      <line x1="-15" y1="-3" x2="10" y2="-3" stroke="#666" strokeWidth="1.5" />
-                      <line x1="-15" y1="2" x2="5" y2="2" stroke="#666" strokeWidth="1.5" />
-                      <line x1="-15" y1="7" x2="15" y2="7" stroke={colorConfig.fill} strokeWidth="1.5" />
-                    </g>
-                    
-                    {/* Connection to AI */}
-                    <path 
-                      d="M0,-15 C0,-35 -40,-50 -75,-35" 
-                      fill="none" 
-                      stroke={colorConfig.fill} 
-                      strokeWidth="1.5" 
-                      strokeDasharray="3,2"
-                      className={isInView ? "animate-grow-delay-3" : ""}
-                    />
-                  </g>
+                {/* Icon */}
+                <g transform="translate(-75, 0)">
+                  <rect x="-15" y="-15" width="30" height="30" rx="3" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
+                  <circle cx="-5" cy="0" r="5" fill="#666" />
+                  <circle cx="5" cy="0" r="3" fill={colorConfig.fill} />
                 </g>
+              </g>
+              
+              {/* Analytical Learning - Bottom Right */}
+              <g transform="translate(280, 165)">
+                <rect x="-50" y="-20" width="100" height="40" rx="5" fill="transparent" stroke={colorConfig.fill} strokeWidth="1.5" />
+                <text x="0" y="-5" fontSize="10" fill="white" textAnchor="middle" fontWeight="bold">ANALYTICAL</text>
+                <text x="0" y="10" fontSize="9" fill="white" textAnchor="middle">LEARNING</text>
                 
-                {/* Knowledge Gap Analysis */}
-                <g transform="translate(45, 90)" className={isInView ? "animate-fade-in-delay-2" : ""}>
-                  <rect x="-20" y="-30" width="40" height="60" rx="5" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" opacity="0.7" />
-                  <text x="0" y="-20" textAnchor="middle" fill="white" fontSize="5" fontWeight="bold">KNOWLEDGE MAP</text>
-                  
-                  {/* Topic mastery representation */}
-                  <rect x="-15" y="-12" width="30" height="4" rx="2" fill="#444" />
-                  <rect x="-15" y="-12" width="25" height="4" rx="2" fill={colorConfig.fill} opacity="0.8" />
-                  <text x="-12" y="-8" textAnchor="start" fill="white" fontSize="3">Topic A</text>
-                  
-                  <rect x="-15" y="-4" width="30" height="4" rx="2" fill="#444" />
-                  <rect x="-15" y="-4" width="10" height="4" rx="2" fill="#FF4B4B" opacity="0.8" />
-                  <text x="-12" y="0" textAnchor="start" fill="white" fontSize="3">Topic B</text>
-                  
-                  <rect x="-15" y="4" width="30" height="4" rx="2" fill="#444" />
-                  <rect x="-15" y="4" width="20" height="4" rx="2" fill="#FFDE59" opacity="0.8" />
-                  <text x="-12" y="8" textAnchor="start" fill="white" fontSize="3">Topic C</text>
-                  
-                  <rect x="-15" y="12" width="30" height="4" rx="2" fill="#444" />
-                  <rect x="-15" y="12" width="28" height="4" rx="2" fill={colorConfig.fill} opacity="0.8" />
-                  <text x="-12" y="16" textAnchor="start" fill="white" fontSize="3">Topic D</text>
-                  
-                  {/* Gap indicator */}
-                  <circle cx="10" cy="-4" r="3" fill="none" stroke="#FF4B4B" strokeWidth="0.5" className="pulse-circle" />
-                  <text x="10" y="-4" textAnchor="middle" fill="white" fontSize="4">!</text>
+                {/* Icon */}
+                <g transform="translate(75, 0)">
+                  <rect x="-15" y="-15" width="30" height="30" rx="3" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
+                  <line x1="-8" y1="-8" x2="8" y2="-8" stroke={colorConfig.fill} strokeWidth="1" />
+                  <line x1="-8" y1="-3" x2="5" y2="-3" stroke={colorConfig.fill} strokeWidth="1" />
+                  <line x1="-8" y1="2" x2="8" y2="2" stroke={colorConfig.fill} strokeWidth="1" />
+                  <line x1="-8" y1="7" x2="3" y2="7" stroke={colorConfig.fill} strokeWidth="1" />
                 </g>
+              </g>
+              
+              {/* Connecting Lines */}
+              <g>
+                {/* Top Connection */}
+                <path 
+                  d="M120,65 C150,45 250,45 280,65" 
+                  fill="none" 
+                  stroke={colorConfig.fill} 
+                  strokeWidth="1.5" 
+                  strokeDasharray="5,3" 
+                />
                 
-                {/* Engagement Monitoring */}
-                <g transform="translate(255, 90)" className={isInView ? "animate-fade-in-delay-3" : ""}>
-                  <rect x="-20" y="-30" width="40" height="60" rx="5" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" opacity="0.7" />
-                  <text x="0" y="-20" textAnchor="middle" fill="white" fontSize="5" fontWeight="bold">ENGAGEMENT</text>
-                  
-                  {/* Engagement meter */}
-                  <rect x="-15" y="-10" width="30" height="40" rx="2" fill="#222" />
-                  <rect x="-15" y="10" width="30" height="20" rx="2" fill="url(#engagementGradient)" />
-                  
-                  <g>
-                    <line x1="-15" y1="-5" x2="-10" y2="-5" stroke="#444" strokeWidth="0.5" />
-                    <text x="-8" y="-4" textAnchor="start" fill="#666" fontSize="4">LOW</text>
-                  </g>
-                  <g>
-                    <line x1="-15" y1="10" x2="-10" y2="10" stroke="#444" strokeWidth="0.5" />
-                    <text x="-8" y="11" textAnchor="start" fill="#FFDE59" fontSize="4">MED</text>
-                  </g>
-                  <g>
-                    <line x1="-15" y1="25" x2="-10" y2="25" stroke="#444" strokeWidth="0.5" />
-                    <text x="-8" y="26" textAnchor="start" fill={colorConfig.fill} fontSize="4">HIGH</text>
-                  </g>
-                  
-                  {/* Engagement indicator - animated */}
-                  <g>
-                    <circle cx="0" cy="15" r="4" fill="white" opacity="0.8">
-                      <animate attributeName="cy" values="15;18;12;20;15" dur="5s" repeatCount="indefinite" />
-                    </circle>
-                    <line x1="-15" y1="15" x2="15" y2="15" stroke="white" strokeWidth="0.5" strokeDasharray="1,1" opacity="0.5">
-                      <animate attributeName="y1" values="15;18;12;20;15" dur="5s" repeatCount="indefinite" />
-                      <animate attributeName="y2" values="15;18;12;20;15" dur="5s" repeatCount="indefinite" />
-                    </line>
-                  </g>
-                </g>
+                {/* Bottom Connection */}
+                <path 
+                  d="M120,185 C150,205 250,205 280,185" 
+                  fill="none" 
+                  stroke={colorConfig.fill} 
+                  strokeWidth="1.5" 
+                  strokeDasharray="5,3" 
+                />
                 
-                {/* Real-time Learning Path Refinement */}
-                <g transform="translate(150, 180)" className={isInView ? "animate-fade-in-delay-4" : ""}>
-                  <rect x="-100" y="-15" width="200" height="25" rx="5" fill="url(#gradientGreen)" fillOpacity="0.2" stroke={colorConfig.fill} strokeWidth="1" />
-                  <text x="0" y="-5" textAnchor="middle" fill="white" fontSize="6" fontWeight="bold">REAL-TIME LEARNING PATH REFINEMENT</text>
-                  
-                  {/* Initial path vs. Adaptive path */}
-                  <path 
-                    d="M-80,5 C-60,-5 -30,15 0,5 C30,-5 60,15 80,5" 
-                    fill="none" 
-                    stroke="#666" 
-                    strokeWidth="1" 
-                    strokeDasharray="2,2"
-                  />
-                  <text x="-90" y="7" textAnchor="start" fill="#666" fontSize="4">INITIAL</text>
-                  
-                  <path 
-                    d="M-80,5 C-70,0 -50,0 -40,5 C-30,10 -20,0 0,5 C20,10 40,0 60,5 C70,10 75,0 80,5" 
-                    fill="none" 
-                    stroke={colorConfig.fill} 
-                    strokeWidth="1.5" 
-                    className={isInView ? "animate-dash" : ""}
-                    strokeDasharray="200"
-                    strokeDashoffset="200"
-                  />
-                  <text x="85" y="7" textAnchor="start" fill={colorConfig.fill} fontSize="4">ADAPTIVE</text>
-                </g>
+                {/* Left Connection */}
+                <path 
+                  d="M100,85 C80,100 80,150 100,165" 
+                  fill="none" 
+                  stroke={colorConfig.fill} 
+                  strokeWidth="1.5" 
+                  strokeDasharray="5,3" 
+                />
                 
-                {/* Cognitive Styles Visualization */}
-                <g transform="translate(150, 50)" className={isInView ? "animate-fade-in-delay-3" : ""}>
-                  <rect x="-50" y="-10" width="100" height="20" rx="10" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" opacity="0.7" />
-                  <text x="0" y="0" textAnchor="middle" fill="white" fontSize="5" fontWeight="bold">ADAPTING TO COGNITIVE STYLES</text>
-                  
-                  {/* Icons representing different cognitive approaches */}
-                  <g transform="translate(-35, 0)">
-                    <circle cx="0" cy="0" r="3" fill={colorConfig.fill} opacity="0.7" />
-                    <text x="0" y="7" textAnchor="middle" fill="white" fontSize="3">SEQUENTIAL</text>
-                  </g>
-                  <g transform="translate(-12, 0)">
-                    <rect x="-3" y="-3" width="6" height="6" fill={colorConfig.fill} opacity="0.7" />
-                    <text x="0" y="7" textAnchor="middle" fill="white" fontSize="3">GLOBAL</text>
-                  </g>
-                  <g transform="translate(12, 0)">
-                    <polygon points="0,-3 3,2 -3,2" fill={colorConfig.fill} opacity="0.7" />
-                    <text x="0" y="7" textAnchor="middle" fill="white" fontSize="3">ACTIVE</text>
-                  </g>
-                  <g transform="translate(35, 0)">
-                    <path d="M-2,-2 L2,2 M-2,2 L2,-2" stroke={colorConfig.fill} strokeWidth="1.5" />
-                    <text x="0" y="7" textAnchor="middle" fill="white" fontSize="3">REFLECTIVE</text>
-                  </g>
-                </g>
-              </svg>
-            </div>
+                {/* Right Connection */}
+                <path 
+                  d="M300,85 C320,100 320,150 300,165" 
+                  fill="none" 
+                  stroke={colorConfig.fill} 
+                  strokeWidth="1.5" 
+                  strokeDasharray="5,3" 
+                />
+                
+                {/* Diagonal Connection */}
+                <path 
+                  d="M135,100 C180,125 220,125 265,100" 
+                  fill="none" 
+                  stroke={colorConfig.fill} 
+                  strokeWidth="1.5" 
+                  strokeDasharray="5,3" 
+                />
+                
+                {/* Diagonal Connection */}
+                <path 
+                  d="M135,150 C180,125 220,125 265,150" 
+                  fill="none" 
+                  stroke={colorConfig.fill} 
+                  strokeWidth="1.5" 
+                  strokeDasharray="5,3" 
+                />
+              </g>
+              
+              {/* Labels */}
+              <g transform="translate(200, 125)">
+                <circle cx="0" cy="0" r="15" fill="url(#learningGradient)" stroke={colorConfig.fill} strokeWidth="1.5" />
+                <text x="0" y="0" fontSize="10" fill="white" textAnchor="middle" fontWeight="bold">AI</text>
+              </g>
+              
+              {/* Engagement Indicator */}
+              <g transform="translate(80, 35)">
+                <rect x="-25" y="-15" width="50" height="30" rx="5" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
+                <path d="M-15,-6 L-5,-6" stroke={colorConfig.fill} strokeWidth="1" />
+                <path d="M-15,0 L0,0" stroke={colorConfig.fill} strokeWidth="1" />
+                <path d="M-15,6 L-8,6" stroke={colorConfig.fill} strokeWidth="1" />
+              </g>
+              
+              {/* Learning Path */}
+              <g transform="translate(320, 35)">
+                <rect x="-25" y="-15" width="50" height="30" rx="5" fill="#333" stroke={colorConfig.fill} strokeWidth="0.5" />
+                <polygon points="0,-7 7,0 0,7 -7,0" fill={colorConfig.fill} />
+              </g>
+            </svg>
           )}
         </div>
       </div>

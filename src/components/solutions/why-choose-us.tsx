@@ -10,7 +10,7 @@ interface WhyChooseUsProps {
   conclusion: string;
   ctaText: string;
   ctaLink: string;
-  primaryColor: "purple" | "pink" | "green" | "blue" | "red";
+  primaryColor: "purple" | "pink" | "green" | "blue" | "red" | "amber";
 }
 
 const colorMap = {
@@ -58,6 +58,15 @@ const colorMap = {
     shadow: "shadow-red-900/20",
     hoverShadow: "shadow-red-800/30",
     glow: "rgba(239,68,68,0.5)",
+  },
+  amber: {
+    gradient: "from-amber-600 to-amber-400",
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/20",
+    text: "text-amber-400",
+    shadow: "shadow-amber-900/20",
+    hoverShadow: "shadow-amber-800/30",
+    glow: "rgba(255,165,0,0.5)",
   },
 };
 

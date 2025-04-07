@@ -1,8 +1,8 @@
 import SolutionHero from "@/components/solutions/solution-hero";
-import KnowledgeSynthesisSections from "@/components/solutions/knowledge-synthesis/sections-list";
+import AutomatedAnalysisSections from "@/components/solutions/automated-analysis/sections-list";
 import WhyChooseUs from "@/components/solutions/why-choose-us";
 
-export default function KnowledgeSynthesisPage() {
+export default function AutomatedAnalysisPage() {
   // Solution-specific configuration
   const solutionConfig = {
     // Hero section configuration
@@ -13,7 +13,7 @@ export default function KnowledgeSynthesisPage() {
       primaryColor: "red" as const,
       accentColor: "red" as const,
       tertiaryColor: "purple" as const,
-      imagePath: "/knowledge-synthesis-visual.svg",
+      imagePath: "/automated-analysis-visual.svg",
     },
     
     // Content sections
@@ -79,7 +79,7 @@ export default function KnowledgeSynthesisPage() {
       />
       
       {/* Content Sections - Using custom component for knowledge synthesis */}
-      <KnowledgeSynthesisSections sections={solutionConfig.sections} />
+      <AutomatedAnalysisSections sections={solutionConfig.sections} />
       
       {/* Why Choose Us Section */}
       <WhyChooseUs 

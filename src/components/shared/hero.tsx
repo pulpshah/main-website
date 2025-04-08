@@ -21,7 +21,7 @@ const colorMap = {
     gradientOverlay: "from-purple-900/60 to-purple-800/30",
     glow: "rgba(168,85,247,0.5)",
     border: "border-purple-500/30",
-    bg: "bg-purple-500/10",
+    bg: "bg-purple-500",
     fill: "#8A3FFC",
     fillOpacity: "0.2",
   },
@@ -32,7 +32,7 @@ const colorMap = {
     gradientOverlay: "from-pink-900/60 to-pink-800/30",
     glow: "rgba(236,72,153,0.5)",
     border: "border-pink-500/30",
-    bg: "bg-pink-500/10",
+    bg: "bg-pink-500",
     fill: "#FF66C4",
     fillOpacity: "0.15",
   },
@@ -43,7 +43,7 @@ const colorMap = {
     gradientOverlay: "from-green-900/60 to-green-800/30",
     glow: "rgba(16,185,129,0.5)",
     border: "border-green-500/30",
-    bg: "bg-green-500/10",
+    bg: "bg-green-500",
     fill: "#10B981",
     fillOpacity: "0.1",
   },
@@ -54,7 +54,7 @@ const colorMap = {
     gradientOverlay: "from-blue-900/60 to-blue-800/30",
     glow: "rgba(59,130,246,0.5)",
     border: "border-blue-500/30",
-    bg: "bg-blue-500/10",
+    bg: "bg-blue-500",
     fill: "#3B82F6",
     fillOpacity: "0.15",
   },
@@ -65,7 +65,7 @@ const colorMap = {
     gradientOverlay: "from-red-900/60 to-red-800/30",
     glow: "rgba(239,68,68,0.5)",
     border: "border-red-500/30",
-    bg: "bg-red-500/10",
+    bg: "bg-red-500",
     fill: "#EF4444",
     fillOpacity: "0.15",
   },
@@ -76,7 +76,7 @@ const colorMap = {
     gradientOverlay: "from-amber-900/60 to-amber-800/30",
     glow: "rgba(255,165,0,0.5)",
     border: "border-amber-500/30",
-    bg: "bg-amber-500/10",
+    bg: "bg-amber-500",
     fill: "#F59E0B",
     fillOpacity: "0.15",
   },
@@ -125,8 +125,17 @@ export default function Hero({
             transition={{ duration: 0.6 }}
           >
             <div className={`${isMobile ? 'flex justify-center' : 'inline-block'}`}>
-              <motion.span 
-                className={`px-2 md:px-4 py-1.5 md:py-2 rounded-full bg-gradient-to-r ${primary.gradient} ${isMobile ? 'text-[10px]' : 'text-xs'} font-medium tracking-wider max-w-full break-words text-white`}
+            <motion.span 
+                className={`
+                  px-2 md:px-4 py-1.5 md:py-2 rounded-full 
+                 ${primary.bg}
+                  ${isMobile ? 'text-[10px]' : 'text-xs'} 
+                  font-medium tracking-wider 
+                  max-w-full break-words text-white
+                `}
+                style={{
+                  boxShadow: `0 0 12px 2px ${primary.glow}`,
+                }}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: 0.2 }}
@@ -134,6 +143,7 @@ export default function Hero({
                 {badge}
               </motion.span>
             </div>
+
             
             <motion.h1 
               className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold ${primary.text} break-words`}

@@ -3,6 +3,8 @@ import FeaturesSection from "@/components/features-section";
 import StatsSection from "@/components/stats-section";
 import RiskSection from "@/components/risk-section";
 import CoverageSection from "@/components/coverage-section";
+import DisengagementSection from "@/components/disengagement-section";
+import CtaSection from "@/components/cta-section";
 
 export default function Home() {
   return (
@@ -76,6 +78,36 @@ export default function Home() {
         <div className="py-6 md:py-10 w-full" suppressHydrationWarning>
           <div className="max-w-full mx-auto" suppressHydrationWarning>
             <CoverageSection />
+          </div>
+        </div>
+        
+        {/* Section Separator - Green to Purple */}
+        <div className="w-full py-4 md:py-6 relative" suppressHydrationWarning>
+          <div className="max-w-sm mx-auto bg-gradient-to-r from-transparent via-purple-500/40 to-transparent h-[2px] shadow-[0_0_8px_rgba(168,85,247,0.5)]" suppressHydrationWarning></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-black border-2 border-purple-500/30 rounded-full flex items-center justify-center" suppressHydrationWarning>
+            <div className="w-3 h-3 bg-purple-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.8)]" suppressHydrationWarning></div>
+          </div>
+        </div>
+        
+        {/* Disengagement Section - Purple */}
+        <div className="py-6 md:py-10 w-full" suppressHydrationWarning>
+          <div className="max-w-full mx-auto" suppressHydrationWarning>
+            <DisengagementSection />
+          </div>
+        </div>
+        
+        {/* Section Separator - Purple to Pink */}
+        <div className="w-full py-4 md:py-6 relative" suppressHydrationWarning>
+          <div className="max-w-sm mx-auto bg-gradient-to-r from-transparent via-pink-500/40 to-transparent h-[2px] shadow-[0_0_8px_rgba(236,72,153,0.5)]" suppressHydrationWarning></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-black border-2 border-pink-500/30 rounded-full flex items-center justify-center" suppressHydrationWarning>
+            <div className="w-3 h-3 bg-pink-500 rounded-full shadow-[0_0_8px_rgba(236,72,153,0.8)]" suppressHydrationWarning></div>
+          </div>
+        </div>
+        
+        {/* CTA Section */}
+        <div className="py-10 md:py-16 w-full" suppressHydrationWarning>
+          <div className="max-w-full mx-auto" suppressHydrationWarning>
+            <CtaSection />
           </div>
         </div>
       </div>

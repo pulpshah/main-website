@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { ThemeProvider } from "@/components/theme-provider";
+import "./force-dark-mode";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,6 +21,10 @@ export const metadata: Metadata = {
   description: "Pulp is the AI-powered platform for full-cycle communications and engagement strategy. Unlock deep audience insights, optimize messaging, and drive impact with real-time data, NLP, and interaction design. Elevate your strategy with adaptive AI for personal, commercial, and civic applications.",
 };
 
+export const viewport: Viewport = {
+  themeColor: "#0a0a0a",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,13 +33,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark overflow-x-hidden" style={{ maxWidth: "100vw" }} suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground overflow-x-hidden`}
         style={{ maxWidth: "100vw" }}
         suppressHydrationWarning
       >
-        <Header />
-        <main className="overflow-x-hidden">{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <Header />
+          <main className="overflow-x-hidden px-4 sm:px-6 md:px-8 lg:px-12 max-w-[1920px] mx-auto">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

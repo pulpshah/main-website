@@ -23,13 +23,13 @@ interface StatsSectionProps {
 export default function StatsSection({
   title = "Just Use Your Words",
   subtitle = "The Benefits of Language Accelerated Automation",
-  description = "Pulp's natural language AI improves the comprehension and efficiency for both technical and non-technical teams.",
+  description = "Pulp’s natural language AI enhances comprehension and streamlines workflows for both technical and non-technical teams.",
   stats = [
     {
       value: 200,
       prefix: "+",
       suffix: "%",
-      title: "Faster Engagement Insights",
+      title: "Faster Engagement Insights (ROAS)",
       description: "Capitalize on audience behavior sooner with fewer resources.",
       isPositive: true,
       duration: 2.5
@@ -38,7 +38,7 @@ export default function StatsSection({
       value: 70,
       prefix: "-",
       suffix: "%",
-      title: "Decrease in Time-to-Value",
+      title: "Decrease in Time-to-Value (TTV)",
       description: "Let users experience value faster, without the learning curve.",
       isPositive: false,
       duration: 2
@@ -47,7 +47,7 @@ export default function StatsSection({
       value: 15,
       prefix: "+",
       suffix: "%",
-      title: "Avg. Revenue per User",
+      title: "Avg. Revenue per User (ARPU)",
       description: "Higher engagement & smarter monetization strategies.",
       isPositive: true,
       duration: 1.5
@@ -56,8 +56,8 @@ export default function StatsSection({
       value: 10,
       prefix: "-",
       suffix: "%",
-      title: "Decrease in Lost Customers",
-      description: "Boost retention with deeper insights and proactive action.",
+      title: "Decrease in Lost Customers (Churn Rate)",
+      description: "Reduce churn with predictive insights and proactive engagement.",
       isPositive: false,
       duration: 1.5
     },
@@ -65,7 +65,7 @@ export default function StatsSection({
       value: 10,
       prefix: "+",
       suffix: "%",
-      title: "Net Promoter Score",
+      title: "Net Promoter Score (NPS)",
       description: "Happier teams & customers, leading to stronger retention.",
       isPositive: true,
       duration: 1.5
@@ -74,7 +74,7 @@ export default function StatsSection({
       value: 50,
       prefix: "-",
       suffix: "%",
-      title: "Decrease in Data Costs",
+      title: "Reduction in Data & Reporting Costs (Labor & SaaS)",
       description: "Automate analysis, cut overhead, and reduce software spend.",
       isPositive: false,
       duration: 2
@@ -123,9 +123,11 @@ export default function StatsSection({
       
       {/* Section heading */}
       <div className="text-center relative z-10 mb-16 px-4">
-        <div className="inline-flex items-center justify-center bg-amber-900/20 backdrop-blur-sm px-5 py-1.5 rounded-full mb-6 border border-amber-500/30">
-          <span className="text-amber-300 text-sm font-medium tracking-wider">BUSINESS IMPACT</span>
-        </div>
+      <div className="inline-block mb-4">
+        <span className="px-2 md:px-4 py-1.5 md:py-2 rounded-full bg-amber-600 text-xs font-medium tracking-wider max-w-full break-words text-white shadow-[0_0_10px_2px_rgba(255,193,7,0.75)] ">
+          BUSINESS IMPACT
+        </span>
+      </div>
         
         <h2 
           className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white"

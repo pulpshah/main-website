@@ -121,7 +121,7 @@ function renderFeatureStatus(status: string | null) {
   if (status.toLowerCase().includes("months")) {
     return (
       <span>
-        <span className="text-pink-500 text-2xl">✓</span>
+        <span className="text-purple-500 text-2xl">✓</span>
         <br />
         <span className="text-xs text-gray-400">{status}</span>
       </span>

@@ -27,7 +27,7 @@ export default function RiskSection({
     },
     {
       title: "Failing to Read the Room",
-      description: "Context isn't just words—it's when, where, and how people engage. Ignoring behavioral signals leads to misread urgency, intent, and interest—causing engagement to miss the mark."
+      description: "Context isn't just words; it's when, where, and how people engage. Ignoring behavioral signals leads to misread urgency, intent, and interest, causing engagement to miss the mark."
     },
     {
       title: "Forgetting to Ask \"Why?\"",
@@ -77,9 +77,11 @@ export default function RiskSection({
             transition: 'opacity 0.8s ease, transform 0.8s ease'
           }}
         >
-          <div className="inline-block px-4 py-1 bg-red-900/30 rounded-full mb-6">
-            <span className="text-red-400 text-sm font-medium tracking-wider">RISK ASSESSMENT</span>
-          </div>
+          <div className="inline-block mb-4">
+          <span className="px-2 md:px-4 py-1.5 md:py-2 rounded-full bg-red-600 text-xs font-medium tracking-wider max-w-full break-words text-white shadow-[0_0_10px_2px_rgba(248,113,113,0.75)] ">
+            RISK MITIGATION
+          </span>
+        </div>
           
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-br from-white via-purple-200 to-white bg-clip-text text-transparent leading-tight">
             {title}

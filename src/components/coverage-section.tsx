@@ -82,8 +82,10 @@ export default function CoverageSection({
             transition: 'opacity 0.8s ease, transform 0.8s ease'
           }}
         >
-          <div className="inline-flex items-center justify-center bg-green-900/20 backdrop-blur-sm px-5 py-1.5 rounded-full mb-6 border border-green-500/30">
-            <span className="text-green-300 text-sm font-medium tracking-wider">UNIVERSAL COVERAGE</span>
+          <div className="inline-block mb-4">
+            <span className="px-2 md:px-4 py-1.5 md:py-2 rounded-full bg-green-600 text-xs font-medium tracking-wider max-w-full break-words text-white shadow-[0_0_10px_2px_rgba(16,185,129,0.75)] ">
+             UNIVERSAL COVERAGE
+            </span>
           </div>
           
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white">

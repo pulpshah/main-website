@@ -1,0 +1,143 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="600" height="400" fill="#0f172a"/>
+  <rect width="600" height="400" fill="url(#grid)" opacity="0.15"/>
+  
+  <!-- Definitions -->
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#3b82f6" stroke-width="0.5"/>
+    </pattern>
+    
+    <linearGradient id="blueGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#1e40af" stop-opacity="0.2"/>
+    </linearGradient>
+    
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  
+  <!-- Main Platform Circle -->
+  <circle cx="300" cy="200" r="80" fill="url(#blueGlow)" opacity="0.8"/>
+  <circle cx="300" cy="200" r="75" fill="none" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.5"/>
+  <circle cx="300" cy="200" r="60" fill="none" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3,3"/>
+  
+  <!-- Pulse effect (simpler animation) -->
+  <circle cx="300" cy="200" r="90" fill="none" stroke="#3b82f6" stroke-width="0.5" opacity="0.3">
+    <animate attributeName="r" values="80;110;80" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;0.1;0.3" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Central Platform -->
+  <circle cx="300" cy="200" r="40" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="300" y="205" text-anchor="middle" font-size="12" fill="#3b82f6" font-family="Arial, sans-serif">Pulp AI</text>
+  
+  <!-- Four Technology Nodes -->
+  <!-- Node 1: Development -->
+  <g>
+    <circle cx="180" cy="130" r="35" fill="#1e293b" stroke="#3b82f6" stroke-width="1"/>
+    <text x="180" y="135" text-anchor="middle" font-size="10" fill="#3b82f6" font-family="Arial, sans-serif">SDK</text>
+    
+    <!-- Code Symbol -->
+    <rect x="165" y="115" width="30" height="5" rx="1" fill="#3b82f6" opacity="0.5"/>
+    <rect x="165" y="125" width="25" height="5" rx="1" fill="#3b82f6" opacity="0.5"/>
+    <rect x="165" y="135" width="20" height="5" rx="1" fill="#3b82f6" opacity="0.5"/>
+  </g>
+  
+  <!-- Node 2: API -->
+  <g>
+    <circle cx="420" cy="130" r="35" fill="#1e293b" stroke="#3b82f6" stroke-width="1"/>
+    <text x="420" y="135" text-anchor="middle" font-size="10" fill="#3b82f6" font-family="Arial, sans-serif">API</text>
+    
+    <!-- API Symbol -->
+    <rect x="400" y="115" width="40" height="5" rx="1" fill="#3b82f6" opacity="0.5"/>
+    <rect x="400" y="125" width="40" height="5" rx="1" fill="#3b82f6" opacity="0.5"/>
+    <rect x="400" y="135" width="40" height="5" rx="1" fill="#3b82f6" opacity="0.5"/>
+  </g>
+  
+  <!-- Node 3: Data Processing -->
+  <g>
+    <circle cx="180" cy="270" r="35" fill="#1e293b" stroke="#3b82f6" stroke-width="1"/>
+    <text x="180" y="275" text-anchor="middle" font-size="10" fill="#3b82f6" font-family="Arial, sans-serif">Data</text>
+    
+    <!-- Database Symbol -->
+    <path d="M165,260 C165,255 180,255 195,255 C210,255 195,255 195,260 C195,265 210,265 195,265 C180,265 165,265 165,260 Z" fill="none" stroke="#3b82f6" stroke-width="1"/>
+    <path d="M165,260 L165,280 C165,285 180,285 195,285 C210,285 195,285 195,280 L195,260" fill="none" stroke="#3b82f6" stroke-width="1"/>
+  </g>
+  
+  <!-- Node 4: Security -->
+  <g>
+    <circle cx="420" cy="270" r="35" fill="#1e293b" stroke="#3b82f6" stroke-width="1"/>
+    <text x="420" y="275" text-anchor="middle" font-size="10" fill="#3b82f6" font-family="Arial, sans-serif">Security</text>
+    
+    <!-- Shield Symbol -->
+    <path d="M410,255 L420,245 L430,255 L430,275 L420,285 L410,275 Z" fill="none" stroke="#3b82f6" stroke-width="1"/>
+    <path d="M415,260 L420,255 L425,260 L425,270 L420,275 L415,270 Z" fill="none" stroke="#3b82f6" stroke-width="1"/>
+  </g>
+  
+  <!-- Connection Lines -->
+  <line x1="300" y1="200" x2="180" y2="130" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="300" y1="200" x2="420" y2="130" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="300" y1="200" x2="180" y2="270" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="300" y1="200" x2="420" y2="270" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4,2"/>
+  
+  <!-- Data Flow Dots (simpler animation) -->
+  <circle cx="240" cy="165" r="3" fill="#38bdf8">
+    <animate attributeName="cx" values="300;180" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="200;130" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="360" cy="165" r="3" fill="#38bdf8">
+    <animate attributeName="cx" values="300;420" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="200;130" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="240" cy="235" r="3" fill="#38bdf8">
+    <animate attributeName="cx" values="300;180" dur="3.5s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="200;270" dur="3.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="360" cy="235" r="3" fill="#38bdf8">
+    <animate attributeName="cx" values="300;420" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="200;270" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Small Tech Elements -->
+  <g>
+    <!-- Code Symbols -->
+    <g transform="translate(250, 150)">
+      <rect x="-15" y="-15" width="30" height="30" rx="3" fill="#1e293b" stroke="#3b82f6" stroke-width="0.5"/>
+      <text x="0" y="5" text-anchor="middle" font-size="14" fill="#3b82f6" font-family="monospace">{}</text>
+    </g>
+    
+    <g transform="translate(350, 150)">
+      <rect x="-15" y="-15" width="30" height="30" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="0.5"/>
+      <text x="0" y="5" text-anchor="middle" font-size="14" fill="#38bdf8" font-family="monospace">[]</text>
+    </g>
+    
+    <g transform="translate(250, 250)">
+      <rect x="-15" y="-15" width="30" height="30" rx="3" fill="#1e293b" stroke="#3b82f6" stroke-width="0.5"/>
+      <text x="0" y="5" text-anchor="middle" font-size="14" fill="#3b82f6" font-family="monospace">&lt;&gt;</text>
+    </g>
+    
+    <g transform="translate(350, 250)">
+      <rect x="-15" y="-15" width="30" height="30" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="0.5"/>
+      <text x="0" y="5" text-anchor="middle" font-size="14" fill="#38bdf8" font-family="monospace">()</text>
+    </g>
+  </g>
+  
+  <!-- Decorative Elements (simple static dots) -->
+  <circle cx="220" cy="200" r="2" fill="#3b82f6" opacity="0.7"/>
+  <circle cx="380" cy="200" r="2" fill="#3b82f6" opacity="0.7"/>
+  <circle cx="300" cy="120" r="2" fill="#3b82f6" opacity="0.7"/>
+  <circle cx="300" cy="280" r="2" fill="#3b82f6" opacity="0.7"/>
+  <circle cx="260" cy="230" r="2" fill="#38bdf8" opacity="0.7"/>
+  <circle cx="340" cy="170" r="2" fill="#38bdf8" opacity="0.7"/>
+  
+  <!-- Technology Title -->
+  <text x="300" y="50" text-anchor="middle" font-size="20" fill="#ffffff" font-family="Arial, sans-serif">Technology Platform</text>
+  <text x="300" y="75" text-anchor="middle" font-size="14" fill="#3b82f6" font-family="Arial, sans-serif">Seamless AI Integration</text>
+</svg> 

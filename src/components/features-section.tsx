@@ -29,17 +29,17 @@ export default function FeaturesSection({
     {
       image: "/landing-images/Understand Appeals With Unprecedented Granularity.png",
       title: "Understand Appeals With Unprecedented Granularity",
-      description: "Decode persuasion in action. Pulp analyzes ethos, pathos, logos, and advanced rhetorical structures to map how arguments are built—and how they land."
+      description: "Analyze persuasion with unmatched precision. Pulp analyzes ethos, pathos, logos, and advanced rhetorical structures to map how arguments are built and how they land."
     },
     {
       image: "/landing-images/Score Responses Based On Word Choice and Objective.png",
       title: "Score Responses Based On Word Choice and Objective",
-      description: "Measure the impact of specific language. Not all words carry the same weight. Pulp's proprietary algorithm scores rhetoric's relative influence in any conversation."
+      description: "Quantify the power of language. Not all words carry the same weight. Pulp's proprietary algorithm scores rhetoric' relative influence in any conversation."
     },
     {
       image: "/landing-images/Create Realistic Personas Individual, Group, and Entity.png",
       title: "Create Realistic Personas: Individual, Group, and Entity",
-      description: "Map deep psychographics, acute cognitive states, and decision-making tendencies. Pulp understands not just who is engaging, but why they engage the way they do."
+      description: "Go beyond basic demographics. Pulp maps deep psychographics, cognitive states, and decision-making patterns. Pulp reveals not just who is engaging but why they engage the way they do."
     },
     {
       image: "/landing-images/Topic Clustering and Knowledge Mapping.png",
@@ -48,7 +48,7 @@ export default function FeaturesSection({
     },
     {
       image: "/landing-images/Model Discussions as Digital, Physical, or Hybrid.png",
-      title: "Model Discussions as Digital, Physical, or Hybrid",
+      title: "Model Discussion Scenes as Digital, Physical, or Hybrid",
       description: "Simulate conversations across any setting. Context matters. Pulp accounts for time, place, format, and interaction mode to refine engagement insights."
     }
   ]
@@ -92,10 +92,14 @@ export default function FeaturesSection({
       />
 
       {/* Section Heading */}
+
+
       <div className="mb-16 text-center px-4">
-        <div className="inline-flex items-center justify-center bg-blue-900/20 backdrop-blur-sm px-5 py-1.5 rounded-full mb-6 border border-blue-500/30">
-          <span className="text-blue-300 text-sm font-medium tracking-wider">AI LANGUAGE CAPABILITIES</span>
-        </div>
+      <div className="inline-block mb-4">
+        <span className="px-2 md:px-4 py-1.5 md:py-2 rounded-full bg-blue-600 text-xs font-medium tracking-wider max-w-full break-words text-white shadow-[0_0_10px_2px_rgba(59,130,246,0.75)] ">
+          AI LANGUAGE CAPABILITIES
+        </span>
+      </div>
         
         <h2 
           className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white"

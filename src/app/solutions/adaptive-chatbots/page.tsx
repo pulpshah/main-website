@@ -1,12 +1,7 @@
-import SolutionHero from "@/components/solutions/solution-hero";
-import { AdaptiveChatsSection } from "@/components/solutions/adaptive-chatbots/sections-list";
-import WhyChooseUs from "@/components/solutions/why-choose-us";
-import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Adaptive Chatbots & Personalization | Pulp AI",
-  description: "Our AI-driven agents don't just respond—they anticipate, evolving with every interaction to deliver precision, relevance, and a human-like touch.",
-};
+import Hero from "@/components/shared/hero";
+import { AdaptiveChatsSection } from "@/components/solutions/adaptive-chatbots/sections-list";
+import WhyChooseUs from "@/components/shared/why-choose-us";
 
 export default function AdaptiveChatsPage() {
   // Solution-specific configuration
@@ -19,7 +14,7 @@ export default function AdaptiveChatsPage() {
       primaryColor: "green" as const,
       accentColor: "green" as const,
       tertiaryColor: "green" as const,
-      imagePath: "/adaptive-chatbots-visual.svg",
+      imagePath: "/solutions/adaptive-chatbots-visual.svg",
     },
     
     // Sections for main content area
@@ -76,7 +71,7 @@ export default function AdaptiveChatsPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
-      <SolutionHero 
+      <Hero 
         badge={solutionConfig.hero.badge}
         title={solutionConfig.hero.title}
         description={solutionConfig.hero.description}

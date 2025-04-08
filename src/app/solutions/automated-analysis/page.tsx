@@ -1,6 +1,6 @@
-import SolutionHero from "@/components/solutions/solution-hero";
 import AutomatedAnalysisSections from "@/components/solutions/automated-analysis/sections-list";
-import WhyChooseUs from "@/components/solutions/why-choose-us";
+import Hero from "@/components/shared/hero";
+import WhyChooseUs from "@/components/shared/why-choose-us";
 
 export default function AutomatedAnalysisPage() {
   // Solution-specific configuration
@@ -13,7 +13,7 @@ export default function AutomatedAnalysisPage() {
       primaryColor: "red" as const,
       accentColor: "red" as const,
       tertiaryColor: "purple" as const,
-      imagePath: "/automated-analysis-visual.svg",
+      imagePath: "/solutions/automated-analysis-visual.svg",
     },
     
     // Content sections
@@ -68,7 +68,7 @@ export default function AutomatedAnalysisPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
-      <SolutionHero 
+      <Hero 
         badge={solutionConfig.hero.badge}
         title={solutionConfig.hero.title}
         description={solutionConfig.hero.description}

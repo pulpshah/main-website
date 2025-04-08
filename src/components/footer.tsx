@@ -133,7 +133,7 @@ export function Footer() {
         
         {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-zinc-800">
-          <p className="text-zinc-500 text-sm text-center">© {new Date().getFullYear()} Pulp. All rights reserved.</p>
+          <p className="text-zinc-500 text-sm text-center">© 2025 Pulp. All rights reserved.</p>
         </div>
       </div>
     </footer>

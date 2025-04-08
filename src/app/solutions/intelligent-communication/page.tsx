@@ -1,6 +1,6 @@
-import SolutionHero from "@/components/solutions/solution-hero";
+import Hero from "@/components/shared/hero";
 import IntelligentCommunicationSections from "@/components/solutions/intelligent-communication/sections-list";
-import WhyChooseUs from "@/components/solutions/why-choose-us";
+import WhyChooseUs from "@/components/shared/why-choose-us";
 
 export default function IntelligentCommunicationPage() {
   // Solution-specific configuration
@@ -13,7 +13,7 @@ export default function IntelligentCommunicationPage() {
       primaryColor: "purple" as const,
       accentColor: "pink" as const,
       tertiaryColor: "green" as const,
-      imagePath: "/communication-visual.svg",
+      imagePath: "/solutions/communication-visual.svg",
     },
     
     // Content sections
@@ -67,7 +67,7 @@ export default function IntelligentCommunicationPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
-      <SolutionHero 
+      <Hero 
         badge={solutionConfig.hero.badge}
         title={solutionConfig.hero.title}
         description={solutionConfig.hero.description}

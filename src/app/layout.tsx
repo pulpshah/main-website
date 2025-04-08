@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header";
@@ -14,10 +13,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Pulp",
-  description: "Pulp turns intelligence into action. From messaging that persuades to insights that predict, our AI adapts to the way you think, work, and engage.",
-};
 
 export default function RootLayout({
   children,

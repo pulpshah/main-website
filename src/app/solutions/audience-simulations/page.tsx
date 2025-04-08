@@ -1,6 +1,6 @@
+import Hero from "@/components/shared/hero";
 import AudienceSimulationsSections from "@/components/solutions/audience-simulations/sections-list";
-import SolutionHero from "@/components/solutions/solution-hero";
-import WhyChooseUs from "@/components/solutions/why-choose-us";
+import WhyChooseUs from "@/components/shared/why-choose-us";
 
 export default function AudienceSimulationsPage() {
   // Solution-specific configuration
@@ -13,7 +13,7 @@ export default function AudienceSimulationsPage() {
       primaryColor: "pink" as const,
       accentColor: "purple" as const,
       tertiaryColor: "green" as const,
-      imagePath: "/audience-simulation-visual.svg",
+      imagePath: "/solutions/audience-simulation-visual.svg",
     },
     
     // Content sections
@@ -67,7 +67,7 @@ export default function AudienceSimulationsPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
-      <SolutionHero 
+      <Hero 
         badge={solutionConfig.hero.badge}
         title={solutionConfig.hero.title}
         description={solutionConfig.hero.description}

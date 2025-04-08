@@ -1,6 +1,6 @@
-import SolutionHero from "@/components/solutions/solution-hero";
+import Hero from "@/components/shared/hero";
 import ContentModerationSections from "@/components/solutions/content-moderation/sections-list";
-import WhyChooseUs from "@/components/solutions/why-choose-us";
+import WhyChooseUs from "@/components/shared/why-choose-us";
 
 export default function ContentModerationPage() {
   // Solution-specific configuration
@@ -13,7 +13,7 @@ export default function ContentModerationPage() {
       primaryColor: "blue" as const,
       accentColor: "blue" as const,
       tertiaryColor: "green" as const,
-      imagePath: "/content-moderation-visual.svg",
+      imagePath: "/solutions/content-moderation-visual.svg",
     },
     
     // Content sections
@@ -67,7 +67,7 @@ export default function ContentModerationPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
-      <SolutionHero 
+      <Hero 
         badge={solutionConfig.hero.badge}
         title={solutionConfig.hero.title}
         description={solutionConfig.hero.description}

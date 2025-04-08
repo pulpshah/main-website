@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-interface SolutionHeroProps {
+interface HeroProps {
   badge: string;
   title: string;
   description: string;
@@ -82,7 +82,7 @@ const colorMap = {
   },
 };
 
-export default function SolutionHero({
+export default function Hero({
   badge = "SOLUTION",
   title = "Solution Title",
   description = "Solution description goes here...",
@@ -90,7 +90,7 @@ export default function SolutionHero({
   accentColor = "pink",
   tertiaryColor = "green",
   imagePath = "/default-solution.svg",
-}: SolutionHeroProps) {
+}: HeroProps) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

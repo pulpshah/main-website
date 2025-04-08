@@ -1,12 +1,7 @@
-import { Metadata } from "next";
-import SolutionHero from "@/components/solutions/solution-hero";
+import Hero from "@/components/shared/hero";
 import { KnowledgeSynthesisSections } from "@/components/solutions/knowledge-synthesis/sections-list";
-import WhyChooseUs from "@/components/solutions/why-choose-us";
+import WhyChooseUs from "@/components/shared/why-choose-us";
 
-export const metadata: Metadata = {
-  title: "Knowledge Synthesis & Automated Summarization | Pulp",
-  description: "Transform information overload into concise, actionable intelligence with Pulp's AI-powered Knowledge Synthesis solutions.",
-};
 
 export default function KnowledgeSynthesisPage() {
     const heroConfig = {
@@ -16,7 +11,7 @@ export default function KnowledgeSynthesisPage() {
         primaryColor: "amber" as const,
         accentColor: "amber" as const,
         tertiaryColor: "amber" as const,
-        imagePath: "/knowledge-synthesis-visual.svg",
+        imagePath: "/solutions/knowledge-synthesis-visual.svg",
     };
 
   const sectionsConfig = [
@@ -67,7 +62,7 @@ export default function KnowledgeSynthesisPage() {
 
   return (
     <main className="flex min-h-screen flex-col">
-      <SolutionHero 
+      <Hero 
         badge={heroConfig.badge}
         title={heroConfig.title}
         description={heroConfig.description}

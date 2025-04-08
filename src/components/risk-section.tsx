@@ -78,7 +78,7 @@ export default function RiskSection({
           }}
         >
           <div className="inline-block mb-4">
-          <span className="px-2 md:px-4 py-1.5 md:py-2 rounded-full bg-red-600 text-xs font-medium tracking-wider max-w-full break-words text-white shadow-[0_0_10px_2px_rgba(248,113,113,0.75)] ">
+          <span className="px-2 md:px-4 py-1.5 md:py-2 rounded-full bg-red-600/20 text-xs font-medium tracking-wider max-w-full break-words text-white shadow-[0_0_10px_2px_rgba(248,113,113,0.75)] ">
             RISK MITIGATION
           </span>
         </div>

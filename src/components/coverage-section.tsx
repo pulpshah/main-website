@@ -17,7 +17,7 @@ interface CoverageSectionProps {
 
 export default function CoverageSection({
   title = "Make Every Touchpoint an Advantage",
-  subtitle = "Amplify Engagement Anytime, Anywhere.",
+  subtitle = "Amplify  Engagement Anytime, Anywhere.",
   description = "People navigate multiple roles in their daily lives. Pulp AI features are built to understand and adapt to individuals' communication needs across personal, professional, and civic contexts.",
   ctaText = "Get Full Coverage Engagement Tools",
   coverageAreas = [
@@ -83,7 +83,7 @@ export default function CoverageSection({
           }}
         >
           <div className="inline-block mb-4">
-            <span className="px-2 md:px-4 py-1.5 md:py-2 rounded-full bg-green-600 text-xs font-medium tracking-wider max-w-full break-words text-white shadow-[0_0_10px_2px_rgba(16,185,129,0.75)] ">
+            <span className="px-2 md:px-4 py-1.5 md:py-2 rounded-full bg-green-600/20 text-xs font-medium tracking-wider max-w-full break-words text-white shadow-[0_0_10px_2px_rgba(16,185,129,0.75)] ">
              UNIVERSAL COVERAGE
             </span>
           </div>

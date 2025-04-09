@@ -1,0 +1,122 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Elements -->
+  <circle cx="400" cy="300" r="250" fill="#9333EA" fill-opacity="0.03" />
+  <circle cx="400" cy="300" r="200" fill="#9333EA" fill-opacity="0.05" />
+  <circle cx="400" cy="300" r="150" fill="#9333EA" fill-opacity="0.07" />
+  
+  <!-- Connection Lines -->
+  <path d="M280 320L360 240M360 240L440 200M440 200L520 240M520 240L600 320M280 320L230 400M600 320L650 400" stroke="#9333EA" stroke-width="2" stroke-opacity="0.3" stroke-dasharray="4 4" />
+  
+  <!-- Data Point Nodes -->
+  <circle cx="280" cy="320" r="30" fill="#18181B" stroke="#9333EA" stroke-width="2" />
+  <circle cx="360" cy="240" r="24" fill="#18181B" stroke="#9333EA" stroke-width="2" />
+  <circle cx="440" cy="200" r="34" fill="#18181B" stroke="#9333EA" stroke-width="2" />
+  <circle cx="520" cy="240" r="24" fill="#18181B" stroke="#9333EA" stroke-width="2" />
+  <circle cx="600" cy="320" r="30" fill="#18181B" stroke="#9333EA" stroke-width="2" />
+  <circle cx="230" cy="400" r="20" fill="#18181B" stroke="#9333EA" stroke-width="2" />
+  <circle cx="650" cy="400" r="20" fill="#18181B" stroke="#9333EA" stroke-width="2" />
+  
+  <!-- Icon Elements -->
+  <g transform="translate(265, 305)">
+    <path d="M15 8C15 12.4183 11.6421 16 7.5 16C3.35786 16 0 12.4183 0 8C0 3.58172 3.35786 0 7.5 0C11.6421 0 15 3.58172 15 8Z" fill="#9333EA" />
+    <path d="M8 4V8L11 10" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+  </g>
+  
+  <g transform="translate(345, 225)">
+    <path d="M15 8C15 12.4183 11.6421 16 7.5 16C3.35786 16 0 12.4183 0 8C0 3.58172 3.35786 0 7.5 0C11.6421 0 15 3.58172 15 8Z" fill="#9333EA" />
+    <path d="M5 8H10" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M7.5 5.5V10.5" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+  </g>
+  
+  <g transform="translate(425, 185)">
+    <path d="M15 8C15 12.4183 11.6421 16 7.5 16C3.35786 16 0 12.4183 0 8C0 3.58172 3.35786 0 7.5 0C11.6421 0 15 3.58172 15 8Z" fill="#9333EA" />
+    <path d="M4 8L6.5 10.5L11 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+  
+  <g transform="translate(505, 225)">
+    <path d="M15 8C15 12.4183 11.6421 16 7.5 16C3.35786 16 0 12.4183 0 8C0 3.58172 3.35786 0 7.5 0C11.6421 0 15 3.58172 15 8Z" fill="#9333EA" />
+    <path d="M4 6L7.5 9.5L11 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+  
+  <g transform="translate(585, 305)">
+    <path d="M15 8C15 12.4183 11.6421 16 7.5 16C3.35786 16 0 12.4183 0 8C0 3.58172 3.35786 0 7.5 0C11.6421 0 15 3.58172 15 8Z" fill="#9333EA" />
+    <path d="M4 8H11" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+  </g>
+  
+  <!-- Growth Chart -->
+  <g transform="translate(320, 350)">
+    <!-- Chart Background -->
+    <rect x="0" y="0" width="160" height="120" rx="8" fill="#18181B" stroke="#9333EA" stroke-opacity="0.5" stroke-width="2" />
+    
+    <!-- Chart Grid -->
+    <line x1="20" y1="100" x2="140" y2="100" stroke="#6B7280" stroke-opacity="0.5" stroke-width="1" />
+    <line x1="20" y1="70" x2="140" y2="70" stroke="#6B7280" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="2 2" />
+    <line x1="20" y1="40" x2="140" y2="40" stroke="#6B7280" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="2 2" />
+    
+    <!-- Chart Bars -->
+    <rect x="30" y="70" width="15" height="30" rx="2" fill="#9333EA" fill-opacity="0.3" />
+    <rect x="55" y="60" width="15" height="40" rx="2" fill="#9333EA" fill-opacity="0.5" />
+    <rect x="80" y="50" width="15" height="50" rx="2" fill="#9333EA" fill-opacity="0.7" />
+    <rect x="105" y="30" width="15" height="70" rx="2" fill="#9333EA" />
+    
+    <!-- Chart Title -->
+    <text x="20" y="20" font-family="Arial" font-size="10" fill="white">Growth Metrics</text>
+    
+    <!-- Trend Line -->
+    <path d="M37 65C50 60 65 55 87 45C110 35 115 25 120 20" stroke="#F472B6" stroke-width="2" stroke-linecap="round" fill="none" />
+  </g>
+  
+  <!-- Audience Segmentation -->
+  <g transform="translate(500, 350)">
+    <!-- Background -->
+    <rect x="0" y="0" width="160" height="120" rx="8" fill="#18181B" stroke="#9333EA" stroke-opacity="0.5" stroke-width="2" />
+    
+    <!-- Segments -->
+    <path d="M80 60 L80 10 A50 50 0 0 1 123.3 35 Z" fill="#9333EA" />
+    <path d="M80 60 L123.3 35 A50 50 0 0 1 115 95 Z" fill="#9333EA" fill-opacity="0.7" />
+    <path d="M80 60 L115 95 A50 50 0 0 1 45 95 Z" fill="#9333EA" fill-opacity="0.5" />
+    <path d="M80 60 L45 95 A50 50 0 0 1 36.7 35 Z" fill="#9333EA" fill-opacity="0.3" />
+    <path d="M80 60 L36.7 35 A50 50 0 0 1 80 10 Z" fill="#9333EA" fill-opacity="0.2" />
+    
+    <!-- Center Circle -->
+    <circle cx="80" cy="60" r="10" fill="#18181B" stroke="#9333EA" stroke-width="1" />
+    
+    <!-- Title -->
+    <text x="60" y="105" font-family="Arial" font-size="10" fill="white">Audience Segments</text>
+  </g>
+  
+  <!-- Message Optimization -->
+  <g transform="translate(140, 350)">
+    <!-- Background -->
+    <rect x="0" y="0" width="160" height="120" rx="8" fill="#18181B" stroke="#9333EA" stroke-opacity="0.5" stroke-width="2" />
+    
+    <!-- Message Icons -->
+    <rect x="20" y="30" width="120" height="20" rx="4" fill="#27272A" />
+    <rect x="20" y="30" width="80" height="20" rx="4" fill="#9333EA" fill-opacity="0.2" />
+    <circle cx="30" cy="40" r="5" fill="#9333EA" />
+    
+    <rect x="20" y="60" width="120" height="20" rx="4" fill="#27272A" />
+    <rect x="20" y="60" width="100" height="20" rx="4" fill="#9333EA" fill-opacity="0.5" />
+    <circle cx="30" cy="70" r="5" fill="#9333EA" />
+    
+    <rect x="20" y="90" width="120" height="20" rx="4" fill="#27272A" />
+    <rect x="20" y="90" width="110" height="20" rx="4" fill="#9333EA" fill-opacity="0.8" />
+    <circle cx="30" cy="100" r="5" fill="#9333EA" />
+    
+    <!-- Title -->
+    <text x="20" y="20" font-family="Arial" font-size="10" fill="white">Message Optimization</text>
+  </g>
+  
+  <!-- Decorative Elements -->
+  <circle cx="200" cy="150" r="5" fill="#9333EA" fill-opacity="0.5" />
+  <circle cx="220" cy="170" r="3" fill="#9333EA" fill-opacity="0.3" />
+  <circle cx="180" cy="180" r="2" fill="#9333EA" fill-opacity="0.7" />
+  
+  <circle cx="600" cy="150" r="5" fill="#9333EA" fill-opacity="0.5" />
+  <circle cx="580" cy="170" r="3" fill="#9333EA" fill-opacity="0.3" />
+  <circle cx="620" cy="180" r="2" fill="#9333EA" fill-opacity="0.7" />
+  
+  <!-- Highlight Glow Effects -->
+  <circle cx="440" cy="200" r="50" fill="#9333EA" fill-opacity="0.1" />
+  <circle cx="440" cy="200" r="30" fill="#9333EA" fill-opacity="0.1" />
+</svg> 

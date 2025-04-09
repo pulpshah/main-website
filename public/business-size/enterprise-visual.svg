@@ -1,0 +1,150 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Elements -->
+  <circle cx="400" cy="300" r="250" fill="#2563EB" fill-opacity="0.03" />
+  <circle cx="400" cy="300" r="200" fill="#2563EB" fill-opacity="0.05" />
+  <circle cx="400" cy="300" r="150" fill="#2563EB" fill-opacity="0.07" />
+  
+  <!-- Security Shield -->
+  <g transform="translate(350, 180)">
+    <!-- Shield Background -->
+    <path d="M100 190C100 190 170 170 170 90V40L100 10L30 40V90C30 170 100 190 100 190Z" fill="#18181B" stroke="#2563EB" stroke-width="3" />
+    
+    <!-- Shield Inner Pattern -->
+    <path d="M100 170C100 170 150 150 150 90V50L100 25L50 50V90C50 150 100 170 100 170Z" stroke="#2563EB" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="3 3" fill="none" />
+    
+    <!-- Shield Center Element -->
+    <path d="M100 140C100 140 130 125 130 85V60L100 45L70 60V85C70 125 100 140 100 140Z" fill="#2563EB" fill-opacity="0.1" stroke="#2563EB" stroke-width="2" />
+    
+    <!-- Check Mark -->
+    <path d="M80 90L95 105L120 75" stroke="#2563EB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+  
+  <!-- Network Nodes and Connections -->
+  <g>
+    <!-- Global Circle -->
+    <circle cx="230" cy="240" r="40" fill="#18181B" stroke="#2563EB" stroke-width="2" />
+    <circle cx="230" cy="240" r="30" fill="none" stroke="#2563EB" stroke-opacity="0.3" stroke-width="1" stroke-dasharray="3 3" />
+    <circle cx="230" cy="240" r="20" fill="#2563EB" fill-opacity="0.1" />
+    
+    <!-- Globe Pattern -->
+    <path d="M200 230H260" stroke="#2563EB" stroke-opacity="0.5" stroke-width="1" />
+    <path d="M205 245H255" stroke="#2563EB" stroke-opacity="0.5" stroke-width="1" />
+    <path d="M210 260H250" stroke="#2563EB" stroke-opacity="0.5" stroke-width="1" />
+    <path d="M230 200V280" stroke="#2563EB" stroke-opacity="0.5" stroke-width="1" />
+    <path d="M215 205C215 205 225 220 230 220C235 220 245 205 245 205" stroke="#2563EB" stroke-opacity="0.5" stroke-width="1" />
+    <path d="M210 275C210 275 225 255 230 255C235 255 250 275 250 275" stroke="#2563EB" stroke-opacity="0.5" stroke-width="1" />
+  </g>
+  
+  <g>
+    <!-- Analysis Circle -->
+    <circle cx="570" cy="240" r="40" fill="#18181B" stroke="#2563EB" stroke-width="2" />
+    <circle cx="570" cy="240" r="25" fill="#2563EB" fill-opacity="0.1" />
+    
+    <!-- Analysis Icon -->
+    <path d="M550 240H590" stroke="#2563EB" stroke-width="2" />
+    <path d="M555 230H585" stroke="#2563EB" stroke-width="2" />
+    <path d="M560 250H580" stroke="#2563EB" stroke-width="2" />
+    <path d="M545 260L595 220" stroke="#2563EB" stroke-width="2" />
+  </g>
+  
+  <!-- Connection Lines -->
+  <path d="M270 240L350 250M590 260L620 300M620 300L670 340M270 260L300 330M300 330L350 390M350 390L400 420M350 250L400 280" stroke="#2563EB" stroke-width="2" stroke-opacity="0.3" stroke-dasharray="4 4" />
+  
+  <!-- Data Flow Visual -->
+  <g transform="translate(300, 330)">
+    <!-- Background -->
+    <rect x="0" y="0" width="200" height="140" rx="10" fill="#18181B" stroke="#2563EB" stroke-width="2" />
+    
+    <!-- Data Flow Lines -->
+    <path d="M20 30H180" stroke="#2563EB" stroke-opacity="0.3" stroke-width="1" />
+    <path d="M20 50H180" stroke="#2563EB" stroke-opacity="0.3" stroke-width="1" />
+    <path d="M20 70H180" stroke="#2563EB" stroke-opacity="0.3" stroke-width="1" />
+    <path d="M20 90H180" stroke="#2563EB" stroke-opacity="0.3" stroke-width="1" />
+    <path d="M20 110H180" stroke="#2563EB" stroke-opacity="0.3" stroke-width="1" />
+    
+    <!-- Data Packets -->
+    <rect x="30" y="25" width="40" height="10" rx="2" fill="#2563EB" />
+    <rect x="130" y="25" width="20" height="10" rx="2" fill="#2563EB" fill-opacity="0.5" />
+    
+    <rect x="50" y="45" width="30" height="10" rx="2" fill="#2563EB" fill-opacity="0.7" />
+    <rect x="100" y="45" width="60" height="10" rx="2" fill="#2563EB" fill-opacity="0.3" />
+    
+    <rect x="40" y="65" width="50" height="10" rx="2" fill="#2563EB" fill-opacity="0.4" />
+    <rect x="120" y="65" width="40" height="10" rx="2" fill="#2563EB" fill-opacity="0.6" />
+    
+    <rect x="70" y="85" width="70" height="10" rx="2" fill="#2563EB" />
+    <rect x="20" y="85" width="20" height="10" rx="2" fill="#2563EB" fill-opacity="0.5" />
+    
+    <rect x="30" y="105" width="40" height="10" rx="2" fill="#2563EB" fill-opacity="0.3" />
+    <rect x="90" y="105" width="70" height="10" rx="2" fill="#2563EB" fill-opacity="0.8" />
+    
+    <!-- Title -->
+    <text x="80" y="130" font-family="Arial" font-size="12" fill="white" text-anchor="middle">Data Intelligence</text>
+  </g>
+  
+  <!-- Message Protection System -->
+  <g transform="translate(550, 300)">
+    <!-- Background -->
+    <rect x="0" y="0" width="160" height="140" rx="10" fill="#18181B" stroke="#2563EB" stroke-width="2" />
+    
+    <!-- Lock Icon -->
+    <rect x="60" y="20" width="40" height="30" rx="5" fill="#2563EB" />
+    <rect x="70" y="50" width="20" height="30" fill="#2563EB" />
+    <circle cx="80" cy="60" r="5" fill="white" />
+    
+    <!-- Protected Messages -->
+    <g transform="translate(30, 90)">
+      <rect x="0" y="0" width="100" height="15" rx="3" fill="#2563EB" fill-opacity="0.2" />
+      <rect x="5" y="5" width="40" height="5" rx="1" fill="white" fill-opacity="0.5" />
+      <circle cx="95" cy="7.5" r="3" fill="#2563EB" />
+    </g>
+    
+    <g transform="translate(40, 110)">
+      <rect x="0" y="0" width="80" height="15" rx="3" fill="#2563EB" fill-opacity="0.2" />
+      <rect x="5" y="5" width="30" height="5" rx="1" fill="white" fill-opacity="0.5" />
+      <circle cx="75" cy="7.5" r="3" fill="#2563EB" />
+    </g>
+    
+    <!-- Shield Mini Icon -->
+    <path d="M20 30C20 30 30 27 30 15V8L20 3L10 8V15C10 27 20 30 20 30Z" fill="#2563EB" fill-opacity="0.5" />
+    <path d="M15 17L18 20L25 12" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+  
+  <!-- Response Node -->
+  <g transform="translate(150, 330)">
+    <!-- Background -->
+    <rect x="0" y="0" width="120" height="140" rx="10" fill="#18181B" stroke="#2563EB" stroke-width="2" />
+    
+    <!-- Alert Icon -->
+    <circle cx="60" cy="40" r="20" fill="#2563EB" />
+    <path d="M60 30V45" stroke="white" stroke-width="3" stroke-linecap="round" />
+    <circle cx="60" cy="50" r="2" fill="white" />
+    
+    <!-- Counter Measures Text -->
+    <text x="60" y="80" font-family="Arial" font-size="10" fill="white" text-anchor="middle">Counter Measures</text>
+    
+    <!-- Response Buttons -->
+    <rect x="20" y="90" width="80" height="15" rx="3" fill="#2563EB" fill-opacity="0.7" />
+    <text x="60" y="101" font-family="Arial" font-size="8" fill="white" text-anchor="middle">RESPOND</text>
+    
+    <rect x="20" y="110" width="80" height="15" rx="3" fill="#2563EB" fill-opacity="0.4" />
+    <text x="60" y="121" font-family="Arial" font-size="8" fill="white" text-anchor="middle">MONITOR</text>
+  </g>
+  
+  <!-- Decorative Elements -->
+  <circle cx="200" cy="150" r="5" fill="#2563EB" fill-opacity="0.5" />
+  <circle cx="220" cy="170" r="3" fill="#2563EB" fill-opacity="0.3" />
+  <circle cx="180" cy="180" r="2" fill="#2563EB" fill-opacity="0.7" />
+  
+  <circle cx="600" cy="150" r="5" fill="#2563EB" fill-opacity="0.5" />
+  <circle cx="580" cy="170" r="3" fill="#2563EB" fill-opacity="0.3" />
+  <circle cx="620" cy="180" r="2" fill="#2563EB" fill-opacity="0.7" />
+  
+  <!-- Security Circles -->
+  <circle cx="400" cy="280" r="5" fill="#2563EB" />
+  <circle cx="400" cy="280" r="15" fill="none" stroke="#2563EB" stroke-width="1" stroke-opacity="0.3" />
+  <circle cx="400" cy="280" r="25" fill="none" stroke="#2563EB" stroke-width="1" stroke-dasharray="2 2" stroke-opacity="0.2" />
+  
+  <!-- Highlight Glow Effect -->
+  <circle cx="350" cy="250" r="30" fill="#2563EB" fill-opacity="0.1" />
+</svg> 

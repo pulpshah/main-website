@@ -55,4 +55,4 @@ Key Conventions:
 
 Follow Next.js docs for Data Fetching, Rendering, and Routing
 
-we are going to make the landing page for my company. I already have all the information I want to put on it. likes images, text and other data. We will use NextJS 15, with app router. We will be using tailwind CSS and shadcn UI elements. Our color scheme would be black/dark gray background with primrary color as bright purple and pinkish aswell as some green as third
+we are making the main page for my company. I already have all the information I want to put on it. likes images, text and other data. We will use NextJS 15, with app router. We will be using tailwind CSS and shadcn UI elements. Our color scheme would be black/dark gray background with primrary color as bright purple and pinkish aswell as some green as third

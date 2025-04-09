@@ -1,10 +1,10 @@
-import HeroSection from "@/components/hero-section";
-import FeaturesSection from "@/components/features-section";
-import StatsSection from "@/components/stats-section";
-import RiskSection from "@/components/risk-section";
-import CoverageSection from "@/components/coverage-section";
-import DisengagementSection from "@/components/disengagement-section";
-import CtaSection from "@/components/cta-section";
+import HeroSection from "@/components/landing/hero-section";
+import FeaturesSection from "@/components/features/features-section";
+import StatsSection from "@/components/landing/stats-section";
+import RiskSection from "@/components/landing/risk-section";
+import CoverageSection from "@/components/landing/coverage-section";
+import DisengagementSection from "@/components/landing/disengagement-section";
+import CtaSection from "@/components/landing/cta-section";
 
 export default function Home() {
   return (

@@ -5,8 +5,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, X } from "lucide-react";
-import { OfferItemsDrawer, offerItems, OfferItemsMobile } from "@/components/offer-items-drawer";
-import { IndustriesDrawer, industryItems, IndustriesMobile } from "@/components/industries-drawer";
+import { OfferItemsDrawer, offerItems, OfferItemsMobile } from "@/components/header/offer-items-drawer";
+import { 
+  ServeItemsDrawer, 
+  industryItems, 
+  ServeItemsMobile, 
+  businessSizeItems, 
+  teamsItems 
+} from "@/components/header/serve-items-drawer";
 
 interface NavigationItem {
   title: string;
@@ -36,6 +42,7 @@ export function Header() {
   const [isWhoWeServeOpen, setIsWhoWeServeOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMobileSection, setExpandedMobileSection] = useState<string | null>(null);
+  const [whoWeServeTab, setWhoWeServeTab] = useState<'industries' | 'business-size' | 'teams'>('industries');
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -97,7 +104,7 @@ export function Header() {
                 }
               />
             ) : item.hasDropdown && item.title === "Who We Serve" ? (
-              <IndustriesDrawer
+              <ServeItemsDrawer
                 key={item.title}
                 isOpen={isWhoWeServeOpen}
                 onOpenChange={setIsWhoWeServeOpen}
@@ -187,7 +194,7 @@ export function Header() {
             <nav className="flex flex-col space-y-6 mt-4">
               {navItems.map((item) => (
                 <div key={item.title} className="py-3 border-b border-zinc-800/50">
-                  {item.hasDropdown ? (
+                  {item.hasDropdown && item.title === "What We Offer" ? (
                     <div className="flex flex-col">
                       <button 
                         className="flex justify-between items-center py-2 text-white font-medium text-lg"
@@ -206,17 +213,92 @@ export function Header() {
                           }`} 
                         />
                       </button>
-                      {item.title === "What We Offer" && expandedMobileSection === item.title && (
+                      {expandedMobileSection === item.title && (
                         <OfferItemsMobile 
                           items={offerItems} 
                           onClick={() => setIsMobileMenuOpen(false)}
                         />
                       )}
-                      {item.title === "Who We Serve" && expandedMobileSection === item.title && (
-                        <IndustriesMobile 
-                          items={industryItems}
-                          onClick={() => setIsMobileMenuOpen(false)}
+                    </div>
+                  ) : item.hasDropdown && item.title === "Who We Serve" ? (
+                    <div className="flex flex-col">
+                      <button 
+                        className="flex justify-between items-center py-2 text-white font-medium text-lg"
+                        onClick={() => {
+                          if (expandedMobileSection === item.title) {
+                            setExpandedMobileSection(null);
+                            // Reset tab selection when closing
+                            setWhoWeServeTab('industries');
+                          } else {
+                            setExpandedMobileSection(item.title);
+                          }
+                        }}
+                      >
+                        {item.title}
+                        <ChevronDown 
+                          className={`h-5 w-5 transition-transform duration-200 ${
+                            expandedMobileSection === item.title ? 'rotate-180' : ''
+                          }`} 
                         />
+                      </button>
+                      {expandedMobileSection === item.title && (
+                        <div className="py-3 pl-4 space-y-4 border-t border-zinc-800/30 mt-3">
+                          {/* Tab selection for Who We Serve on mobile */}
+                          <div className="flex flex-col space-y-2 mb-4">
+                            <div className="grid grid-cols-3 gap-2 rounded-md bg-zinc-900/50 p-1">
+                              <button
+                                onClick={() => setWhoWeServeTab('industries')}
+                                className={`py-2 px-3 text-sm rounded-md transition-colors duration-200 ${
+                                  whoWeServeTab === 'industries' 
+                                    ? 'bg-purple-500/20 text-purple-400 font-medium' 
+                                    : 'text-zinc-400 hover:text-white'
+                                }`}
+                              >
+                                Industries
+                              </button>
+                              <button
+                                onClick={() => setWhoWeServeTab('business-size')}
+                                className={`py-2 px-3 text-sm rounded-md transition-colors duration-200 ${
+                                  whoWeServeTab === 'business-size' 
+                                    ? 'bg-blue-500/20 text-blue-400 font-medium' 
+                                    : 'text-zinc-400 hover:text-white'
+                                }`}
+                              >
+                                Business Size
+                              </button>
+                              <button
+                                onClick={() => setWhoWeServeTab('teams')}
+                                className={`py-2 px-3 text-sm rounded-md transition-colors duration-200 ${
+                                  whoWeServeTab === 'teams' 
+                                    ? 'bg-green-500/20 text-green-400 font-medium' 
+                                    : 'text-zinc-400 hover:text-white'
+                                }`}
+                              >
+                                Teams
+                              </button>
+                            </div>
+                          </div>
+                          
+                          {/* Show items based on selected tab */}
+                          {whoWeServeTab === 'industries' && (
+                            <ServeItemsMobile 
+                              items={industryItems}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            />
+                          )}
+                          {whoWeServeTab === 'business-size' && (
+                            <ServeItemsMobile 
+                              items={businessSizeItems}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            />
+                          )}
+                          {whoWeServeTab === 'teams' && (
+                            <ServeItemsMobile 
+                              items={teamsItems}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            />
+                          )}
+                        </div>
                       )}
                     </div>
                   ) : (

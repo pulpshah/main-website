@@ -9,7 +9,7 @@ export default function IntelligentCommunicationPage() {
     hero: {
       badge: "SOLUTION",
       title: "Intelligent Communication & Engagement",
-      description: "Messaging isn't just about what you say—it's about how it lands. Pulp turns conversation into strategy, structuring dialogue with precision, refining persuasion, and ensuring every interaction drives impact. Whether shaping narratives, enhancing collaboration, or optimizing engagement, Pulp makes communication sharper, smarter, and impossible to ignore.",
+      description: "Messaging isn't just about what you say; it's about how it lands. Pulp turns conversation into strategy, structuring dialogue with precision, refining persuasion, and ensuring every interaction drives impact. Whether shaping narratives, enhancing collaboration, or optimizing engagement, Pulp makes communication sharper, smarter, and impossible to ignore.",
       primaryColor: "purple" as const,
       accentColor: "pink" as const,
       tertiaryColor: "green" as const,
@@ -20,21 +20,21 @@ export default function IntelligentCommunicationPage() {
     sections: [
       {
         title: "Make Every Conversation Count",
-        description: "Communication isn't just about speaking—it's about landing. Pulp structures messaging with precision, ensuring clarity, persuasion, and engagement in every interaction. No more misalignment. No more wasted words.",
+        description: "Communication isn't just about speaking; it's about understanding. Pulp structures messaging with precision, ensuring clarity, persuasion, and engagement in every interaction. No more misalignment. No more wasted words.",
         imageSide: "right" as const,
         color: "purple" as const,
         icon: "MessageCircle",
       },
       {
-        title: "Persuasion, Engineered",
-        description: "Most messaging platforms analyze sentiment. Pulp goes further—breaking down ethos, pathos, and logos to map exactly why an argument works. Whether you're refining a pitch, shaping a debate, or guiding collaboration, Pulp ensures your words move people the way you intend.",
+        title: "Persuasion Engineered",
+        description: "Most messaging platforms analyze sentiment. Pulp goes further, breaking down ethos, pathos, and logos to map exactly why an argument works. Whether you're refining a pitch, shaping a debate, or guiding collaboration, Pulp ensures your words move people the way you intend.",
         imageSide: "left" as const,
         color: "purple" as const,
         icon: "LineChart",
       },
       {
         title: "Engagement That Evolves in Real Time",
-        description: "Static messaging is dead. Pulp continuously refines language based on audience response, contextual cues, and persuasion patterns—adapting conversations dynamically for maximum impact.",
+        description: "Static messaging is dead. Pulp continuously refines language based on audience response, contextual cues, and persuasion patterns, adapting conversations dynamically for maximum impact.",
         imageSide: "right" as const,
         color: "purple" as const,
         icon: "RefreshCw",

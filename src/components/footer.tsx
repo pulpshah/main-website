@@ -3,9 +3,9 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="border-t border-zinc-800 bg-black py-12">
+    <footer className="border-t border-zinc-800 bg-black py-12 ">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between">
+        <div className="flex flex-col md:flex-row justify-between mx-12">
           {/* Logo */}
           <div className="mb-8 md:mb-0">
             <Link href="/">

@@ -16,8 +16,8 @@ interface RiskSectionProps {
 }
 
 export default function RiskSection({
-  title = "Engagement data without direction goes nowhere.",
-  subtitle = "You're Either Ahead of the Conversation or Behind It",
+  title = "You're Either Ahead of the Conversation or Behind It",
+  subtitle = "Engagement data without direction goes nowhere",
   description = "Incorrectly measuring engagement skews data, making improvement challenging, harming reputation, and eroding stakeholder confidence.",
   ctaText = "Let's Talk Risk Mitigation",
   risks = [
@@ -77,7 +77,7 @@ export default function RiskSection({
             transition: 'opacity 0.8s ease, transform 0.8s ease'
           }}
         >
-          <div className="inline-block mb-4">
+        <div className="inline-block mb-4">
           <span className="px-2 md:px-4 py-1.5 md:py-2 rounded-full bg-red-600/20 text-xs font-medium tracking-wider max-w-full break-words text-white shadow-[0_0_10px_2px_rgba(248,113,113,0.75)] ">
             RISK MITIGATION
           </span>
@@ -95,13 +95,6 @@ export default function RiskSection({
             {description}
           </p>
           
-          <button className="group relative px-8 py-4 bg-red-700 hover:bg-red-600 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-[0_0_20px_rgba(248,113,113,0.4)] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-black overflow-hidden">
-            <span className="relative z-10 flex items-center justify-center">
-              {ctaText}
-              <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
-            </span>
-            <span className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-          </button>
         </div>
         
         {/* Risk cards */}
@@ -113,6 +106,16 @@ export default function RiskSection({
               index={index}
             />
           ))}
+        </div>
+
+        <div className="max-w-3xl mx-auto text-center mt-16">
+          <button className="group relative px-8 py-4 bg-red-700 hover:bg-red-600 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-[0_0_20px_rgba(248,113,113,0.4)] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-black overflow-hidden">
+            <span className="relative z-10 flex items-center justify-center">
+              {ctaText}
+              <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
+            </span>
+            <span className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+          </button>
         </div>
       </div>
     </section>
@@ -190,7 +193,7 @@ function RiskCard({ risk, index }: { risk: RiskItem; index: number }) {
     >
       {/* Number indicator */}
       <div 
-        className={`absolute -top-3 -left-3 w-16 h-16 ${colors.glow} rounded-full flex items-center justify-center text-xl font-bold ${colors.icon} opacity-20 group-hover:opacity-40 transition-all duration-500`}
+        className={`absolute -top-3 -left-3 w-16 h-16 ${colors.glow} rounded-full flex items-center justify-center text-xl font-bold ${colors.icon} opacity-50 group-hover:opacity-40 transition-all duration-500`}
         suppressHydrationWarning
       >
         <span>{index + 1}</span>

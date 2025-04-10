@@ -11,16 +11,21 @@ interface CtaSectionProps {
 }
 
 export default function CtaSection({
-  title = "Ready to Strengthen Your Engagement?",
-  subtitle = "Start Driving Meaningful Connections Today",
+  title = "Pulp AI Knows What Its Talking About. Literally.",
+  subtitle = "Let's Build the Future of Engagement Together",
   description = "Discover how Pulp's engagement platform can transform your communication strategy and help you connect with what truly motivates your audience.",
   primaryButtonText = "Request Demo",
-  secondaryButtonText = "Talk to Sales"
+  secondaryButtonText = "Contact Sales"
 }: CtaSectionProps) {
   const [isHovered, setIsHovered] = useState(false);
   
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6">
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <div className="inline-block mb-8">
+          <span className="px-2 md:px-4 py-1.5 md:py-2 rounded-full bg-purple-600/20 text-xs font-medium tracking-wider max-w-full break-words text-white shadow-[0_0_10px_2px_rgba(168,85,247,0.75)] ">
+            Stay Engaged. Stay Ahead.
+          </span>
+        </div>
       <div className="relative rounded-2xl overflow-hidden">
         {/* Background with gradient effect */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/30 to-gray-900 z-0"></div>

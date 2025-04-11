@@ -37,7 +37,7 @@ export default function HeroSection({
         {/* Text Content */}
         <div className={`flex-1 space-y-6 md:space-y-8 ${isMobile ? 'text-center w-full' : ''}`}>
           <div className={`${isMobile ? 'flex justify-center' : 'inline-block'}`}>
-            <span className={`px-2 md:px-4 py-1.5 md:py-2 rounded-full bg-purple-600/20 text-white shadow-[0_0_10px_2px_rgba(168,85,247,0.75)] ${isMobile ? 'text-[10px]' : 'text-xs'} font-medium tracking-wider max-w-full break-words`}>
+            <span className={`px-2 md:px-4 py-1.5 md:py-2 rounded-full bg-purple-600/20 text-white shadow-[0_0_10px_2px_rgba(168,85,247,0.75)] ${isMobile ? 'text-[10px]' : 'text-xs'} font-medium tracking-wider max-w-full break-words mt-2`}>
               {isMobile ? "CONVERSATION MEETS ENGAGEMENT" : badge}
             </span>
           </div>

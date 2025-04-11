@@ -1,5 +1,5 @@
 import HeroSection from "@/components/landing/hero-section";
-import FeaturesSection from "@/components/features/features-section";
+import FeaturesSection from "@/components/landing/features-section";
 import StatsSection from "@/components/landing/stats-section";
 import RiskSection from "@/components/landing/risk-section";
 import CoverageSection from "@/components/landing/coverage-section";

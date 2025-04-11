@@ -22,32 +22,32 @@ export default function FeaturesSection({
   description = "Natural language is about conveying meaning, grasping ideas, and compelling action. Use Pulp AI's language dynamics to do what humans naturally do, and more.",
   features = [
     {
-      image: "/landing-images/Predict and Simulate Persuasive Resonance.png",
+      image: "/landing-images/Predict and Simulate Persuasive Resonance.svg",
       title: "Predict and Simulate Persuasive Resonance",
       description: "Anticipate how messages will be received. Pulp evaluates whether an audience will accept, consider, or reject a message before it's even delivered."
     },
     {
-      image: "/landing-images/Understand Appeals With Unprecedented Granularity.png",
+      image: "/landing-images/Understand Appeals With Unprecedented Granularity.svg",
       title: "Understand Appeals With Unprecedented Granularity",
       description: "Analyze persuasion with unmatched precision. Pulp analyzes ethos, pathos, logos, and advanced rhetorical structures to map how arguments are built and how they land."
     },
     {
-      image: "/landing-images/Score Responses Based On Word Choice and Objective.png",
+      image: "/landing-images/Score Responses Based On Word Choice and Objective.svg",
       title: "Score Responses Based On Word Choice and Objective",
       description: "Quantify the power of language. Not all words carry the same weight. Pulp's proprietary algorithm scores rhetoric' relative influence in any conversation."
     },
     {
-      image: "/landing-images/Create Realistic Personas Individual, Group, and Entity.png",
+      image: "/landing-images/Create Realistic Personas Individual, Group, and Entity.svg",
       title: "Create Realistic Personas: Individual, Group, and Entity",
       description: "Go beyond basic demographics. Pulp maps deep psychographics, cognitive states, and decision-making patterns. Pulp reveals not just who is engaging but why they engage the way they do."
     },
     {
-      image: "/landing-images/Topic Clustering and Knowledge Mapping.png",
+      image: "/landing-images/Topic Clustering and Knowledge Mapping.svg",
       title: "Topic Clustering and Knowledge Mapping",
       description: "Utilize the deeper narrative within words. Conversations reveal themes, biases, and implicit knowledge structures. Pulp traces connections that others miss."
     },
     {
-      image: "/landing-images/Model Discussions as Digital, Physical, or Hybrid.png",
+      image: "/landing-images/Model Discussions as Digital, Physical, or Hybrid.svg",
       title: "Model Discussion Scenes as Digital, Physical, or Hybrid",
       description: "Simulate conversations across any setting. Context matters. Pulp accounts for time, place, format, and interaction mode to refine engagement insights."
     }

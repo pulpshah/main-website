@@ -166,19 +166,8 @@ function RiskCard({ risk, index }: { risk: RiskItem; index: number }) {
     
     return icons[index % icons.length];
   };
-
-  // Different colors for each card
-  const getCardColors = () => {
-    const colorSchemes = [
-      { border: "border-red-900/20", icon: "text-red-400", highlight: "text-red-400", glow: "bg-red-700/10", accent: "bg-red-700/30" },
-      { border: "border-purple-900/20", icon: "text-purple-400", highlight: "text-purple-400", glow: "bg-purple-700/10", accent: "bg-purple-700/30" },
-      { border: "border-blue-900/20", icon: "text-blue-400", highlight: "text-blue-400", glow: "bg-blue-700/10", accent: "bg-blue-700/30" }
-    ];
-    
-    return colorSchemes[index % colorSchemes.length];
-  };
   
-  const colors = getCardColors();
+  const colors = { border: "border-red-900/20", icon: "text-red-400", highlight: "text-red-400", glow: "bg-red-700/10", accent: "bg-red-700/30" };
   
   return (
     <div 
@@ -191,13 +180,6 @@ function RiskCard({ risk, index }: { risk: RiskItem; index: number }) {
       }}
       suppressHydrationWarning
     >
-      {/* Number indicator */}
-      <div 
-        className={`absolute -top-3 -left-3 w-16 h-16 ${colors.glow} rounded-full flex items-center justify-center text-xl font-bold ${colors.icon} opacity-50 group-hover:opacity-40 transition-all duration-500`}
-        suppressHydrationWarning
-      >
-        <span>{index + 1}</span>
-      </div>
       
       {/* Bottom accent line */}
       <div className={`absolute bottom-0 left-0 h-1 ${colors.accent} w-0 group-hover:w-full transition-all duration-700 ease-in-out`}></div>
@@ -207,13 +189,19 @@ function RiskCard({ risk, index }: { risk: RiskItem; index: number }) {
       
       <div className="p-8 relative z-10">
         <div className="mb-4">
-          <div className="flex items-center">
-            <div className={`w-10 h-10 rounded-full ${colors.glow} ${colors.icon} flex items-center justify-center mr-4 transform group-hover:scale-110 transition-transform duration-500`}>
-              {getRiskIcon()}
+          <div className="flex items-center flex-row gap-10">
+            <div 
+              className={`absolute left-4 w-16 h-16 ${colors.glow} rounded-full flex items-center justify-center text-xl font-bold ${colors.icon} opacity-50 group-hover:opacity-40 transition-all duration-500`}
+              suppressHydrationWarning
+            >
+              <span>{index + 1}</span>
             </div>
-            <h3 className={`text-xl font-semibold text-white transition-colors duration-300`}>
+            <h3 className={`text-xl font-semibold text-white transition-colors duration-300 ml-15`}>
               {risk.title}
             </h3>
+            <div className={`w-10 h-10 rounded-full ${colors.glow} ${colors.icon} flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500 -mr-4`}>
+              {getRiskIcon()}
+            </div>
           </div>
         </div>
         <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300 pl-14 leading-relaxed">

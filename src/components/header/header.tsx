@@ -74,7 +74,7 @@ export function Header() {
 
   return (
     <header className={`sticky top-0 z-50 w-full border-b border-zinc-800 ${isMobileMenuOpen ? 'bg-black' : 'bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60'} overflow-hidden`}>
-      <div className="container flex h-16 items-center justify-between px-4 max-w-full mx-12">
+      <div className="container flex h-16 items-center justify-between px-4 max-w-full md:mx-12">
         <div className="flex items-center" suppressHydrationWarning>
           <Link href="/" className="">
             <Image 
@@ -130,7 +130,7 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center space-x-24" suppressHydrationWarning>
+        <div className="flex items-center md:space-x-24" suppressHydrationWarning>
           <Button className="hidden sm:inline-flex bg-purple-600 hover:bg-purple-500 text-white shadow-lg shadow-purple-900/20 transition-all hover:shadow-purple-800/30">
             Request Demo
           </Button>

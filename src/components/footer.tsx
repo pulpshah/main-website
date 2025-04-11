@@ -8,12 +8,19 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between mx-12">
           {/* Logo */}
           <div className="mb-8 md:mb-0">
-            <Link href="/">
+            <Link href="/" className="flex flex-col gap-2">
               <Image 
                 src="/horizontal-logo.svg" 
                 alt="Pulp Logo" 
                 width={143} 
                 height={34} 
+                priority
+              />
+              <Image 
+                src="/footer/Experience-Information.svg" 
+                alt="Experience Information" 
+                width={250} 
+                height={50} 
                 priority
               />
             </Link>

@@ -84,7 +84,7 @@ const colorMap = {
 // Section component
 function Section({ title, description, imageSide, color, icon, index }: SectionProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
   const colorConfig = colorMap[color];
   const Icon = iconMap[icon as keyof typeof iconMap];
   

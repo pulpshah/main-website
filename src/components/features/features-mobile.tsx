@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import { FeatureData } from "@/lib/features-data"
-import { cn } from "@/lib/utils"
 
 interface FeatureMobileItemProps {
   feature: FeatureData

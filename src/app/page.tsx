@@ -5,6 +5,10 @@ import RiskSection from "@/components/landing/risk-section";
 import CoverageSection from "@/components/landing/coverage-section";
 import DisengagementSection from "@/components/landing/disengagement-section";
 import CtaSection from "@/components/landing/cta-section";
+import {PulpAnimation} from "@/components/landing/hero-animation";
+import {Loading} from "@/components/landing/hero-loading";
+import {Ending, ParticleEffect} from "@/components/landing/hero-ending";
+import {About} from "@/components/landing/about";
 
 export default function Home() {
   return (
@@ -18,7 +22,12 @@ export default function Home() {
       <div className="relative z-10 w-full overflow-hidden" suppressHydrationWarning>
         {/* Hero Section */}
         <div className="w-full max-w-full mx-auto py-8 md:py-12" suppressHydrationWarning>
-          <HeroSection />
+        <section className="relative min-h-screen w-full flex items-center justify-center">
+          <Loading />
+          <PulpAnimation />
+          <Ending />
+          <ParticleEffect />
+        </section>
         </div>
         
         {/* Section Separator - Purple */}

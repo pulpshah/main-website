@@ -5,7 +5,7 @@ import { CalendarClock } from 'lucide-react'; // or use ArrowRight if you prefer
 
 import { useEffect, useRef, useState } from 'react';
 
-export function About({ onFocus }: { onFocus?: (inView: boolean) => void }) {
+export default function AboutSection({ onFocus }: { onFocus?: (inView: boolean) => void }) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -79,7 +79,7 @@ export function About({ onFocus }: { onFocus?: (inView: boolean) => void }) {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-black text-white px-6 py-32 flex flex-col items-center justify-center z-20 relative"
+      className="w-full text-white px-6 py-32 flex flex-col items-center justify-center z-20 relative"
     >
       <div className="flex flex-col md:flex-row items-center md:items-start justify-between w-full max-w-7xl gap-10">
         {/* TEXT BLOCK */}

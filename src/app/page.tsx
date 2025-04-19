@@ -1,14 +1,15 @@
-import HeroSection from "@/components/landing/hero-section";
+// import HeroSection from "@/components/landing/hero-section";
 import FeaturesSection from "@/components/landing/features-section";
 import StatsSection from "@/components/landing/stats-section";
 import RiskSection from "@/components/landing/risk-section";
 import CoverageSection from "@/components/landing/coverage-section";
 import DisengagementSection from "@/components/landing/disengagement-section";
 import CtaSection from "@/components/landing/cta-section";
-import {PulpAnimation} from "@/components/landing/hero-animation";
-import {Loading} from "@/components/landing/hero-loading";
-import {Ending, ParticleEffect} from "@/components/landing/hero-ending";
-import {About} from "@/components/landing/about";
+
+// import HeroVideo from "@/components/landing/hero-video";
+import HeroAnimation from "@/components/landing/hero-animation";
+import {Links, ParticleEffect} from "@/components/landing/hero-extra";
+import AboutSection from "@/components/landing/about-section";
 
 export default function Home() {
   return (
@@ -23,11 +24,12 @@ export default function Home() {
         {/* Hero Section */}
         <div className="w-full max-w-full mx-auto py-8 md:py-12" suppressHydrationWarning>
         <section className="relative min-h-screen w-full flex items-center justify-center">
-          <Loading />
-          <PulpAnimation />
-          <Ending />
+          {/* <HeroVideo /> */}
+          <HeroAnimation />
           <ParticleEffect />
+          <Links />
         </section>
+        <AboutSection />
         </div>
         
         {/* Section Separator - Purple */}

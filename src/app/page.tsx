@@ -8,7 +8,7 @@ import CtaSection from "@/components/landing/cta-section";
 
 // import HeroVideo from "@/components/landing/hero-video";
 import HeroAnimation from "@/components/landing/hero-animation";
-import {Links, ParticleEffect} from "@/components/landing/hero-extra";
+// import {Links, ParticleEffect} from "@/components/landing/hero-extra";
 import AboutSection from "@/components/landing/about-section";
 
 export default function Home() {
@@ -26,8 +26,8 @@ export default function Home() {
         <section className="relative min-h-screen w-full flex items-center justify-center">
           {/* <HeroVideo /> */}
           <HeroAnimation />
-          <ParticleEffect />
-          <Links />
+          {/* <ParticleEffect /> */}
+          {/* <Links /> */}
         </section>
         <AboutSection />
         </div>

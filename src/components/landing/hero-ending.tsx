@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react';
 export function ParticleEffect() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const particles: any[] = [];
-  let mouse = { x: 0, y: 0 };
+  const mouse = { x: 0, y: 0 };
 
   useEffect(() => {
     const canvas = canvasRef.current!;

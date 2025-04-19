@@ -1,4 +1,3 @@
-import HeroSection from "@/components/landing/hero-section";
 import FeaturesSection from "@/components/landing/features-section";
 import StatsSection from "@/components/landing/stats-section";
 import RiskSection from "@/components/landing/risk-section";
@@ -7,8 +6,7 @@ import DisengagementSection from "@/components/landing/disengagement-section";
 import CtaSection from "@/components/landing/cta-section";
 import {PulpAnimation} from "@/components/landing/hero-animation";
 import {Loading} from "@/components/landing/hero-loading";
-import {Ending, ParticleEffect} from "@/components/landing/hero-ending";
-import {About} from "@/components/landing/about";
+import { ParticleEffect } from "@/components/landing/hero-ending";
 
 export default function Home() {
   return (
@@ -21,15 +19,14 @@ export default function Home() {
       
       <div className="relative z-10 w-full overflow-hidden" suppressHydrationWarning>
         {/* Hero Section */}
-        <div className="w-full max-w-full mx-auto py-8 md:py-12" suppressHydrationWarning>
+        <div className="w-full max-w-full mx-auto" suppressHydrationWarning>
         <section className="relative min-h-screen w-full flex items-center justify-center">
           <Loading />
           <PulpAnimation />
-          <Ending />
           <ParticleEffect />
         </section>
         </div>
-        
+        <div className="w-full max-w-full px-4 sm:px-6 md:px-8 lg:px-12  mx-auto" suppressHydrationWarning>
         {/* Section Separator - Purple */}
         <div className="w-full py-4 md:py-6 relative" suppressHydrationWarning>
           <div className="max-w-sm mx-auto bg-gradient-to-r from-transparent via-purple-500/40 to-transparent h-[2px] shadow-[0_0_8px_rgba(168,85,247,0.5)]" suppressHydrationWarning></div>
@@ -120,6 +117,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

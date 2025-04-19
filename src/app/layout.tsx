@@ -39,7 +39,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <Header />
-          <main className="overflow-x-hidden px-4 sm:px-6 md:px-8 lg:px-12 max-w-[1920px] mx-auto">{children}</main>
+          <main className="overflow-x-hidden max-w-[1920px]">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

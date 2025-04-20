@@ -73,23 +73,23 @@ export function Header() {
   }, [isWhatWeOfferOpen, isWhoWeServeOpen]);
 
   return (
-    <header className={`sticky top-0 z-50 w-full border-b border-zinc-800 ${isMobileMenuOpen ? 'bg-black' : 'bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60'} overflow-hidden`}>
+    <header className={`sticky top-0 z-50 w-full border-b border-zinc-800 ${isMobileMenuOpen ? 'bg-black' : 'bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/25'}`}>
       <div className="container flex h-16 items-center justify-between px-4 max-w-full md:mx-12">
         <div className="flex items-center" suppressHydrationWarning>
           <Link href="/" className="">
             <Image 
-              src="/horizontal-logo.svg" 
+              src="/logo.svg" 
               alt="Pulp Logo" 
               width={143} 
-              height={34} 
+              height={143} 
               priority
-              className="h-auto"
+              className="w-8 h-auto"
             />
           </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="mx-auto hidden md:flex items-center space-x-8">
+        <nav className="mx-auto hidden md:flex pl-16 items-center space-x-8">
           {navItems.map((item) => (
             item.hasDropdown && item.title === "What We Offer" ? (
               <OfferItemsDrawer

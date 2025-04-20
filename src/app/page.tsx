@@ -1,12 +1,15 @@
+// import HeroSection from "@/components/landing/hero-section";
 import FeaturesSection from "@/components/landing/features-section";
 import StatsSection from "@/components/landing/stats-section";
 import RiskSection from "@/components/landing/risk-section";
 import CoverageSection from "@/components/landing/coverage-section";
 import DisengagementSection from "@/components/landing/disengagement-section";
 import CtaSection from "@/components/landing/cta-section";
-import {PulpAnimation} from "@/components/landing/hero-animation";
-import {Loading} from "@/components/landing/hero-loading";
-import { ParticleEffect } from "@/components/landing/hero-ending";
+
+import HeroVideo from "@/components/landing/hero-video";
+import HeroAnimation from "@/components/landing/hero-animation";
+import {ParticleEffect} from "@/components/landing/hero-extra";
+import AboutSection from "@/components/landing/about-section";
 
 export default function Home() {
   return (
@@ -21,10 +24,14 @@ export default function Home() {
         {/* Hero Section */}
         <div className="w-full max-w-full mx-auto" suppressHydrationWarning>
         <section className="relative min-h-screen w-full flex items-center justify-center">
-          <Loading />
-          <PulpAnimation />
+          <HeroAnimation />
+          <HeroVideo />
           <ParticleEffect />
+          {/* <Links /> */}
+
         </section>
+        <div className="w-full h-px bg-neutral-800" />
+        <AboutSection />
         </div>
         <div className="w-full max-w-full px-4 sm:px-6 md:px-8 lg:px-12  mx-auto" suppressHydrationWarning>
         {/* Section Separator - Purple */}

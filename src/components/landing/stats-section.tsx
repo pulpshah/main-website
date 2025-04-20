@@ -248,8 +248,8 @@ export default function StatsSection({
 
       {/* Format 2 NORMAL COMMENT OUT  */}
 
-{/* 
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 justify-items-center text-center">
+
+{/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 justify-items-center text-center">
   {stats.map((stat, index) => (
     <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />
   ))}

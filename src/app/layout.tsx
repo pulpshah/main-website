@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark overflow-x-hidden" style={{ maxWidth: "100vw" }} suppressHydrationWarning>
+    <html lang="en" style={{ maxWidth: "100vw" }} suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground overflow-x-hidden`}
         style={{ maxWidth: "100vw" }}
@@ -41,7 +41,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <Header />
-          <main className="overflow-x-hidden px-4 sm:px-6 md:px-8 lg:px-12 max-w-[1920px] mx-auto">{children}</main>
+          <main className="overflow-x-hidden max-w-[1920px]">{children}</main>
           <Footer />
           <ChatOverlay initialMessage="Welcome to Pulp! How can I help you today?" />
           <PageDataTester />

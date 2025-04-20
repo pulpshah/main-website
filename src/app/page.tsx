@@ -1,10 +1,15 @@
-import HeroSection from "@/components/landing/hero-section";
+// import HeroSection from "@/components/landing/hero-section";
 import FeaturesSection from "@/components/landing/features-section";
 import StatsSection from "@/components/landing/stats-section";
 import RiskSection from "@/components/landing/risk-section";
 import CoverageSection from "@/components/landing/coverage-section";
 import DisengagementSection from "@/components/landing/disengagement-section";
 import CtaSection from "@/components/landing/cta-section";
+
+import HeroVideo from "@/components/landing/hero-video";
+import HeroAnimation from "@/components/landing/hero-animation";
+import {ParticleEffect} from "@/components/landing/hero-extra";
+import AboutSection from "@/components/landing/about-section";
 
 export default function Home() {
   return (
@@ -17,10 +22,18 @@ export default function Home() {
       
       <div className="relative z-10 w-full overflow-hidden" suppressHydrationWarning>
         {/* Hero Section */}
-        <div className="w-full max-w-full mx-auto py-8 md:py-12" suppressHydrationWarning>
-          <HeroSection />
+        <div className="w-full max-w-full mx-auto" suppressHydrationWarning>
+        <section className="relative min-h-screen w-full flex items-center justify-center">
+          <HeroAnimation />
+          <HeroVideo />
+          <ParticleEffect />
+          {/* <Links /> */}
+
+        </section>
+        <div className="w-full h-px bg-neutral-800" />
+        <AboutSection />
         </div>
-        
+        <div className="w-full max-w-full px-4 sm:px-6 md:px-8 lg:px-12  mx-auto" suppressHydrationWarning>
         {/* Section Separator - Purple */}
         <div className="w-full py-4 md:py-6 relative" suppressHydrationWarning>
           <div className="max-w-sm mx-auto bg-gradient-to-r from-transparent via-purple-500/40 to-transparent h-[2px] shadow-[0_0_8px_rgba(168,85,247,0.5)]" suppressHydrationWarning></div>
@@ -111,6 +124,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

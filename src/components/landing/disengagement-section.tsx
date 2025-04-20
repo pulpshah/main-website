@@ -1,31 +1,22 @@
 "use client";
 
+import Image from "next/image";
+
 interface StatBlockProps {
   value: string;
-  title: string;
   description: string;
+  footer?: string;
   className?: string;
 }
 
-function StatBlock({ value, title, description, className = "" }: StatBlockProps) {
+function StatBlock({ value, description, footer, className = "" }: StatBlockProps) {
   return (
-    <div className={`rounded-xl overflow-hidden shadow-lg bg-gradient-to-b from-gray-800/60 to-gray-900/90 border border-gray-800/50 ${className}`}>
-      <div className="p-6 sm:p-8 relative z-10">
-        <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-purple-600/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-pink-600/10 rounded-full blur-3xl"></div>
-        
-        <h3 className="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-4">
-          {value}
-        </h3>
-        
-        <h4 className="text-xl sm:text-2xl font-semibold text-purple-300 mb-2">
-          {title}
-        </h4>
-        
-        <p className="text-gray-300 text-sm sm:text-base">
-          {description}
-        </p>
-      </div>
+    <div
+      className={`rounded-xl bg-gradient-to-br from-[#2e2e33] via-[#1f1f22] to-[#19191c] border border-[#3A3A3F] p-6 text-center shadow-md ${className}`}
+    >
+      <h3 className="text-4xl font-extrabold text-white mb-2">{value}</h3>
+      <p className="text-gray-200 text-sm">{description}</p>
+      {footer && <p className="text-xs text-gray-500 mt-2">{footer}</p>}
     </div>
   );
 }
@@ -39,107 +30,103 @@ interface InfoBlockProps {
 
 function InfoBlock({ title, description, ctaText, className = "" }: InfoBlockProps) {
   return (
-    <div className={`space-y-4 ${className}`}>
-      <h3 className="text-xl sm:text-2xl font-semibold text-purple-300">{title}</h3>
-      <p className="text-gray-300 text-sm sm:text-base">{description}</p>
-      
+    <div className={`space-y-3 ${className}`}>
+      <h4 className="text-sm font-semibold text-white">{title}</h4>
+      <p className="text-sm text-gray-300">{description}</p>
       {ctaText && (
-        <div>
-          <button className="group flex items-center gap-2 px-4 py-2 bg-purple-600/90 rounded-lg text-white text-sm font-medium transition-all hover:shadow-[0_0_15px_rgba(168,85,247,0.5)] hover:scale-105">
-            {ctaText}
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="h-4 w-4 transition-transform group-hover:translate-x-1" 
-              viewBox="0 0 20 20" 
-              fill="currentColor"
-            >
-              <path 
-                fillRule="evenodd" 
-                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" 
-                clipRule="evenodd" 
-              />
-            </svg>
-          </button>
-        </div>
+        <button className="inline-flex items-center text-sm font-medium text-white bg-purple-600 hover:bg-purple-500 px-4 py-2 rounded-lg transition-all">
+          {ctaText}
+          <svg className="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fillRule="evenodd"
+              d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </button>
       )}
     </div>
   );
 }
 
 export default function DisengagementSection() {
-
   return (
-    <div className="w-full max-w-full mx-auto overflow-x-hidden px-4 sm:px-6">
-      <div className="space-y-12">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
-            Disengagement Costs More Than You Think
+    <section className="w-full px-4 py-16 sm:px-6">
+      <div className="max-w-6xl mx-auto rounded-3xl border border-gray-800 bg-gradient-to-b from-gray-800/60 to-gray-900/90 shadow-xl px-6 sm:px-10 py-16 space-y-16 overflow-hidden relative">
+        {/* Glowy background blobs */}
+        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-pink-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        {/* Header */}
+        <div className="text-center space-y-4 relative z-10 max-w-3xl mx-auto">
+          <div className="mx-auto h-16">
+            <Image
+              src="/horizontal-logo.svg"
+              alt="Pulp Logo"
+              width={200}
+              height={52}
+              className="mx-auto h-full w-auto object-contain"
+            />
+          </div>
+          <p className="text-sm text-purple-300 font-medium tracking-wide uppercase">
+            The Price of Disengagement is Too High
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-white">
+            The Need is Everywhere. <br />
+            The Time is Now.
           </h2>
-          <p className="text-xl text-gray-300">
-            Connection Drives Everything. The Time to Act is Now.
-          </p>
-          <p className="text-gray-400">
-            Engagement isn&apos;t just about attention, it&apos;s about impact. Businesses rely on engaged employees, customers, and investors. Governments depend on active citizens and leaders. <span className="text-purple-300 font-medium">At the core of it all? People.</span>
+          <p className="text-gray-300 text-sm sm:text-base">
+            Engagement refers to sharing attention with and for other people and groups. Businesses have investors, employees, clients. Governments have citizens, representatives, and appointed officials. But everyone is a person.
           </p>
         </div>
 
-        {/* First Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          <div className="flex flex-col justify-between h-full">
-            <InfoBlock 
-              title="Engagement that Sticks"
-              description="If you're not tapping into what drives people beneath the surface, you're not really in the conversation."
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
+          {/* Column 1 */}
+          <div className="flex flex-col space-y-6">
+            <InfoBlock
+              title="Engagement That Resonates"
+              description="If you’re not speaking to the subconscious of your audience, you’re not in the conversation."
               ctaText="Learn More"
-              className="mb-8"
             />
-            
-            <StatBlock 
+            <StatBlock
               value="95%"
-              title="Buyers choose subconsciously"
-              description="The subconscious drives purchasing behavior."
-              className="h-56 sm:h-64"
+              description="Buyers choose subconsciously"
+              footer="The subconscious drives purchasing behavior. Source: Harvard Business School"
             />
           </div>
-          
-          <div className="flex flex-col justify-between h-full">
-            <InfoBlock 
-              title="Employee Disengagement is Expensive"
-              description="Lost productivity and employee attrition cost business leaders and companies every year."
-              ctaText="Learn More"
-              className="mb-8"
-            />
-            
-            <StatBlock 
-              value="$228M+"
-              title="Yearly Cost of Disengaged Workers"
-              description="Median-size S&P 500 companies could pay $1B+ in 5 years"
-              className="h-56 sm:h-64"
-            />
-          </div>
-        </div>
 
-        {/* Second Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          <div className="flex flex-col justify-between h-full">
-            <InfoBlock 
-              title="Lowered Civic Engagement Hurts Us All"
-              description="Activating youth civic engagement isn't just political - it's about shaping the future."
+          {/* Column 2 */}
+          <div className="flex flex-col space-y-6">
+            <StatBlock
+              value="$228M+"
+              description="Yearly Cost of Disengaged Workers"
+              footer="Median-size S&P 500 companies could pay $1B+ in 5 years. Source: McKinsey & Company"
+            />
+            <InfoBlock
+              title="Employee Disengagement is Expensive"
+              description="Lost productivity and employee attrition cost people, managers, and businesses every year."
               ctaText="Learn More"
-              className="mb-8"
             />
           </div>
-          
-          <div className="flex flex-col justify-between h-full">
-            <StatBlock 
+
+          {/* Bottom */}
+          <div className="flex flex-col space-y-6">
+            <InfoBlock
+              title="Lowered Civic Engagement Hurts Us All"
+              description="Activating youth civic engagement is a critical priority for political strategists across the aisle."
+              ctaText="Learn More"
+            />
+          </div>
+          <div className="flex flex-col space-y-6">
+            <StatBlock
               value="1 in 3"
-              title="Adults 18-24 won't participate"
-              description="Civic engagement is suffering needlessly"
-              className="h-56 sm:h-64"
+              description="Adults 18–24 won’t participate"
+              footer="Civic engagement is suffering needlessly. Source: Institute for Citizens & Scholars"
             />
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
-} 
+}

@@ -6,7 +6,7 @@ import CoverageSection from "@/components/landing/coverage-section";
 import DisengagementSection from "@/components/landing/disengagement-section";
 import CtaSection from "@/components/landing/cta-section";
 
-// import HeroVideo from "@/components/landing/hero-video";
+import HeroVideo from "@/components/landing/hero-video";
 import HeroAnimation from "@/components/landing/hero-animation";
 import {ParticleEffect} from "@/components/landing/hero-extra";
 import AboutSection from "@/components/landing/about-section";
@@ -24,11 +24,13 @@ export default function Home() {
         {/* Hero Section */}
         <div className="w-full max-w-full mx-auto py-8 md:py-12" suppressHydrationWarning>
         <section className="relative min-h-screen w-full flex items-center justify-center">
-          {/* <HeroVideo /> */}
           <HeroAnimation />
+          <HeroVideo />
           <ParticleEffect />
           {/* <Links /> */}
+
         </section>
+        <div className="w-full h-1 bg-neutral-800" />
         <AboutSection />
         </div>
         

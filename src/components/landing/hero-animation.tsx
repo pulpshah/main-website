@@ -55,7 +55,7 @@ export default function HeroAnimation() {
   }, []);
 
   return (
-    <div className="flex items-center gap-[.95] p-9">
+    <div className="flex items-center gap-[1px]">
       <svg
         ref={pRef}
         width="23"
@@ -123,7 +123,7 @@ export default function HeroAnimation() {
         viewBox="0 0 40 40"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="opacity-0 ml-[5] mt-[5]"
+        className="opacity-0 mr-[5px] ml-[8px] mt-[6px]"
         style={{ overflow: "visible" }}
       >
         <path

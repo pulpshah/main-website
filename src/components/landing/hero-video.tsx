@@ -24,14 +24,14 @@ export default function HeroVideo() {
         if (!video.duration || fadeOut) return;
 
         if (video.currentTime >= trimmedEnd) {
-          setFadeOut(true); // start fade while playing
+          setFadeOut(true);
 
           // Pause and reset AFTER fade
           setTimeout(() => {
             if (!video) return;
             video.pause();
             video.currentTime = 0;
-          }, 2000); // matches fade-out duration
+          }, 2000);
         }
       };
 
@@ -54,28 +54,38 @@ export default function HeroVideo() {
       } else {
         video.addEventListener("loadedmetadata", startPlayback, { once: true });
       }
-    }, 3000); // delay before showing the video
+    }, 3000); // Delay before showing the video
 
     return () => clearTimeout(timeout);
   }, [fadeOut]);
 
   return (
-    <div className="absolute inset-0 -z-10">
-      <video
-        ref={videoRef}
-        src="/video/hyperspace-c.mp4"
-        muted
-        playsInline
-        className={`w-full h-full object-cover transition-opacity duration-1000 ${
-          showVideo && !fadeOut ? "opacity-100" : "opacity-0"
-        }`}
-      />
-      <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
-      <div
-        className={`absolute inset-0 bg-black z-20 transition-opacity duration-2000 ${
-          fadeOut ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-      />
-    </div>
+    <>
+      {/* Black background behind everything */}
+      <div className="absolute inset-0 z-[-10] bg-black" />
+
+      {/* Video and overlays */}
+      <div className="absolute inset-0 z-[-9]">
+        <video
+          ref={videoRef}
+          src="/video/hyperspace-c.mp4"
+          muted
+          playsInline
+          className={`w-full h-full object-cover transition-opacity duration-1000 ${
+            showVideo && !fadeOut ? "opacity-100" : "opacity-0"
+          }`}
+        />
+
+        {/* Optional: subtle black overlay */}
+        <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
+
+        {/* Fade-out blackout layer */}
+        <div
+          className={`absolute inset-0 bg-black z-20 transition-opacity duration-2000 ${
+            fadeOut ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+        />
+      </div>
+    </>
   );
 }

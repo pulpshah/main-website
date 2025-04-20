@@ -100,6 +100,10 @@ interface OfferItemsDrawerProps {
 }
 
 export function OfferItemsDrawer({ isOpen, onOpenChange, triggerContent }: OfferItemsDrawerProps) {
+  const handleLinkClick = () => {
+    onOpenChange(false);
+  };
+
   return (
     <Drawer 
       open={isOpen} 
@@ -138,6 +142,7 @@ export function OfferItemsDrawer({ isOpen, onOpenChange, triggerContent }: Offer
                   opacity: 0,
                   animation: `fadeInUp 0.5s ease forwards ${0.1 + index * 0.05}s`
                 }}
+                onClick={handleLinkClick}
               >
                 {/* Card glow effect */}
                 <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${offer.color} opacity-70 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`}></div>

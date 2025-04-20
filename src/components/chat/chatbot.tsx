@@ -5,7 +5,6 @@ import { Send, X, MessageSquare, Bot, User, AlertCircle } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { useChat } from '@ai-sdk/react'
-import { useContextCollector, ContextPayload } from "@/lib/context-collector";
 
 interface ChatbotProps {
   initialMessage?: string;
@@ -14,7 +13,6 @@ interface ChatbotProps {
 export function Chatbot({ initialMessage = "Hi there! How can I help you today?" }: ChatbotProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [currentContext, setCurrentContext] = useState<ContextPayload | null>(null);
   
   const {
     messages,
@@ -33,23 +31,10 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
         role: "assistant",
       }
     ],
-    body: {
-      context: currentContext
-    },
     onError: () => {
       setHasError(true);
     }
   });
-  
-  // Collect context when chat is open
-  useContextCollector({
-    enabled: isOpen,
-    onContextUpdate: (context) => {
-      setCurrentContext(context);
-    }
-  });
-
-  console.log(currentContext);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   

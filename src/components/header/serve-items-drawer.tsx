@@ -154,6 +154,10 @@ interface ServeItemsDrawerProps {
 export function ServeItemsDrawer({ isOpen, onOpenChange, triggerContent }: ServeItemsDrawerProps) {
   const [activeTab, setActiveTab] = useState<TabType>('industries');
 
+  const handleLinkClick = () => {
+    onOpenChange(false);
+  };
+
   const getActiveItems = () => {
     switch (activeTab) {
       case 'industries':
@@ -276,6 +280,7 @@ export function ServeItemsDrawer({ isOpen, onOpenChange, triggerContent }: Serve
                             opacity: 0,
                             animation: `fadeInUp 0.5s ease forwards ${0.1 + index * 0.05}s`
                           }}
+                          onClick={handleLinkClick}
                         >
                           {/* Card glow effect */}
                           <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${item.color} opacity-70 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`}></div>
@@ -310,6 +315,7 @@ export function ServeItemsDrawer({ isOpen, onOpenChange, triggerContent }: Serve
                               opacity: 0,
                               animation: `fadeInUp 0.5s ease forwards ${0.3 + index * 0.05}s`
                             }}
+                            onClick={handleLinkClick}
                           >
                             {/* Card glow effect */}
                             <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${item.color} opacity-70 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`}></div>
@@ -350,6 +356,7 @@ export function ServeItemsDrawer({ isOpen, onOpenChange, triggerContent }: Serve
                             opacity: 0,
                             animation: `fadeInUp 0.5s ease forwards ${0.1 + index * 0.05}s`
                           }}
+                          onClick={handleLinkClick}
                         >
                           {/* Card glow effect */}
                           <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${item.color} opacity-70 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`}></div>

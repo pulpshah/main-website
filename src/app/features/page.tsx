@@ -6,7 +6,7 @@ export default function FeaturesPage() {
       <div className="container mx-auto">
         
         <div className="flex flex-col items-center mb-16 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-green-400">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-pink-500">
             Features & Plans
           </h1>
           <p className="text-lg text-gray-300 max-w-3xl">

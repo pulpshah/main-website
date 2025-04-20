@@ -30,7 +30,7 @@ export default function Home() {
           {/* <Links /> */}
 
         </section>
-        <div className="w-full h-1 bg-neutral-800" />
+        <div className="w-full h-px bg-neutral-800" />
         <AboutSection />
         </div>
         

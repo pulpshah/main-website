@@ -64,24 +64,24 @@ export default function HeroVideo() {
       {/* Black background behind everything */}
       <div className="absolute inset-0 z-[-10] bg-black" />
 
-      {/* Video and overlays */}
-      <div className="absolute inset-0 z-[-9]">
+      {/* Rounded video container */}
+      <div className="absolute inset-0 z-[-9] overflow-hidden rounded-2xl">
         <video
           ref={videoRef}
           src="/video/hyperspace-c.mp4"
           muted
           playsInline
-          className={`w-full h-full object-cover transition-opacity duration-1000 ${
+          className={`w-full h-full object-cover transition-opacity duration-1000 rounded-2xl ${
             showVideo && !fadeOut ? "opacity-100" : "opacity-0"
           }`}
         />
 
         {/* Optional: subtle black overlay */}
-        <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none rounded-6xl" />
 
         {/* Fade-out blackout layer */}
         <div
-          className={`absolute inset-0 bg-black z-20 transition-opacity duration-2000 ${
+          className={`absolute inset-0 bg-black z-20 transition-opacity duration-2000 rounded-6xl ${
             fadeOut ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
         />

@@ -78,7 +78,7 @@ export function Header() {
         <div className="flex items-center" suppressHydrationWarning>
           <Link href="/" className="">
             <Image 
-              src="/Logo.svg" 
+              src="/logo.svg" 
               alt="Pulp Logo" 
               width={143} 
               height={143} 

@@ -53,7 +53,7 @@ export default function DisengagementSection() {
   return (
     <section className="w-full px-4 py-16 sm:px-6">
       <div className="max-w-6xl mx-auto rounded-3xl border border-gray-800 bg-gradient-to-b from-gray-800/60 to-gray-900/90 shadow-xl px-6 sm:px-10 py-16 space-y-16 overflow-hidden relative">
-        {/* Glowy background blobs */}
+        {/* Background Glows */}
         <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-pink-500/10 rounded-full blur-[100px] pointer-events-none"></div>
 
@@ -80,9 +80,44 @@ export default function DisengagementSection() {
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
-          {/* Column 1 */}
+       {/* Mobile Version (fixed alternation) */}
+<div className="flex flex-col gap-8 md:hidden relative z-10">
+  <StatBlock
+    value="95%"
+    description="Buyers choose subconsciously"
+    footer="The subconscious drives purchasing behavior. Source: Harvard Business School"
+  />
+  <InfoBlock
+    title="Engagement That Resonates"
+    description="If you’re not speaking to the subconscious of your audience, you’re not in the conversation."
+    ctaText="Learn More"
+  />
+
+  <StatBlock
+    value="$228M+"
+    description="Yearly Cost of Disengaged Workers"
+    footer="Median-size S&P 500 companies could pay $1B+ in 5 years. Source: McKinsey & Company"
+  />
+  <InfoBlock
+    title="Employee Disengagement is Expensive"
+    description="Lost productivity and employee attrition cost people, managers, and businesses every year."
+    ctaText="Learn More"
+  />
+
+  <StatBlock
+    value="1 in 3"
+    description="Adults 18–24 won’t participate"
+    footer="Civic engagement is suffering needlessly. Source: Institute for Citizens & Scholars"
+  />
+  <InfoBlock
+    title="Lowered Civic Engagement Hurts Us All"
+    description="Activating youth civic engagement is a critical priority for political strategists across the aisle."
+    ctaText="Learn More"
+  />
+</div>
+
+        {/* Desktop Version */}
+        <div className="hidden md:grid md:grid-cols-2 gap-10 relative z-10">
           <div className="flex flex-col space-y-6">
             <InfoBlock
               title="Engagement That Resonates"
@@ -95,8 +130,6 @@ export default function DisengagementSection() {
               footer="The subconscious drives purchasing behavior. Source: Harvard Business School"
             />
           </div>
-
-          {/* Column 2 */}
           <div className="flex flex-col space-y-6">
             <StatBlock
               value="$228M+"
@@ -109,8 +142,6 @@ export default function DisengagementSection() {
               ctaText="Learn More"
             />
           </div>
-
-          {/* Bottom */}
           <div className="flex flex-col space-y-6">
             <InfoBlock
               title="Lowered Civic Engagement Hurts Us All"

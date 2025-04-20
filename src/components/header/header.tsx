@@ -30,11 +30,7 @@ const navItems: NavigationItem[] = [
     title: "Who We Serve",
     href: "#",
     hasDropdown: true,
-  },
-  {
-    title: "Pricing",
-    href: "/pricing",
-  },
+  }
 ];
 
 export function Header() {

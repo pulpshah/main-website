@@ -6,9 +6,10 @@ import CoverageSection from "@/components/landing/coverage-section";
 import DisengagementSection from "@/components/landing/disengagement-section";
 import CtaSection from "@/components/landing/cta-section";
 
-import HeroVideo from "@/components/landing/hero-video";
-import HeroAnimation from "@/components/landing/hero-animation";
-import {ParticleEffect} from "@/components/landing/hero-extra";
+// TODO: Add Hero Section
+// import HeroVideo from "@/components/landing/hero-video";
+// import HeroAnimation from "@/components/landing/hero-animation";
+// import {ParticleEffect} from "@/components/landing/hero-extra";
 import AboutSection from "@/components/landing/about-section";
 
 export default function Home() {
@@ -23,13 +24,12 @@ export default function Home() {
       <div className="relative z-10 w-full overflow-hidden" suppressHydrationWarning>
         {/* Hero Section */}
         <div className="w-full max-w-full mx-auto" suppressHydrationWarning>
-        <section className="relative min-h-screen w-full flex items-center justify-center">
+        {/* TODO: Add Hero Section */}
+        {/* <section className="relative min-h-screen w-full flex items-center justify-center">
           <HeroAnimation />
           <HeroVideo />
           <ParticleEffect />
-          {/* <Links /> */}
-
-        </section>
+        </section> */}
         <div className="w-full h-px bg-neutral-800" />
         <AboutSection />
         </div>

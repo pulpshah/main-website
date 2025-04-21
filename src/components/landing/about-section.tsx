@@ -3,24 +3,6 @@
 import { CalendarClock } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-// Detect mobile safely
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const check = () =>
-      setIsMobile(
-        typeof window !== "undefined" &&
-          (window.innerWidth <= 768 || /Mobi|Android/i.test(navigator.userAgent))
-      );
-
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  return isMobile;
-}
 
 const phrases = [
   "Meet Pulp AI.",
@@ -34,31 +16,10 @@ export default function AboutSection({
 }: {
   onFocus?: (inView: boolean) => void;
 }) {
-  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-
-  // Handle scroll position and compute scroll progress
-  useEffect(() => {
-    if (isMobile) return;
-
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const scrollY = Math.min(
-        Math.max((windowHeight - rect.top) / (windowHeight + rect.height), 0),
-        1
-      );
-      setScrollProgress(scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isMobile]);
 
   // Trigger onFocus callback when component is in view
   useEffect(() => {
@@ -96,19 +57,16 @@ export default function AboutSection({
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, currentPhraseIndex]);
 
-  // Disable scroll animations on mobile
-  const translateX = isMobile ? 0 : -scrollProgress * 80;
-  const demoTranslateX = isMobile ? 0 : scrollProgress * 80;
 
   return (
     <section
       ref={sectionRef}
-      className="w-full text-white px-6 py-32 flex flex-col items-center justify-center z-20 relative"
+      className="w-full text-white px-6 py-12 flex flex-col items-center justify-center z-20 relative"
     >
       <div className="flex flex-col md:flex-row items-center md:items-start justify-between w-full max-w-7xl gap-10">
         <div
           style={{
-            transform: `translateX(${translateX}px)`,
+            transform: `translateX(0px)`,
             transition: "transform 0.2s ease-out",
           }}
           className="max-w-2xl text-gray-300 text-center md:text-left leading-normal space-y-6"
@@ -164,7 +122,7 @@ export default function AboutSection({
 
         <div
           style={{
-            transform: `translateX(${demoTranslateX}px)`,
+            transform: `translateX(0px)`,
             transition: "transform 0.2s ease-out",
           }}
           className="w-full md:w-[40%] flex flex-col items-center mt-10"

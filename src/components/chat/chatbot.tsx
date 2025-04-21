@@ -5,6 +5,20 @@ import { Send, X, MessageSquare, Bot, User, AlertCircle } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { useChat } from '@ai-sdk/react'
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+
+// Define interfaces for component props
+interface CodeProps {
+  inline?: boolean;
+  className?: string;
+  children?: React.ReactNode;
+}
+
+interface TableProps {
+  children?: React.ReactNode;
+}
 
 interface ChatbotProps {
   initialMessage?: string;
@@ -76,7 +90,9 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
       {/* Chat overlay */}
       <div 
         className={cn(
-          "fixed bottom-24 right-6 flex h-[500px] w-[350px] flex-col rounded-lg bg-zinc-900/95 backdrop-blur-sm shadow-xl transition-all duration-300 ease-in-out z-50 border border-zinc-800",
+          "fixed bottom-24 right-6 flex flex-col rounded-lg bg-zinc-900/95 backdrop-blur-sm shadow-xl transition-all duration-300 ease-in-out z-50 border border-zinc-800",
+          "md:h-[500px] md:w-[350px]", // Desktop size
+          "h-[70vh] w-[calc(100%-3rem)]", // Mobile size
           isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
         )}
       >
@@ -129,7 +145,43 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
                     : "bg-zinc-800 text-zinc-100 rounded-tl-none"
                 )}
               >
-                <p className="text-sm">{message.content}</p>
+                <div className={cn("text-sm markdown-content", message.role === "user" ? "user-markdown" : "assistant-markdown")}>
+                  <ReactMarkdown 
+                    remarkPlugins={[remarkGfm]} 
+                    rehypePlugins={[rehypeRaw]}
+                    components={{
+                      p: ({...props}) => <p className="mb-2 last:mb-0" {...props} />,
+                      a: ({...props}) => <a className="underline" {...props} />,
+                      ul: ({...props}) => <ul className="list-disc pl-4 mb-2" {...props} />,
+                      ol: ({...props}) => <ol className="list-decimal pl-4 mb-2" {...props} />,
+                      li: ({...props}) => <li className="mb-1" {...props} />,
+                      code: ({inline, className, ...props}: CodeProps) => {
+                        const match = /language-(\w+)/.exec(className || '');
+                        return inline ? (
+                          <code className="px-1 py-0.5 rounded text-xs" {...props} />
+                        ) : (
+                          <code className={cn(
+                            "block p-2 rounded text-xs my-2 overflow-x-auto",
+                            match && `language-${match[1]}`
+                          )} {...props} />
+                        );
+                      },
+                      pre: ({...props}) => <pre className="p-2 rounded my-2 overflow-x-auto" {...props} />,
+                      h1: ({...props}) => <h1 className="text-base font-semibold mt-3 mb-2" {...props} />,
+                      h2: ({...props}) => <h2 className="text-base font-semibold mt-3 mb-2" {...props} />,
+                      h3: ({...props}) => <h3 className="text-sm font-semibold mt-2 mb-1" {...props} />,
+                      blockquote: ({...props}) => <blockquote className="border-l-2 pl-2 italic my-2" {...props} />,
+                      table: ({...props}: TableProps) => <table className="w-full text-left border-collapse" {...props} />,
+                      thead: ({...props}) => <thead {...props} />,
+                      tbody: ({...props}) => <tbody {...props} />,
+                      tr: ({...props}) => <tr {...props} />,
+                      th: ({...props}) => <th className="p-2" {...props} />,
+                      td: ({...props}) => <td className="p-2" {...props} />
+                    }}
+                  >
+                    {message.content}
+                  </ReactMarkdown>
+                </div>
               </div>
             </div>
           ))}
@@ -171,36 +223,47 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
         
         {/* Chat input */}
         <form onSubmit={onSubmit} className="border-t border-zinc-800 p-4">
-          <div className="flex items-center gap-2">
-            <input
-              type="text"
-              value={input}
-              onChange={handleInputChange}
-              placeholder="Type your message..."
-              className="flex-1 rounded-full bg-zinc-800 px-4 py-2 text-sm text-zinc-100 focus:outline-none focus:ring-2 focus:ring-purple-500 border border-zinc-700"
-              disabled={status === "streaming"}
-            />
-            {status === "submitted" ? (
-              <Button
-                type="button"
-                size="icon"
-                onClick={() => stop()}
-                className="h-10 w-10 rounded-full bg-red-600 p-0 hover:bg-red-700 transition-all duration-300"
-                aria-label="Stop generating"
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            ) : (
-              <Button
-                type="submit"
-                size="icon"
-                disabled={status === "streaming" || !input.trim()}
-                className="h-10 w-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 p-0 hover:from-purple-700 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
-                aria-label="Send message"
-              >
-                <Send className="h-4 w-4" />
-              </Button>
-            )}
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <textarea
+                value={input}
+                onChange={handleInputChange}
+                placeholder="Type your message..."
+                className="flex-1 rounded-lg bg-zinc-800 px-4 py-2 text-sm text-zinc-100 focus:outline-none focus:ring-2 focus:ring-purple-500 border border-zinc-700 resize-none min-h-[40px] max-h-[120px]"
+                disabled={status === "streaming"}
+                rows={1}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (input.trim()) {
+                      onSubmit(e);
+                    }
+                  }
+                }}
+                style={{ overflow: 'auto' }}
+              />
+              {status === "submitted" ? (
+                <Button
+                  type="button"
+                  size="icon"
+                  onClick={() => stop()}
+                  className="h-10 w-10 rounded-full bg-red-600 p-0 hover:bg-red-700 transition-all duration-300"
+                  aria-label="Stop generating"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  size="icon"
+                  disabled={status === "streaming" || !input.trim()}
+                  className="h-10 w-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 p-0 hover:from-purple-700 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                  aria-label="Send message"
+                >
+                  <Send className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
           </div>
         </form>
       </div>

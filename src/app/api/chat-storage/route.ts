@@ -9,6 +9,16 @@ interface ChatMessageData {
   previousMessageId?: string;
 }
 
+// Interface for Neo4j query parameters
+interface Neo4jQueryParams {
+  messageId: string;
+  sessionId: string;
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: string;
+  previousMessageId?: string;
+}
+
 // Storage function to connect to Neo4j and store chat messages
 async function storeChatMessageInNeo4j(data: ChatMessageData) {
   // Get Neo4j connection details from environment variables
@@ -43,7 +53,7 @@ async function storeChatMessageInNeo4j(data: ChatMessageData) {
     
     // Create a query to store the message and link to previous message if exists
     let query;
-    let params: any = {
+    const params: Neo4jQueryParams = {
       messageId,
       sessionId: data.sessionId,
       role: data.role,
@@ -83,10 +93,13 @@ async function storeChatMessageInNeo4j(data: ChatMessageData) {
     
     const result = await session.run(query, params);
     
-    console.log('Chat message stored in Neo4j:', messageId);
+    // Extract the messageId from the result if needed
+    const messageIdFromResult = result.records[0]?.get('messageId') || messageId;
+    
+    console.log('Chat message stored in Neo4j:', messageIdFromResult);
     return { 
       success: true, 
-      messageId: messageId
+      messageId: messageIdFromResult
     };
     
   } catch (error) {

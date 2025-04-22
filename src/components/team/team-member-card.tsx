@@ -19,6 +19,7 @@ export function TeamMemberCard({ name, position, photoUrl, onReadMore }: TeamMem
       className="relative w-full aspect-square rounded-lg overflow-hidden group cursor-pointer transition-all"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={onReadMore}
     >
       {/* Background image */}
       <div className="w-full h-full bg-zinc-900 rounded-lg overflow-hidden">

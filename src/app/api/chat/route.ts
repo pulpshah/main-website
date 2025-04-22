@@ -23,7 +23,7 @@ const sitemap = {
   '/about': 'About Pulp - Company mission, vision, and team',
   '/contact': 'Contact Us - Get in touch with the Pulp team',
   '/features': 'Features - Core capabilities of the Pulp platform',
-  
+  '/team': 'Team - Meet the Pulp team',
   // Solutions pages
   '/solutions/knowledge-synthesis': 'Knowledge Synthesis - How Pulp extracts and organizes insights',
   '/solutions/adaptive-chatbots': 'Adaptive Chatbots - Personalized AI communication agents',

@@ -38,6 +38,11 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/team" className="text-zinc-400 hover:text-white text-sm">
+                    Team
+                  </Link>
+                </li>
+                <li>
                   <Link href="/programs" className="text-zinc-400 hover:text-white text-sm">
                     Programs
                   </Link>

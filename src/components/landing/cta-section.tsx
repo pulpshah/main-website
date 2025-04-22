@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 interface CtaSectionProps {
@@ -59,7 +60,9 @@ export default function CtaSection({
                 onMouseLeave={() => setIsHovered(false)}
               >
                 <div className="flex items-center justify-center gap-2">
-                  {primaryButtonText}
+                  <Link href="/contact">
+                    {primaryButtonText}
+                  </Link>
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     className={`h-5 w-5 transition-transform duration-300 ${isHovered ? 'translate-x-1' : ''}`}

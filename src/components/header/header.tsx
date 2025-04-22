@@ -128,7 +128,9 @@ export function Header() {
 
         <div className="flex items-center md:space-x-24" suppressHydrationWarning>
           <Button className="hidden sm:inline-flex bg-purple-600 hover:bg-purple-500 text-white shadow-lg shadow-purple-900/20 transition-all hover:shadow-purple-800/30">
-            Request Demo
+            <Link href="/contact">
+              Request Demo
+            </Link>
           </Button>
           
           {/* Mobile menu button */}
@@ -315,7 +317,9 @@ export function Header() {
                 className="w-full bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white py-6 text-base font-medium shadow-lg shadow-purple-900/20 transition-all hover:shadow-purple-800/30"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Request Demo
+                <Link href="/contact">
+                  Request Demo
+                </Link>
               </Button>
             </div>
           </div>

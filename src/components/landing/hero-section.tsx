@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface HeroSectionProps {
@@ -54,7 +55,9 @@ export default function HeroSection({
           
           <div className={`${isMobile ? 'flex justify-center' : ''}`}>
             <button className="group flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-purple-600 rounded-lg text-white font-medium transition-all hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] hover:scale-105">
-              {ctaText}
+              <Link href="/contact">
+                {ctaText}
+              </Link>
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 className="h-5 w-5 transition-transform group-hover:translate-x-1" 

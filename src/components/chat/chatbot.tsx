@@ -8,6 +8,7 @@ import { useChat } from '@ai-sdk/react'
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
+import { v4 as uuidv4 } from 'uuid'; // Import uuid to generate session IDs
 
 // Define interfaces for component props
 interface CodeProps {
@@ -24,9 +25,32 @@ interface ChatbotProps {
   initialMessage?: string;
 }
 
+// Interface for storing messages in Neo4j
+interface ChatMessageStorage {
+  sessionId: string;
+  role: 'user' | 'assistant';
+  content: string;
+  previousMessageId?: string;
+}
+
+// Interface for chat message
+interface ChatMessage {
+  id: string;
+  role: 'user' | 'assistant' | 'system' | 'data';
+  content: string;
+}
+
 export function Chatbot({ initialMessage = "Hi there! How can I help you today?" }: ChatbotProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [sessionId, setSessionId] = useState<string>("");
+  const [lastMessageId, setLastMessageId] = useState<string | null>(null);
+  const [storedMessageIds, setStoredMessageIds] = useState<Set<string>>(new Set());
+  
+  // Generate a session ID when the component mounts
+  useEffect(() => {
+    setSessionId(uuidv4());
+  }, []);
   
   const {
     messages,
@@ -62,6 +86,58 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
     }
   }, [messages, isOpen]);
 
+  // Store chat messages in Neo4j when new messages are added
+  useEffect(() => {
+    const storeMessage = async (message: ChatMessage) => {
+      try {
+        // Skip storing the initial assistant message, system/data messages, or already stored messages
+        if (
+          message.id === "initial" || 
+          (message.role !== 'user' && message.role !== 'assistant') || 
+          storedMessageIds.has(message.id)
+        ) return;
+        
+        // Prepare message data for storage
+        const messageData: ChatMessageStorage = {
+          sessionId,
+          role: message.role, // Now we know this is either 'user' or 'assistant'
+          content: message.content,
+          previousMessageId: lastMessageId || undefined
+        };
+        
+        // Send message to storage API
+        const response = await fetch('/api/chat-storage', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(messageData),
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          // Update the last message ID for linking in the chain
+          setLastMessageId(result.messageId);
+          // Mark this message as stored
+          setStoredMessageIds(prev => new Set([...prev, message.id]));
+        } else {
+          console.error('Failed to store chat message:', result.error);
+        }
+      } catch (error) {
+        console.error('Error storing chat message:', error);
+      }
+    };
+    
+    // Get the latest message
+    const latestMessage = messages[messages.length - 1];
+    
+    // Store messages in both "ready" state (after AI response) and when user messages are "submitted"
+    if ((status === "ready" || status === "submitted") && latestMessage && sessionId && !storedMessageIds.has(latestMessage.id)) {
+      storeMessage(latestMessage);
+    }
+  }, [status, messages, sessionId, lastMessageId, storedMessageIds]);
+
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setHasError(false);
@@ -72,6 +148,40 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
     setHasError(false);
     reload();
   };
+  
+  // Store initial assistant message when chat is first opened
+  useEffect(() => {
+    if (isOpen && sessionId && messages.length === 1 && messages[0].id === "initial" && !lastMessageId && !storedMessageIds.has("initial")) {
+      const storeInitialMessage = async () => {
+        try {
+          const messageData: ChatMessageStorage = {
+            sessionId,
+            role: 'assistant',
+            content: initialMessage
+          };
+          
+          const response = await fetch('/api/chat-storage', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(messageData),
+          });
+          
+          const result = await response.json();
+          
+          if (result.success) {
+            setLastMessageId(result.messageId);
+            setStoredMessageIds(prev => new Set([...prev, "initial"]));
+          }
+        } catch (error) {
+          console.error('Error storing initial message:', error);
+        }
+      };
+      
+      storeInitialMessage();
+    }
+  }, [isOpen, sessionId, initialMessage, messages, lastMessageId, storedMessageIds]);
   
   return (
     <>

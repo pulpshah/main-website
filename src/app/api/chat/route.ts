@@ -17,8 +17,41 @@ interface PineconeHitFields {
   [key: string]: string | number | boolean | null | undefined;
 }
 
+// Website sitemap with page paths and descriptions
+const sitemap = {
+  '/': 'Home page - Overview of Pulp and its communication intelligence suite',
+  '/about': 'About Pulp - Company mission, vision, and team',
+  '/contact': 'Contact Us - Get in touch with the Pulp team',
+  '/features': 'Features - Core capabilities of the Pulp platform',
+  
+  // Solutions pages
+  '/solutions/knowledge-synthesis': 'Knowledge Synthesis - How Pulp extracts and organizes insights',
+  '/solutions/adaptive-chatbots': 'Adaptive Chatbots - Personalized AI communication agents',
+  '/solutions/automated-analysis': 'Automated Analysis - AI-powered conversation analytics',
+  '/solutions/content-moderation': 'Content Moderation - Intelligent content filtering and governance',
+  '/solutions/audience-simulations': 'Audience Simulations - Model and predict audience responses',
+  '/solutions/intelligent-communication': 'Intelligent Communication - Smart messaging optimization',
+  
+  // Industries pages
+  '/industries': 'Industries - How different sectors benefit from Pulp',
+  '/industries/professional-services': 'Professional Services - Pulp solutions for consultancies and firms',
+  '/industries/technology': 'Technology - Pulp solutions for technology companies',
+  '/industries/marketing': 'Marketing - Pulp solutions for marketing teams',
+  '/industries/education': 'Education - Pulp solutions for educational institutions',
+  '/industries/government': 'Government - Pulp solutions for public sector organizations',
+  
+  // Teams pages
+  '/teams/data-analysis': 'Data Analysis Teams - Solutions for analytics professionals',
+  '/teams/distribution-strategy': 'Distribution Strategy Teams - Solutions for content distribution',
+  '/teams/messaging-strategy': 'Messaging Strategy Teams - Solutions for message development',
+  
+  // Business size pages
+  '/business-size/enterprise': 'Enterprise - Solutions for large organizations',
+  '/business-size/mid-market': 'Mid-Market - Solutions for medium-sized businesses',
+};
+
 export async function POST(req: Request) {
-  const { messages } = await req.json() as { messages: ChatMessage[] };
+  const { messages, origin } = await req.json() as { messages: ChatMessage[], origin: string };
   const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY || '' });
 
   const indexName = 'main-website';
@@ -51,11 +84,17 @@ export async function POST(req: Request) {
         })
         .filter(Boolean);
     }
-    
-    console.log('Pinecone context:', contextFromPinecone);
   } catch (error) {
     console.error('Error querying Pinecone:', error);
   }
+  
+  // Convert sitemap to a formatted string for the system prompt
+  const sitemapFormatted = Object.entries(sitemap)
+    .map(([path, description]) => `- ${path}: ${description}`)
+    .join('\n');
+
+  console.log('Origin:', origin);
+  const baseUrl = origin;
   
   const mainSystemMessage = `
   You are the conversational concierge and strategic guide for Pulp — a premium communication intelligence suite that helps businesses turn language into leverage. Your job is to listen carefully, respond accurately, and help users understand what Pulp does, how it works, and why it matters. Prioritize user intent and understanding, not just literal interpretation. Your replies should be grounded, confident, and clear — like someone who understands both product and people.
@@ -87,6 +126,15 @@ Main features:
 Industries served: civic engagement, education, marketing, technology, professional services
 Business types: enterprise, mid-market
 Use-case teams: messaging, distribution, and data analysis
+
+Website Sitemap:
+${sitemapFormatted}
+
+When discussing topics related to specific pages in our sitemap, add a helpful reference at the end of your response. Use Markdown to create links. For example, if discussing message scoring, add something like:
+
+> **Learn more**: For detailed information about our message scoring capabilities, visit our [Message Scoring page](${baseUrl}/solutions/message-scoring).
+
+Make sure the suggested page is highly relevant to the user's question. Don't suggest a page for every response - only when it would genuinely help the user find more detailed information. The link should appear at the end of your response, after you've fully answered the question.
 
 Viewport awareness:
 

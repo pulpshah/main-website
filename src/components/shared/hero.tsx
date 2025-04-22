@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface HeroProps {
   badge: string;
@@ -170,7 +171,9 @@ export default function Hero({
               transition={{ duration: 0.5, delay: 0.5 }}
             >
               <button className={`group flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r ${primary.gradient} rounded-lg text-white font-medium transition-all hover:shadow-[0_0_20px_${primary.glow}] hover:scale-105`}>
-                Request Demo
+                <Link href="/contact"> 
+                  Request Demo
+                </Link>
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   className="h-5 w-5 transition-transform group-hover:translate-x-1" 

@@ -47,12 +47,17 @@ const isPartOfChatbot = (element: HTMLElement): boolean => {
   while (currentElement && currentElement !== document.body) {
     const classNames = Array.from(currentElement.classList);
     if (
-      classNames.some(cls => cls.includes("chat") || cls.includes("message") || cls.includes("bot")) ||
+      classNames.some(
+        (cls) =>
+          cls.includes("chat") || cls.includes("message") || cls.includes("bot")
+      ) ||
       currentElement.getAttribute("aria-label")?.includes("chat") ||
       currentElement.getAttribute("aria-label")?.includes("message") ||
       (window.getComputedStyle(currentElement).position === "fixed" &&
-        (["24px", "6px"].includes(window.getComputedStyle(currentElement).bottom) ||
-         window.getComputedStyle(currentElement).right === "6px"))
+        (["24px", "6px"].includes(
+          window.getComputedStyle(currentElement).bottom
+        ) ||
+          window.getComputedStyle(currentElement).right === "6px"))
     ) {
       return true;
     }
@@ -61,12 +66,17 @@ const isPartOfChatbot = (element: HTMLElement): boolean => {
   return false;
 };
 
-const dedupeBlocks = (blocks: PageData["structuredText"]): PageData["structuredText"] => {
+const dedupeBlocks = (
+  blocks: PageData["structuredText"]
+): PageData["structuredText"] => {
   const deduped: PageData["structuredText"] = [];
 
   blocks.forEach((block, i) => {
-    const isChildOfExisting = blocks.some((other, j) =>
-      i !== j && block.path.startsWith(other.path) && block.text === other.text
+    const isChildOfExisting = blocks.some(
+      (other, j) =>
+        i !== j &&
+        block.path.startsWith(other.path) &&
+        block.text === other.text
     );
     if (!isChildOfExisting) deduped.push(block);
   });
@@ -86,17 +96,18 @@ export const usePageData = (options?: { debug?: boolean }) => {
 
   const updatingRef = useRef(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const lastUrlRef = useRef<string>('');
-  const lastContentSignatureRef = useRef<string>('');
+  const lastUrlRef = useRef<string>("");
+  const lastContentSignatureRef = useRef<string>("");
 
   useEffect(() => {
     const getContentSignature = (): string => {
-      const headings = Array.from(document.querySelectorAll('h1, h2, h3'))
-        .map(h => h.textContent?.trim())
+      const headings = Array.from(document.querySelectorAll("h1, h2, h3"))
+        .map((h) => h.textContent?.trim())
         .filter(Boolean)
-        .join('|');
+        .join("|");
 
-      const mainContent = document.querySelector('main')?.textContent?.trim() || '';
+      const mainContent =
+        document.querySelector("main")?.textContent?.trim() || "";
 
       return `${window.location.pathname}|${document.title}|${headings}|${mainContent.length}`;
     };
@@ -111,7 +122,10 @@ export const usePageData = (options?: { debug?: boolean }) => {
         try {
           const currentUrl = window.location.href;
           const currentContentSignature = getContentSignature();
-          if (currentUrl === lastUrlRef.current && currentContentSignature === lastContentSignatureRef.current) {
+          if (
+            currentUrl === lastUrlRef.current &&
+            currentContentSignature === lastContentSignatureRef.current
+          ) {
             updatingRef.current = false;
             return;
           }
@@ -126,11 +140,17 @@ export const usePageData = (options?: { debug?: boolean }) => {
           const buttonTexts = new Set<string>();
 
           const buttons = Array.from(
-            document.querySelectorAll("button, input[type='submit'], [role='button']")
+            document.querySelectorAll(
+              "button, input[type='submit'], [role='button']"
+            )
           )
-            .filter(button => !isPartOfChatbot(button as HTMLElement))
-            .map(button => {
-              const text = ((button as HTMLElement).innerText.trim() || button.getAttribute("value") || "No text").replace(/\s+/g, " ");
+            .filter((button) => !isPartOfChatbot(button as HTMLElement))
+            .map((button) => {
+              const text = (
+                (button as HTMLElement).innerText.trim() ||
+                button.getAttribute("value") ||
+                "No text"
+              ).replace(/\s+/g, " ");
               buttonTexts.add(text);
               return {
                 text,
@@ -138,76 +158,94 @@ export const usePageData = (options?: { debug?: boolean }) => {
                 path: getElementPath(button as HTMLElement),
               };
             })
-            .filter(button => button.text !== "No text");
+            .filter((button) => button.text !== "No text");
 
           const candidates = Array.from(
-            document.querySelectorAll('section, article, div[class*="max-w"], div[class*="py-"], div[class*="space-y"]')
-          ).filter(el => !isPartOfChatbot(el as HTMLElement));
+            document.querySelectorAll(
+              'section, article, div[class*="max-w"], div[class*="py-"], div[class*="space-y"]'
+            )
+          ).filter((el) => !isPartOfChatbot(el as HTMLElement));
 
-          const structuredTextRaw = candidates.map(el => {
-            const textChunks: string[] = [];
-            const links: Array<{ text: string; url: string }> = [];
-            const images: Array<{ src: string; alt: string; width: number; height: number }> = [];
+          const structuredTextRaw = candidates
+            .map((el) => {
+              const textChunks: string[] = [];
+              const links: Array<{ text: string; url: string }> = [];
+              const images: Array<{
+                src: string;
+                alt: string;
+                width: number;
+                height: number;
+              }> = [];
 
-            const traverse = (node: Element | ChildNode) => {
-              if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) {
-                textChunks.push(node.textContent.trim());
-              }
-              if (node instanceof HTMLElement) {
-                if (node.tagName === 'A') {
-                  const anchor = node as HTMLAnchorElement;
-                  if (anchor.href) {
-                    links.push({ text: anchor.innerText.trim(), url: anchor.href });
+              const traverse = (node: Element | ChildNode) => {
+                if (
+                  node.nodeType === Node.TEXT_NODE &&
+                  node.textContent?.trim()
+                ) {
+                  textChunks.push(node.textContent.trim());
+                }
+                if (node instanceof HTMLElement) {
+                  if (node.tagName === "A") {
+                    const anchor = node as HTMLAnchorElement;
+                    if (anchor.href) {
+                      links.push({
+                        text: anchor.innerText.trim(),
+                        url: anchor.href,
+                      });
+                    }
                   }
+                  if (node.tagName === "IMG") {
+                    const img = node as HTMLImageElement;
+                    images.push({
+                      src: img.src,
+                      alt: img.alt || "No alt text",
+                      width: img.width,
+                      height: img.height,
+                    });
+                  }
+                  Array.from(node.childNodes).forEach(traverse);
                 }
-                if (node.tagName === 'IMG') {
-                  const img = node as HTMLImageElement;
-                  images.push({
-                    src: img.src,
-                    alt: img.alt || 'No alt text',
-                    width: img.width,
-                    height: img.height
-                  });
-                }
-                Array.from(node.childNodes).forEach(traverse);
-              }
-            };
+              };
 
-            traverse(el);
+              traverse(el);
 
-            const text = textChunks.join("\n\n");
+              const text = textChunks.join("\n\n");
 
-            if (text.length > 5000 && el.childElementCount > 5) return null;
+              if (text.length > 5000 && el.childElementCount > 5) return null;
 
-            return {
-              text,
-              path: getElementPath(el as HTMLElement),
-              links,
-              images
-            };
-          }).filter((block): block is Exclude<typeof block, null> => !!block && block.text.length > 30);
+              return {
+                text,
+                path: getElementPath(el as HTMLElement),
+                links,
+                images,
+              };
+            })
+            .filter(
+              (block): block is Exclude<typeof block, null> =>
+                !!block && block.text.length > 30
+            );
 
           const structuredText = dedupeBlocks(structuredTextRaw);
 
           const links = Array.from(document.querySelectorAll("a[href]"))
-            .filter(link => !isPartOfChatbot(link as HTMLElement))
-            .map(link => ({
+            .filter((link) => !isPartOfChatbot(link as HTMLElement))
+            .map((link) => ({
               text: (link as HTMLElement).innerText.trim(),
               url: (link as HTMLAnchorElement).href,
               path: getElementPath(link as HTMLElement),
             }))
-            .filter(link => link.text);
+            .filter((link) => link.text);
 
           const images = Array.from(document.querySelectorAll("img"))
-            .filter(img => !isPartOfChatbot(img as HTMLElement))
-            .map(img => {
+            .filter((img) => !isPartOfChatbot(img as HTMLElement))
+            .map((img) => {
               const image = img as HTMLImageElement;
               return {
                 src: image.src,
                 alt: image.alt || "No alt text",
                 width: image.width,
                 height: image.height,
-                path: getElementPath(image)
+                path: getElementPath(image),
               };
             });
 
@@ -227,7 +265,7 @@ export const usePageData = (options?: { debug?: boolean }) => {
               textCount: structuredText.length,
               linksCount: links.length,
               buttonsCount: buttons.length,
-              imagesCount: images.length
+              imagesCount: images.length,
             });
           }
         } catch (error) {
@@ -246,7 +284,7 @@ export const usePageData = (options?: { debug?: boolean }) => {
       subtree: true,
       characterData: true,
       attributes: true,
-      attributeFilter: ['style', 'class', 'hidden']
+      attributeFilter: ["style", "class", "hidden"],
     });
 
     const handleUrlChange = () => {
@@ -263,26 +301,32 @@ export const usePageData = (options?: { debug?: boolean }) => {
 
     const originalPushState = history.pushState;
     const originalReplaceState = history.replaceState;
-    history.pushState = function () { originalPushState.apply(this, arguments as any); handleHistoryChange(); };
-    history.replaceState = function () { originalReplaceState.apply(this, arguments as any); handleHistoryChange(); };
+    history.pushState = function () {
+      originalPushState.apply(this, arguments as any);
+      handleHistoryChange();
+    };
+    history.replaceState = function () {
+      originalReplaceState.apply(this, arguments as any);
+      handleHistoryChange();
+    };
 
     const urlCheckInterval = setInterval(handleUrlChange, 1000);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('popstate', handlePopState);
-    window.addEventListener('hashchange', handleUrlChange);
-    document.addEventListener('click', event => {
-      const link = (event.target as HTMLElement).closest('a');
-      if (link && link.getAttribute('href')) setTimeout(handleUrlChange, 100);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("popstate", handlePopState);
+    window.addEventListener("hashchange", handleUrlChange);
+    document.addEventListener("click", (event) => {
+      const link = (event.target as HTMLElement).closest("a");
+      if (link && link.getAttribute("href")) setTimeout(handleUrlChange, 100);
     });
 
     return () => {
       observer.disconnect();
       clearInterval(urlCheckInterval);
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('popstate', handlePopState);
-      window.removeEventListener('hashchange', handleUrlChange);
-      document.removeEventListener('click', handleUrlChange);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("popstate", handlePopState);
+      window.removeEventListener("hashchange", handleUrlChange);
+      document.removeEventListener("click", handleUrlChange);
       history.pushState = originalPushState;
       history.replaceState = originalReplaceState;
       if (timeoutRef.current) clearTimeout(timeoutRef.current);

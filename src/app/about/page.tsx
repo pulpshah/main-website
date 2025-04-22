@@ -82,7 +82,7 @@ export default function AboutPage() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="flex min-h-screen flex-col px-16">
       {/* Hero Section */}
       <Hero 
         badge={aboutConfig.hero.badge}

@@ -7,7 +7,12 @@ import { useState, useEffect, useRef } from "react";
 interface PageData {
   url: string;
   title: string;
-  structuredText: Array<{ text: string | undefined; path: string }>;
+  structuredText: Array<{
+    text: string;
+    path: string;
+    links: Array<{ text: string; url: string }>;
+    images: Array<{ src: string; alt: string; width: number; height: number }>;
+  }>;
   links: Array<{ text: string; url: string; path: string }>;
   buttons: Array<{ text: string; action: string; path: string }>;
   images: Array<{
@@ -37,42 +42,36 @@ const getElementPath = (element: HTMLElement): string => {
   return parts.join(" > ");
 };
 
-// Check if element is part of the chatbot UI
 const isPartOfChatbot = (element: HTMLElement): boolean => {
-  // Check if the element or any of its parents have chatbot-related classes/attributes
   let currentElement: HTMLElement | null = element;
-  
   while (currentElement && currentElement !== document.body) {
-    // Check for chat-related classes
     const classNames = Array.from(currentElement.classList);
     if (
-      classNames.some(cls => 
-        cls.includes('chat') || 
-        cls.includes('message') || 
-        cls.includes('bot')
-      ) ||
-      currentElement.getAttribute('aria-label')?.includes('chat') ||
-      currentElement.getAttribute('aria-label')?.includes('message') ||
-      // Check for fixed positioning which is often used for chat overlays
-      (window.getComputedStyle(currentElement).position === 'fixed' &&
-       (window.getComputedStyle(currentElement).bottom === '24px' || 
-        window.getComputedStyle(currentElement).bottom === '6px' ||
-        window.getComputedStyle(currentElement).right === '6px'))
+      classNames.some(cls => cls.includes("chat") || cls.includes("message") || cls.includes("bot")) ||
+      currentElement.getAttribute("aria-label")?.includes("chat") ||
+      currentElement.getAttribute("aria-label")?.includes("message") ||
+      (window.getComputedStyle(currentElement).position === "fixed" &&
+        (["24px", "6px"].includes(window.getComputedStyle(currentElement).bottom) ||
+         window.getComputedStyle(currentElement).right === "6px"))
     ) {
       return true;
     }
-    
     currentElement = currentElement.parentElement;
   }
-  
-  // Also check if it's our page data tester
-  if (currentElement && 
-      (currentElement.classList.contains('PageDataTester') || 
-       currentElement.getAttribute('data-testid') === 'page-data-tester')) {
-    return true;
-  }
-  
   return false;
+};
+
+const dedupeBlocks = (blocks: PageData["structuredText"]): PageData["structuredText"] => {
+  const deduped: PageData["structuredText"] = [];
+
+  blocks.forEach((block, i) => {
+    const isChildOfExisting = blocks.some((other, j) =>
+      i !== j && block.path.startsWith(other.path) && block.text === other.text
+    );
+    if (!isChildOfExisting) deduped.push(block);
+  });
+
+  return deduped;
 };
 
 export const usePageData = (options?: { debug?: boolean }) => {
@@ -85,72 +84,53 @@ export const usePageData = (options?: { debug?: boolean }) => {
     images: [],
   });
 
-  // Use ref to prevent excessive updates
   const updatingRef = useRef(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastUrlRef = useRef<string>('');
   const lastContentSignatureRef = useRef<string>('');
 
   useEffect(() => {
-    // Calculate a signature of the page content to detect significant changes
     const getContentSignature = (): string => {
       const headings = Array.from(document.querySelectorAll('h1, h2, h3'))
         .map(h => h.textContent?.trim())
         .filter(Boolean)
         .join('|');
-      
+
       const mainContent = document.querySelector('main')?.textContent?.trim() || '';
-      
+
       return `${window.location.pathname}|${document.title}|${headings}|${mainContent.length}`;
     };
 
     const extractPageData = () => {
-      // Prevent concurrent updates
       if (updatingRef.current) return;
       updatingRef.current = true;
 
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
-      // Debounce the extraction to avoid multiple rapid updates
       timeoutRef.current = setTimeout(() => {
         try {
-          // Check if URL or page content has changed significantly
           const currentUrl = window.location.href;
           const currentContentSignature = getContentSignature();
-          
-          // Skip update if URL and content haven't changed significantly
-          if (currentUrl === lastUrlRef.current && 
-              currentContentSignature === lastContentSignatureRef.current) {
+          if (currentUrl === lastUrlRef.current && currentContentSignature === lastContentSignatureRef.current) {
             updatingRef.current = false;
             return;
           }
-          
-          // Update our references
+
           lastUrlRef.current = currentUrl;
           lastContentSignatureRef.current = currentContentSignature;
-          
+
           if (options?.debug) {
             console.log("Page change detected:", currentUrl);
           }
 
-          const extractedTexts = new Set<string>();
           const buttonTexts = new Set<string>();
 
-          // Process buttons first
           const buttons = Array.from(
-            document.querySelectorAll(
-              "button, input[type='submit'], [role='button']"
-            )
+            document.querySelectorAll("button, input[type='submit'], [role='button']")
           )
             .filter(button => !isPartOfChatbot(button as HTMLElement))
-            .map((button) => {
-              const text = (
-                (button as HTMLElement).innerText.trim() ||
-                button.getAttribute("value") ||
-                "No text"
-              ).replace(/\s+/g, " ");
+            .map(button => {
+              const text = ((button as HTMLElement).innerText.trim() || button.getAttribute("value") || "No text").replace(/\s+/g, " ");
               buttonTexts.add(text);
               return {
                 text,
@@ -158,118 +138,96 @@ export const usePageData = (options?: { debug?: boolean }) => {
                 path: getElementPath(button as HTMLElement),
               };
             })
-            .filter((button) => button.text !== "No text");
+            .filter(button => button.text !== "No text");
 
-          // Process structured text with depth-first leaf node extraction
-          const structuredText = Array.from(
-            document.body.querySelectorAll(
-              "h1, h2, h3, h4, h5, h6, p, label, li, strong, em, span, div, td, th, blockquote, pre, code"
-            )
-          )
-            .filter(el => !isPartOfChatbot(el as HTMLElement))
-            .flatMap((el) => {
-              const results: Array<{ text: string; path: string }> = [];
+          const candidates = Array.from(
+            document.querySelectorAll('section, article, div[class*="max-w"], div[class*="py-"], div[class*="space-y"]')
+          ).filter(el => !isPartOfChatbot(el as HTMLElement));
 
-              const traverse = (element: Element) => {
-                // Skip chatbot elements
-                if (isPartOfChatbot(element as HTMLElement)) return;
-                
-                // Skip elements already processed as buttons
-                if (
-                  element.matches('button, input[type="submit"], [role="button"]')
-                )
-                  return;
+          const structuredTextRaw = candidates.map(el => {
+            const textChunks: string[] = [];
+            const links: Array<{ text: string; url: string }> = [];
+            const images: Array<{ src: string; alt: string; width: number; height: number }> = [];
 
-                // Skip hidden elements
-                const style = window.getComputedStyle(element as HTMLElement);
-                if (
-                  style.display === "none" || 
-                  style.visibility === "hidden" || 
-                  style.opacity === "0" ||
-                  (element as HTMLElement).offsetParent === null
-                ) {
-                  return;
+            const traverse = (node: Element | ChildNode) => {
+              if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) {
+                textChunks.push(node.textContent.trim());
+              }
+              if (node instanceof HTMLElement) {
+                if (node.tagName === 'A') {
+                  const anchor = node as HTMLAnchorElement;
+                  if (anchor.href) {
+                    links.push({ text: anchor.innerText.trim(), url: anchor.href });
+                  }
                 }
-
-                // Capture direct text nodes regardless of children
-                const directText = Array.from(element.childNodes)
-                  .filter(
-                    (node) =>
-                      node.nodeType === Node.TEXT_NODE &&
-                      node.textContent?.trim() &&
-                      !buttonTexts.has(node.textContent.trim())
-                  )
-                  .map((node) => node.textContent?.trim().replace(/\s+/g, " "))
-                  .join(" ")
-                  .trim();
-
-                if (directText && !extractedTexts.has(directText)) {
-                  extractedTexts.add(directText);
-                  results.push({
-                    text: directText,
-                    path: getElementPath(element as HTMLElement),
+                if (node.tagName === 'IMG') {
+                  const img = node as HTMLImageElement;
+                  images.push({
+                    src: img.src,
+                    alt: img.alt || 'No alt text',
+                    width: img.width,
+                    height: img.height
                   });
                 }
+                Array.from(node.childNodes).forEach(traverse);
+              }
+            };
 
-                // Continue depth-first traversal
-                Array.from(element.children).forEach(traverse);
-              };
+            traverse(el);
 
-              traverse(el);
-              return results;
-            })
-            .filter(
-              (entry, index, arr) =>
-                !arr.some(
-                  (e, i) =>
-                    i < index &&
-                    e.path.startsWith(entry.path) &&
-                    e.text.includes(entry.text)
-                )
-            );
+            const text = textChunks.join("\n\n");
+
+            if (text.length > 5000 && el.childElementCount > 5) return null;
+
+            return {
+              text,
+              path: getElementPath(el as HTMLElement),
+              links,
+              images
+            };
+          }).filter((block): block is Exclude<typeof block, null> => !!block && block.text.length > 30);
+
+          const structuredText = dedupeBlocks(structuredTextRaw);
 
           const links = Array.from(document.querySelectorAll("a[href]"))
             .filter(link => !isPartOfChatbot(link as HTMLElement))
-            .map(
-              (link) => ({
-                text: (link as HTMLAnchorElement).innerText.trim(),
-                url: (link as HTMLAnchorElement).href,
-                path: getElementPath(link as HTMLElement),
-              })
-            )
-            .filter(link => link.text); // Filter out links without text
+            .map(link => ({
+              text: (link as HTMLElement).innerText.trim(),
+              url: (link as HTMLAnchorElement).href,
+              path: getElementPath(link as HTMLElement),
+            }))
+            .filter(link => link.text);
 
           const images = Array.from(document.querySelectorAll("img"))
             .filter(img => !isPartOfChatbot(img as HTMLElement))
-            .map(
-              (img) => ({
-                src: img.src,
-                alt: img.alt || "No alt text",
-                width: img.width,
-                height: img.height,
-                path: getElementPath(img),
-              })
-            );
+            .map(img => {
+              const image = img as HTMLImageElement;
+              return {
+                src: image.src,
+                alt: image.alt || "No alt text",
+                width: image.width,
+                height: image.height,
+                path: getElementPath(image)
+              };
+            });
 
-          const newPageData = {
+          setPageData({
             url: window.location.href,
             title: document.title,
             structuredText,
             links,
             buttons,
             images,
-          };
+          });
 
-          setPageData(newPageData);
-          
           if (options?.debug) {
             console.log("Updated Page Data:", {
-              url: newPageData.url,
-              title: newPageData.title,
-              textCount: newPageData.structuredText.length,
-              linksCount: newPageData.links.length,
-              buttonsCount: newPageData.buttons.length,
-              imagesCount: newPageData.images.length
+              url: currentUrl,
+              title: document.title,
+              textCount: structuredText.length,
+              linksCount: links.length,
+              buttonsCount: buttons.length,
+              imagesCount: images.length
             });
           }
         } catch (error) {
@@ -277,58 +235,12 @@ export const usePageData = (options?: { debug?: boolean }) => {
         } finally {
           updatingRef.current = false;
         }
-      }, 300); // Debounce for 300ms
+      }, 300);
     };
 
-    // Initial extraction
     extractPageData();
 
-    // Track URL changes for SPAs that use history API
-    const handleUrlChange = () => {
-      if (lastUrlRef.current !== window.location.href) {
-        if (options?.debug) {
-          console.log("URL change detected:", window.location.href);
-        }
-        extractPageData();
-      }
-    };
-
-    // Handle lazy-loaded content with more sensitive mutation detection
-    const observer = new MutationObserver((mutations) => {
-      let shouldUpdate = false;
-      
-      // Check if mutations are significant enough to trigger an update
-      for (const mutation of mutations) {
-        // Added/removed nodes
-        if (mutation.type === 'childList' && 
-            (mutation.addedNodes.length > 0 || mutation.removedNodes.length > 0)) {
-          shouldUpdate = true;
-          break;
-        }
-        
-        // Text content changes
-        if (mutation.type === 'characterData' && 
-            mutation.target.nodeType === Node.TEXT_NODE && 
-            mutation.target.textContent?.trim()) {
-          shouldUpdate = true;
-          break;
-        }
-        
-        // Attribute changes that affect visibility
-        if (mutation.type === 'attributes' && 
-           (mutation.attributeName === 'style' || 
-            mutation.attributeName === 'class' || 
-            mutation.attributeName === 'hidden')) {
-          shouldUpdate = true;
-          break;
-        }
-      }
-      
-      if (shouldUpdate) {
-        extractPageData();
-      }
-    });
-    
+    const observer = new MutationObserver(() => extractPageData());
     observer.observe(document.body, {
       childList: true,
       subtree: true,
@@ -337,59 +249,31 @@ export const usePageData = (options?: { debug?: boolean }) => {
       attributeFilter: ['style', 'class', 'hidden']
     });
 
-    // Handle content that loads on scroll
+    const handleUrlChange = () => {
+      if (lastUrlRef.current !== window.location.href) extractPageData();
+    };
+
     const handleScroll = () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(extractPageData, 500);
     };
 
-    // Listen for browser navigation events (back/forward buttons)
-    const handlePopState = () => {
-      if (options?.debug) {
-        console.log("Navigation event (popstate):", window.location.href);
-      }
-      extractPageData();
-    };
+    const handlePopState = () => extractPageData();
+    const handleHistoryChange = () => setTimeout(handleUrlChange, 0);
 
-    // Listen for programmatic navigation via history API
-    const handleHistoryChange = () => {
-      if (options?.debug) {
-        console.log("History API change detected");
-      }
-      
-      // Wait a tick for the URL to update
-      setTimeout(handleUrlChange, 0);
-    };
-
-    // Override history methods to detect SPA navigation
     const originalPushState = history.pushState;
     const originalReplaceState = history.replaceState;
+    history.pushState = function () { originalPushState.apply(this, arguments as any); handleHistoryChange(); };
+    history.replaceState = function () { originalReplaceState.apply(this, arguments as any); handleHistoryChange(); };
 
-    history.pushState = function() {
-      originalPushState.apply(this, arguments as any);
-      handleHistoryChange();
-    };
-
-    history.replaceState = function() {
-      originalReplaceState.apply(this, arguments as any);
-      handleHistoryChange();
-    };
-
-    // Set up periodic check for URL changes (for client-side routing)
     const urlCheckInterval = setInterval(handleUrlChange, 1000);
 
-    // Install event listeners
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('popstate', handlePopState);
     window.addEventListener('hashchange', handleUrlChange);
     document.addEventListener('click', event => {
-      // Check for link clicks that might change the page
       const link = (event.target as HTMLElement).closest('a');
-      if (link && link.getAttribute('href')) {
-        setTimeout(handleUrlChange, 100);
-      }
+      if (link && link.getAttribute('href')) setTimeout(handleUrlChange, 100);
     });
 
     return () => {
@@ -399,16 +283,11 @@ export const usePageData = (options?: { debug?: boolean }) => {
       window.removeEventListener('popstate', handlePopState);
       window.removeEventListener('hashchange', handleUrlChange);
       document.removeEventListener('click', handleUrlChange);
-      
-      // Restore original history methods
       history.pushState = originalPushState;
       history.replaceState = originalReplaceState;
-      
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, [options?.debug]);
 
   return pageData;
-}; 
+};

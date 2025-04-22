@@ -5,6 +5,7 @@ import { Header } from "@/components/header/header";
 import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ChatOverlay } from "@/components/chat/chat-overlay";
+import { PageDataTester } from "@/components/page-data-tester";
 import "./force-dark-mode";
 
 const geistSans = Geist({
@@ -40,6 +41,8 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <Header />
+          <PageDataTester />
+
           <main className="overflow-x-hidden max-w-[1920px]">{children}</main>
           <Footer />
           <ChatOverlay initialMessage="Welcome to Pulp! How can I help you today?" />

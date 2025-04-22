@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 // Scramble effect component
 function ScrambleOnHover({
@@ -19,7 +19,7 @@ function ScrambleOnHover({
       return;
     }
 
-    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const speed = 30;
     const scrambleFrames = Math.floor(duration / speed);
     let frame = 0;
@@ -32,13 +32,13 @@ function ScrambleOnHover({
       }
 
       const scrambled = value
-        .split('')
+        .split("")
         .map((char) =>
           /\d/.test(char)
             ? chars[Math.floor(Math.random() * chars.length)]
             : char
         )
-        .join('');
+        .join("");
 
       setDisplay(scrambled);
       frame++;
@@ -78,61 +78,65 @@ interface StatsSectionProps {
 }
 
 export default function StatsSection({
-  title = 'Just Use Your Words',
-  subtitle = 'The Benefits of Language Accelerated Automation',
+  title = "Just Use Your Words",
+  subtitle = "The Benefits of Language Accelerated Automation",
   description = "Pulp’s natural language AI enhances comprehension and streamlines workflows for both technical and non-technical teams.",
   stats = [
     {
       value: 200,
-      prefix: '+',
-      suffix: '%',
-      title: 'Faster Engagement Insights (ROAS)',
-      description: 'Capitalize on audience behavior sooner with fewer resources.',
+      prefix: "+",
+      suffix: "%",
+      title: "Faster Engagement Insights (ROAS)",
+      description:
+        "Capitalize on audience behavior sooner with fewer resources.",
       isPositive: true,
       duration: 2.5,
     },
     {
       value: 70,
-      prefix: '-',
-      suffix: '%',
-      title: 'Decrease in Time-to-Value (TTV)',
-      description: 'Let users experience value faster, without the learning curve.',
+      prefix: "-",
+      suffix: "%",
+      title: "Decrease in Time-to-Value (TTV)",
+      description:
+        "Let users experience value faster, without the learning curve.",
       isPositive: false,
       duration: 2,
     },
     {
       value: 15,
-      prefix: '+',
-      suffix: '%',
-      title: 'Avg. Revenue per User (ARPU)',
-      description: 'Higher engagement & smarter monetization strategies.',
+      prefix: "+",
+      suffix: "%",
+      title: "Avg. Revenue per User (ARPU)",
+      description: "Higher engagement & smarter monetization strategies.",
       isPositive: true,
       duration: 1.5,
     },
     {
       value: 10,
-      prefix: '-',
-      suffix: '%',
-      title: 'Decrease in Lost Customers (Churn Rate)',
-      description: 'Reduce churn with predictive insights and proactive engagement.',
+      prefix: "-",
+      suffix: "%",
+      title: "Decrease in Lost Customers (Churn Rate)",
+      description:
+        "Reduce churn with predictive insights and proactive engagement.",
       isPositive: false,
       duration: 1.5,
     },
     {
       value: 10,
-      prefix: '+',
-      suffix: '%',
-      title: 'Net Promoter Score (NPS)',
-      description: 'Happier teams & customers, leading to stronger retention.',
+      prefix: "+",
+      suffix: "%",
+      title: "Net Promoter Score (NPS)",
+      description: "Happier teams & customers, leading to stronger retention.",
       isPositive: true,
       duration: 1.5,
     },
     {
       value: 50,
-      prefix: '-',
-      suffix: '%',
-      title: 'Reduction in Data & Reporting Costs (Labor & SaaS)',
-      description: 'Automate analysis, cut overhead, and reduce software spend.',
+      prefix: "-",
+      suffix: "%",
+      title: "Reduction in Data & Reporting Costs (Labor & SaaS)",
+      description:
+        "Automate analysis, cut overhead, and reduce software spend.",
       isPositive: false,
       duration: 2,
     },
@@ -173,7 +177,7 @@ export default function StatsSection({
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-amber-600/10 to-orange-500/10 rounded-full blur-3xl"
           style={{
             opacity: isVisible ? 0.3 : 0,
-            transition: 'opacity 1s ease',
+            transition: "opacity 1s ease",
           }}
         ></div>
       </div>
@@ -190,8 +194,8 @@ export default function StatsSection({
           className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white"
           style={{
             opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'opacity 0.6s ease, transform 0.6s ease',
+            transform: isVisible ? "translateY(0)" : "translateY(20px)",
+            transition: "opacity 0.6s ease, transform 0.6s ease",
           }}
         >
           {title}
@@ -201,8 +205,8 @@ export default function StatsSection({
           className="w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-400 mx-auto mb-6"
           style={{
             opacity: isVisible ? 1 : 0,
-            width: isVisible ? '96px' : '20px',
-            transition: 'opacity 0.6s ease, width 0.8s ease',
+            width: isVisible ? "96px" : "20px",
+            transition: "opacity 0.6s ease, width 0.8s ease",
           }}
         ></div>
 
@@ -210,8 +214,8 @@ export default function StatsSection({
           className="text-xl md:text-2xl font-semibold text-amber-200 mb-6"
           style={{
             opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s',
+            transform: isVisible ? "translateY(0)" : "translateY(20px)",
+            transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
           }}
         >
           {subtitle}
@@ -221,8 +225,8 @@ export default function StatsSection({
           className="text-lg text-gray-300 max-w-2xl mx-auto"
           style={{
             opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s',
+            transform: isVisible ? "translateY(0)" : "translateY(20px)",
+            transition: "opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s",
           }}
         >
           {description}
@@ -231,48 +235,15 @@ export default function StatsSection({
 
       {/* Stats grid */}
       <div className="w-full max-w-6xl mx-auto relative z-10 overflow-hidden px-4">
+        {/* Format */}
 
-
-
-
-
-      {/* Format 1 SCROLL COMMENT OUT  */}
-
-  {/* <div className="flex overflow-x-auto space-x-6 snap-x snap-mandatory px-2 -mx-2">
-  {stats.map((stat, index) => (
-    <div key={index} className="snap-start shrink-0 w-[300px]">
-      <StatCard stat={stat} index={index} isVisible={isVisible} />
-    </div>
-  ))}
-</div> */}
-
-      {/* Format 2 NORMAL COMMENT OUT  */}
-
-
-{/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 justify-items-center text-center">
-  {stats.map((stat, index) => (
-    <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />
-  ))}
-</div> */}
-
-
-
-      {/* Format 3 COLUM COMMENT OUT  */}
-
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-  {stats.map((stat, index) => (
-    <div key={index} className="h-full">
-      <StatCard stat={stat} index={index} isVisible={isVisible} />
-    </div>
-  ))}
-</div>
-
-
-
-
-
-
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {stats.map((stat, index) => (
+            <div key={index} className="h-full">
+              <StatCard stat={stat} index={index} isVisible={isVisible} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -288,13 +259,13 @@ function StatCard({
   isVisible: boolean;
 }) {
   const accentColor = stat.isPositive
-    ? 'from-amber-500 to-orange-400'
-    : 'from-amber-700 to-amber-500';
+    ? "from-amber-500 to-orange-400"
+    : "from-amber-700 to-amber-500";
 
-  const iconColor = stat.isPositive ? 'text-amber-400' : 'text-amber-600';
+  const iconColor = stat.isPositive ? "text-amber-400" : "text-amber-600";
   const hoverTextColor = stat.isPositive
-    ? 'group-hover:text-amber-200'
-    : 'group-hover:text-amber-300';
+    ? "group-hover:text-amber-200"
+    : "group-hover:text-amber-300";
 
   const icon = stat.isPositive ? (
     <svg
@@ -331,8 +302,10 @@ function StatCard({
       className="bg-black/30 backdrop-blur-sm border border-amber-900/20 rounded-xl p-6 flex flex-col group relative overflow-hidden"
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-        transition: `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`,
+        transform: isVisible ? "translateY(0)" : "translateY(30px)",
+        transition: `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${
+          index * 0.15
+        }s`,
       }}
     >
       <div
@@ -351,12 +324,14 @@ function StatCard({
       >
         {isVisible ? (
           <ScrambleOnHover
-            value={`${stat.prefix || ''}${Math.round(stat.value)}${
-              stat.suffix || ''
+            value={`${stat.prefix || ""}${Math.round(stat.value)}${
+              stat.suffix || ""
             }`}
           />
         ) : (
-          <span>{stat.prefix || ''}0{stat.suffix || ''}</span>
+          <span>
+            {stat.prefix || ""}0{stat.suffix || ""}
+          </span>
         )}
       </div>
 

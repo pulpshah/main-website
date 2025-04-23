@@ -71,13 +71,13 @@ export function FeaturesTable({ data }: FeaturesTableProps) {
 }
 
 function renderFeatureStatus(status: string | null) {
-  if (!status) return <span className="text-pink-500 opacity-50">✓</span>
+  if (!status) return <span className="text-gray-500 opacity-50 text-2xl">✓</span>
 
   // Check if it's an add-on feature
   if (status.toLowerCase().includes("add-on")) {
     return (
       <span className="text-yellow-500">
-        <span className="text-pink-500 opacity-50">✓</span>
+        <span className="text-pink-500 opacity-50 text-2xl">✓</span>
         <br />
         <span className="text-xs">Add-on ({status.replace(/add-on\s*\(([^)]+)\)/i, "$1")})</span>
       </span>

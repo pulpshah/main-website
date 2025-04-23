@@ -63,14 +63,6 @@ export const teamMembers: TeamMember[] = [
     category: "team"
   },
   {
-    id: "devon-smith",
-    name: "Devon Smith",
-    position: "Head of Strategic Communications",
-    photoUrl: "/team/Devon_Smith.jpeg",
-    bio: "Devon Smith is a seasoned strategist with expertise in growth, communication, and innovation. With over eight years of experience driving engagement, audience growth, and revenue for top brands, he has worked with organizations such as T-Mobile, Mercedes-Benz, UnitedMasters, and Ad Age. His work has led to over $5M in revenue, 150K+ new customer leads, and 250K+ event and content subscriptions. Devon specializes in developing high-impact messaging frameworks, content ecosystems, and business strategies that bridge the gap between marketing, education, and social impact.\n\nAt Pulp, Devon spearheads strategic communications, ensuring our marketing efforts are deeply aligned with business development and our AI-driven workflows. His expertise in audience engagement and messaging strategy allows him to shape how Pulp communicates its value across industries, from enterprise clients to developers and researchers. He brings a unique ability to craft narratives that drive adoption and trust while optimizing automated workflows that enhance customer experiences.",
-    category: "team"
-  },
-  {
     id: "nafiz-mannan",
     name: "Nafiz Mannan",
     position: "VP of UX Research",

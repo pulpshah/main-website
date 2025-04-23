@@ -155,44 +155,6 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
     reload();
   };
   
-  // Store initial assistant message when chat is first opened
-  useEffect(() => {
-    if (isOpen && sessionId && messages.length === 1 && messages[0].id === "initial" && !lastMessageId && !storedMessageIds.has("initial")) {
-      const storeInitialMessage = async () => {
-        try {
-          // Get PostHog distinctId
-          const distinctId = getPostHogDistinctId();
-          
-          const messageData: ChatMessageStorage = {
-            sessionId,
-            role: 'assistant',
-            content: initialMessage,
-            distinctId // Add distinctId to the request
-          };
-          
-          const response = await fetch('/api/chat-storage', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(messageData),
-          });
-          
-          const result = await response.json();
-          
-          if (result.success) {
-            setLastMessageId(result.messageId);
-            setStoredMessageIds(prev => new Set([...prev, "initial"]));
-          }
-        } catch (error) {
-          console.error('Error storing initial message:', error);
-        }
-      };
-      
-      storeInitialMessage();
-    }
-  }, [isOpen, sessionId, initialMessage, messages, lastMessageId, storedMessageIds]);
-  
   return (
     <>
       {/* Chatbot toggle button */}

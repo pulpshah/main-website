@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 
-export type TeamTabId = "leadership" | "team" | "board" | "advisors"
+export type TeamTabId = "team" | "board" | "advisors"
 
 interface TeamTabsProps {
   activeTab: TeamTabId
@@ -11,7 +11,6 @@ interface TeamTabsProps {
 }
 
 const tabs: { id: TeamTabId; label: string }[] = [
-  { id: "leadership", label: "Leadership" },
   { id: "team", label: "Team" },
   { id: "board", label: "Board of Directors" },
   { id: "advisors", label: "Advisors" },

@@ -4,7 +4,7 @@ export interface TeamMember {
   position?: string
   photoUrl: string
   bio: string
-  category: 'leadership' | 'team' | 'board' | 'advisors'
+  category: 'team' | 'board' | 'advisors'
 }
 
 // Placeholder for photos - these will be replaced with actual photos
@@ -18,7 +18,7 @@ export const teamMembers: TeamMember[] = [
     position: "Founder & CEO",
     photoUrl: "/team/Shah_Ullah.jpeg",
     bio: "Shah is a strategist and entrepreneur with deep expertise in AI, speech recognition, and data-driven engagement. Before founding Pulp, he led partnerships at Treedom and worked across a range of AI and media-tech startups, gaining a sharp understanding of how technology shapes the way we communicate. With a background in competitive debate and startup execution, he brings a rare blend of human insight and technical acumen to the table, bridging the gap between machine learning and meaningful conversation.\n\nAt Pulp, Shah's leadership is focused on building AI tools that elevate critical thinking and engagement. His work in persuasion modeling and workflow automation powers the platform's ability to personalize and optimize interactions. From securing early-stage funding to developing advanced AI solutions, he ensures Pulp remains at the forefront of language-driven innovation. A former Junior Olympic fencer turned state debate champion, Shah channels the same strategic mindset into building a company that helps people think clearly, communicate effectively, and make informed decisions.",
-    category: "leadership"
+    category: "team"
   },
   {
     id: "bea-dimaculangan",
@@ -26,7 +26,7 @@ export const teamMembers: TeamMember[] = [
     position: "Co-Founder & COO",
     photoUrl: "/team/Bea_Dimaculangan.jpeg",
     bio: "Bea Dimaculangan is the Chief Operating Officer at Pulp, bringing a wealth of entrepreneurial experience and operational expertise to the team. With a background in co-founding and managing early-stage companies across creative industries, she has played a pivotal role in structuring business operations from the ground up. As co-owner of Darkside Industries, Bea has built a thriving multimedia production studio that has engaged hundreds of artists through professional services and event programming. Her ability to scale creative ventures, design efficient workflows, and execute complex projects positions her as a key driver of Pulp's strategic and operational success.\n\nAt Pulp, Bea ensures that high-level vision translates into actionable execution. With a deep understanding of startup operations, she structures processes to keep projects aligned, streamlined, and scalable. Her experience in managing multidisciplinary teams, developing educational initiatives, and pioneering tech-driven events, such as the world's first Music & Tech Summit in the Metaverse, demonstrates her ability to navigate the intersection of technology, strategy, and creative industries. Bea's leadership ensures that Pulp's operations remain agile, efficient, and positioned for long-term impact.",
-    category: "leadership"
+    category: "team"
   },
   
   // Team

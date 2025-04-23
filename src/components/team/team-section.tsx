@@ -7,7 +7,7 @@ import { TeamMemberCard } from "./team-member-card"
 import { TeamMemberModal } from "./team-member-modal"
 
 export function TeamSection() {
-  const [activeTab, setActiveTab] = useState<TeamTabId>("leadership")
+  const [activeTab, setActiveTab] = useState<TeamTabId>("team")
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   
@@ -23,8 +23,6 @@ export function TeamSection() {
   // Get section title and description
   const getSectionTitle = () => {
     switch (activeTab) {
-      case "leadership":
-        return "Leadership"
       case "team":
         return "Team"
       case "board":
@@ -38,8 +36,6 @@ export function TeamSection() {
   
   const getSectionDescription = () => {
     switch (activeTab) {
-      case "leadership":
-        return "Our leadership team brings diverse expertise in AI, product development, and strategic growth."
       case "team":
         return "A multidisciplinary group of builders, thinkers, and strategists."
       case "board":

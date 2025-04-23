@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ChatOverlay } from "@/components/chat/chat-overlay";
 import "./force-dark-mode";
+import { PostHogProvider } from "@/components/PostHogProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,9 +29,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" style={{ maxWidth: "100vw" }} suppressHydrationWarning>
       <body
@@ -38,12 +37,14 @@ export default function RootLayout({
         style={{ maxWidth: "100vw" }}
         suppressHydrationWarning
       >
-        <ThemeProvider>
-          <Header />
-          <main className="overflow-x-hidden max-w-[1920px]">{children}</main>
-          <Footer />
-          <ChatOverlay initialMessage="Welcome to Pulp! How can I help you today?" />
-        </ThemeProvider>
+        <PostHogProvider>
+          <ThemeProvider>
+            <Header />
+            <main className="overflow-x-hidden max-w-[1920px]">{children}</main>
+            <Footer />
+            <ChatOverlay initialMessage="Welcome to Pulp! How can I help you today?" />
+          </ThemeProvider>
+        </PostHogProvider>
       </body>
     </html>
   );

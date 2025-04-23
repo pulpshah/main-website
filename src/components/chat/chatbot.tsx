@@ -9,6 +9,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { v4 as uuidv4 } from 'uuid'; // Import uuid to generate session IDs
+import { getPostHogDistinctId } from "@/components/PostHogProvider";
 
 // Define interfaces for component props
 interface CodeProps {
@@ -31,6 +32,7 @@ interface ChatMessageStorage {
   role: 'user' | 'assistant';
   content: string;
   previousMessageId?: string;
+  distinctId?: string; // Add PostHog distinctId
 }
 
 // Interface for chat message
@@ -97,12 +99,16 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
           storedMessageIds.has(message.id)
         ) return;
         
+        // Get PostHog distinctId
+        const distinctId = getPostHogDistinctId();
+        
         // Prepare message data for storage
         const messageData: ChatMessageStorage = {
           sessionId,
           role: message.role, // Now we know this is either 'user' or 'assistant'
           content: message.content,
-          previousMessageId: lastMessageId || undefined
+          previousMessageId: lastMessageId || undefined,
+          distinctId // Add distinctId to the request
         };
         
         // Send message to storage API
@@ -154,10 +160,14 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
     if (isOpen && sessionId && messages.length === 1 && messages[0].id === "initial" && !lastMessageId && !storedMessageIds.has("initial")) {
       const storeInitialMessage = async () => {
         try {
+          // Get PostHog distinctId
+          const distinctId = getPostHogDistinctId();
+          
           const messageData: ChatMessageStorage = {
             sessionId,
             role: 'assistant',
-            content: initialMessage
+            content: initialMessage,
+            distinctId // Add distinctId to the request
           };
           
           const response = await fetch('/api/chat-storage', {

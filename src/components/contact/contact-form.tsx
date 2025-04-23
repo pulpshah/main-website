@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { getPostHogDistinctId, identifyPostHogUser } from "@/components/PostHogProvider";
 
 interface FormState {
   name: string;
@@ -8,6 +9,7 @@ interface FormState {
   company: string;
   subject: string;
   message: string;
+  distinctId?: string;
 }
 
 interface FormErrors {
@@ -77,12 +79,30 @@ export default function ContactForm() {
     setSubmitStatus('idle');
     
     try {
+      // Get PostHog distinctId
+      const distinctId = getPostHogDistinctId();
+      
+      // Identify user in PostHog with their email and name
+      if (distinctId) {
+        identifyPostHogUser(formState.email, {
+          name: formState.name,
+          company: formState.company || undefined,
+          $email: formState.email
+        });
+      }
+      
+      // Add distinctId to the form data
+      const formData = {
+        ...formState,
+        distinctId
+      };
+      
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formState),
+        body: JSON.stringify(formData),
       });
       
       const data = await response.json();

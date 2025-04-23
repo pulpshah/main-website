@@ -73,8 +73,6 @@ export async function POST(req: Request) {
       },
     });
 
-    console.log('Pinecone results:', results.result.hits);
-    
     // Extract text from the fields.text property based on the console output
     if (results.result.hits && results.result.hits.length > 0) {
       contextFromPinecone = results.result.hits
@@ -92,8 +90,7 @@ export async function POST(req: Request) {
   const sitemapFormatted = Object.entries(sitemap)
     .map(([path, description]) => `- ${path}: ${description}`)
     .join('\n');
-
-  console.log('Origin:', origin);
+    
   const baseUrl = origin;
   
   const mainSystemMessage = `

@@ -56,3 +56,28 @@ function SuspendedPostHogPageView() {
     </Suspense>
   )
 }
+
+// Utility function to get the user's distinct ID
+export function getPostHogDistinctId(): string {
+  if (typeof window !== 'undefined') {
+    return posthog.get_distinct_id();
+  }
+  return '';
+}
+
+// Utility function to identify the user
+export function identifyPostHogUser(email: string, properties?: Record<string, unknown>): void {
+  if (typeof window !== 'undefined') {
+    posthog.identify(email, properties);
+  }
+}
+
+// Utility function to capture events
+export function capturePostHogEvent(
+  eventName: string, 
+  properties?: Record<string, unknown>
+): void {
+  if (typeof window !== 'undefined') {
+    posthog.capture(eventName, properties);
+  }
+}

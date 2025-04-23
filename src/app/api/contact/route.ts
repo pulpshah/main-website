@@ -1,5 +1,14 @@
 import { NextResponse } from "next/server";
 import neo4j from "neo4j-driver";
+import { PostHog } from "posthog-node";
+
+// Initialize PostHog client
+const posthogClient = new PostHog(
+  process.env.NEXT_PUBLIC_POSTHOG_KEY || "",
+  {
+    host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://app.posthog.com",
+  }
+);
 
 // Interface for contact form data
 interface ContactFormData {
@@ -8,6 +17,7 @@ interface ContactFormData {
   company?: string;
   subject: string;
   message: string;
+  distinctId?: string; // PostHog distinct ID for user identification
 }
 
 // Storage function to connect to Neo4j and store contact data
@@ -48,7 +58,8 @@ async function storeContactInNeo4j(data: ContactFormData) {
         company: $company,
         subject: $subject,
         message: $message,
-        timestamp: $timestamp
+        timestamp: $timestamp,
+        distinctId: $distinctId
       })
       RETURN c
       `,
@@ -58,7 +69,8 @@ async function storeContactInNeo4j(data: ContactFormData) {
         company: data.company || "",
         subject: data.subject,
         message: data.message,
-        timestamp: timestamp
+        timestamp: timestamp,
+        distinctId: data.distinctId || ""
       }
     );
     
@@ -102,8 +114,37 @@ export async function POST(request: Request) {
       );
     }
     
+    // Identify user in PostHog using email as the ID if no distinctId provided
+    const distinctId = data.distinctId || data.email;
+    
+    // Identify the user
+    posthogClient.identify({
+      distinctId: distinctId,
+      properties: {
+        name: data.name,
+        email: data.email,
+        company: data.company || undefined
+      }
+    });
+    
+    // Track the contact form submission event
+    posthogClient.capture({
+      distinctId: distinctId,
+      event: 'contact_form_submitted',
+      properties: {
+        subject: data.subject,
+        has_company: !!data.company
+      }
+    });
+    
+    // Add the distinctId to the data for Neo4j storage
+    data.distinctId = distinctId;
+    
     // Store data in Neo4j
     await storeContactInNeo4j(data);
+    
+    // Flush events before ending the request
+    await posthogClient.flush();
     
     // Return success response
     return NextResponse.json(

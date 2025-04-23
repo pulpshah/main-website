@@ -1,5 +1,14 @@
 import { NextResponse } from "next/server";
 import neo4j from "neo4j-driver";
+import { PostHog } from "posthog-node";
+
+// Initialize PostHog client
+const posthogClient = new PostHog(
+  process.env.NEXT_PUBLIC_POSTHOG_KEY || "",
+  {
+    host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://app.posthog.com",
+  }
+);
 
 // Interface for chat message data
 interface ChatMessageData {
@@ -7,6 +16,7 @@ interface ChatMessageData {
   role: 'user' | 'assistant';
   content: string;
   previousMessageId?: string;
+  distinctId?: string; // PostHog distinct ID for user identification
 }
 
 // Interface for Neo4j query parameters
@@ -17,6 +27,7 @@ interface Neo4jQueryParams {
   content: string;
   timestamp: string;
   previousMessageId?: string;
+  distinctId?: string; // PostHog distinct ID for user identification
 }
 
 // Storage function to connect to Neo4j and store chat messages
@@ -58,7 +69,8 @@ async function storeChatMessageInNeo4j(data: ChatMessageData) {
       sessionId: data.sessionId,
       role: data.role,
       content: data.content,
-      timestamp
+      timestamp,
+      distinctId: data.distinctId
     };
     
     if (data.previousMessageId) {
@@ -70,7 +82,8 @@ async function storeChatMessageInNeo4j(data: ChatMessageData) {
           sessionId: $sessionId,
           role: $role,
           content: $content,
-          timestamp: $timestamp
+          timestamp: $timestamp,
+          distinctId: $distinctId
         })
         CREATE (prev)-[:NEXT]->(curr)
         RETURN curr.messageId as messageId
@@ -85,6 +98,7 @@ async function storeChatMessageInNeo4j(data: ChatMessageData) {
           role: $role,
           content: $content,
           timestamp: $timestamp,
+          distinctId: $distinctId,
           isFirst: true
         })
         RETURN curr.messageId as messageId
@@ -129,6 +143,27 @@ export async function POST(request: Request) {
       );
     }
     
+    // If a distinctId is provided, identify the user
+    if (data.distinctId) {
+      posthogClient.identify({
+        distinctId: data.distinctId,
+        properties: {
+          sessionId: data.sessionId
+        }
+      });
+      
+      // Track the chat message event
+      posthogClient.capture({
+        distinctId: data.distinctId,
+        event: 'chat_message_sent',
+        properties: {
+          sessionId: data.sessionId,
+          role: data.role,
+          contentLength: data.content.length,
+        }
+      });
+    }
+    
     // Store message in Neo4j
     const result = await storeChatMessageInNeo4j(data);
     
@@ -140,6 +175,11 @@ export async function POST(request: Request) {
         },
         { status: 500 }
       );
+    }
+    
+    // Flush PostHog events if there's a user to identify
+    if (data.distinctId) {
+      await posthogClient.flush();
     }
     
     // Return success response with the message ID

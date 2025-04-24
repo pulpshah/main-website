@@ -227,6 +227,24 @@ export const usePageData = (options?: { debug?: boolean }) => {
 
           const structuredText = dedupeBlocks(structuredTextRaw);
 
+          // Send to API route (on trigger, should be after deduping and new page change) 
+          // Need to use MutationObserver to avoid spam updates
+          fetch("/api/pinecone-update", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              blocks: structuredText,
+              url: window.location.href,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log("Pinecone upload successful:", data);
+            })
+            .catch((err) => {
+              console.error("Pinecone upload failed:", err);
+            });
+
           const links = Array.from(document.querySelectorAll("a[href]"))
             .filter((link) => !isPartOfChatbot(link as HTMLElement))
             .map((link) => ({

@@ -4,16 +4,37 @@ import { useState, useRef, useEffect } from "react";
 import { Send, X, MessageSquare, Bot, User, AlertCircle } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
-import { useChat } from '@ai-sdk/react'
-
+import { useChat } from "@ai-sdk/react";
+import { PageData, usePageData } from "@/lib/page-data-collector";
 interface ChatbotProps {
   initialMessage?: string;
 }
 
-export function Chatbot({ initialMessage = "Hi there! How can I help you today?" }: ChatbotProps) {
+async function uploadPinecone(structuredText: PageData["structuredText"]) {
+  fetch("/api/pinecone-update", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      blocks: structuredText,
+      url: window.location.href,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Pinecone upload successful:", data);
+    })
+    .catch((err) => {
+      console.error("Pinecone upload failed:", err);
+    });
+}
+
+export function Chatbot({
+  initialMessage = "Hi there! How can I help you today?",
+}: ChatbotProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [hasError, setHasError] = useState(false);
-  
+  const { structuredText } = usePageData();
+
   const {
     messages,
     input,
@@ -21,7 +42,7 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
     handleSubmit: handleChatSubmit,
     status,
     reload,
-    stop
+    stop,
   } = useChat({
     api: "/api/chat",
     initialMessages: [
@@ -29,19 +50,19 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
         id: "initial",
         content: initialMessage,
         role: "assistant",
-      }
+      },
     ],
     onError: () => {
       setHasError(true);
-    }
+    },
   });
-  
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-  
+
   useEffect(() => {
     if (isOpen) {
       scrollToBottom();
@@ -52,13 +73,14 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
     e.preventDefault();
     setHasError(false);
     handleChatSubmit(e);
+    uploadPinecone(structuredText);
   };
 
   const handleRetry = () => {
     setHasError(false);
     reload();
   };
-  
+
   return (
     <>
       {/* Chatbot toggle button */}
@@ -72,12 +94,14 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
       >
         <MessageSquare className="h-6 w-6" />
       </Button>
-      
+
       {/* Chat overlay */}
-      <div 
+      <div
         className={cn(
           "fixed bottom-24 right-6 flex h-[500px] w-[350px] flex-col rounded-lg bg-zinc-900/95 backdrop-blur-sm shadow-xl transition-all duration-300 ease-in-out z-50 border border-zinc-800",
-          isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
+          isOpen
+            ? "opacity-100 scale-100"
+            : "opacity-0 scale-95 pointer-events-none"
         )}
       >
         {/* Chat header */}
@@ -96,7 +120,7 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
             <X className="h-4 w-4" />
           </Button>
         </div>
-        
+
         {/* Chat messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-zinc-900">
           {messages.map((message) => (
@@ -107,11 +131,11 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
                 message.role === "user" ? "flex-row-reverse" : "flex-row"
               )}
             >
-              <div 
+              <div
                 className={cn(
                   "flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center",
-                  message.role === "user" 
-                    ? "bg-gradient-to-r from-purple-600 to-pink-500" 
+                  message.role === "user"
+                    ? "bg-gradient-to-r from-purple-600 to-pink-500"
                     : "bg-green-700"
                 )}
               >
@@ -154,9 +178,11 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
               </div>
               <div className="flex flex-col space-y-2 max-w-[80%]">
                 <div className="rounded-lg p-3 bg-red-600/20 text-red-300 border border-red-600/30 rounded-tl-none">
-                  <p className="text-sm">Sorry, there was an error processing your request.</p>
+                  <p className="text-sm">
+                    Sorry, there was an error processing your request.
+                  </p>
                 </div>
-                <Button 
+                <Button
                   className="self-start text-xs bg-red-600/30 hover:bg-red-600/50 text-red-300"
                   size="sm"
                   onClick={handleRetry}
@@ -168,7 +194,6 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
           )}
           <div ref={messagesEndRef} />
         </div>
-        
         {/* Chat input */}
         <form onSubmit={onSubmit} className="border-t border-zinc-800 p-4">
           <div className="flex items-center gap-2">
@@ -206,4 +231,4 @@ export function Chatbot({ initialMessage = "Hi there! How can I help you today?"
       </div>
     </>
   );
-} 
+}

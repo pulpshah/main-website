@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header/header";
 import { Footer } from "@/components/footer";
@@ -13,6 +13,8 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+const inter = Inter({ subsets: ["latin"] });
+
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -20,7 +22,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Pulp",
-  description: "Pulp is the AI-powered platform for full-cycle communications and engagement strategy. Unlock deep audience insights, optimize messaging, and drive impact with real-time data, NLP, and interaction design. Elevate your strategy with adaptive AI for personal, commercial, and civic applications.",
+  description:
+    "Pulp is the AI-powered platform for full-cycle communications and engagement strategy. Unlock deep audience insights, optimize messaging, and drive impact with real-time data, NLP, and interaction design. Elevate your strategy with adaptive AI for personal, commercial, and civic applications.",
 };
 
 export const viewport: Viewport = {
@@ -35,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" style={{ maxWidth: "100vw" }} suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.className} antialiased bg-background text-foreground overflow-x-hidden`}
         style={{ maxWidth: "100vw" }}
         suppressHydrationWarning
       >

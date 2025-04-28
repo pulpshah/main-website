@@ -4,7 +4,7 @@
 
 import { useState, useEffect, useRef } from "react";
 
-interface PageData {
+export interface PageData {
   url: string;
   title: string;
   structuredText: Array<{
@@ -116,182 +116,160 @@ export const usePageData = (options?: { debug?: boolean }) => {
       if (updatingRef.current) return;
       updatingRef.current = true;
 
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      try {
+        const currentUrl = window.location.href;
+        const currentContentSignature = getContentSignature();
+        if (
+          currentUrl === lastUrlRef.current &&
+          currentContentSignature === lastContentSignatureRef.current
+        ) {
+          updatingRef.current = false;
+          return;
+        }
 
-      timeoutRef.current = setTimeout(() => {
-        try {
-          const currentUrl = window.location.href;
-          const currentContentSignature = getContentSignature();
-          if (
-            currentUrl === lastUrlRef.current &&
-            currentContentSignature === lastContentSignatureRef.current
-          ) {
-            updatingRef.current = false;
-            return;
-          }
+        lastUrlRef.current = currentUrl;
+        lastContentSignatureRef.current = currentContentSignature;
 
-          lastUrlRef.current = currentUrl;
-          lastContentSignatureRef.current = currentContentSignature;
+        if (options?.debug) {
+          console.log("Page change detected:", currentUrl);
+        }
 
-          if (options?.debug) {
-            console.log("Page change detected:", currentUrl);
-          }
+        const buttonTexts = new Set<string>();
 
-          const buttonTexts = new Set<string>();
-
-          const buttons = Array.from(
-            document.querySelectorAll(
-              "button, input[type='submit'], [role='button']"
-            )
+        const buttons = Array.from(
+          document.querySelectorAll(
+            "button, input[type='submit'], [role='button']"
           )
-            .filter((button) => !isPartOfChatbot(button as HTMLElement))
-            .map((button) => {
-              const text = (
-                (button as HTMLElement).innerText.trim() ||
-                button.getAttribute("value") ||
-                "No text"
-              ).replace(/\s+/g, " ");
-              buttonTexts.add(text);
-              return {
-                text,
-                action: button.getAttribute("onclick") || "No direct action",
-                path: getElementPath(button as HTMLElement),
-              };
-            })
-            .filter((button) => button.text !== "No text");
+        )
+          .filter((button) => !isPartOfChatbot(button as HTMLElement))
+          .map((button) => {
+            const text = (
+              (button as HTMLElement).innerText.trim() ||
+              button.getAttribute("value") ||
+              "No text"
+            ).replace(/\s+/g, " ");
+            buttonTexts.add(text);
+            return {
+              text,
+              action: button.getAttribute("onclick") || "No direct action",
+              path: getElementPath(button as HTMLElement),
+            };
+          })
+          .filter((button) => button.text !== "No text");
 
-          const candidates = Array.from(
-            document.querySelectorAll(
-              'section, article, div[class*="max-w"], div[class*="py-"], div[class*="space-y"]'
-            )
-          ).filter((el) => !isPartOfChatbot(el as HTMLElement));
+        const candidates = Array.from(
+          document.querySelectorAll(
+            'section, article, div[class*="max-w"], div[class*="py-"], div[class*="space-y"]'
+          )
+        ).filter((el) => !isPartOfChatbot(el as HTMLElement));
 
-          const structuredTextRaw = candidates
-            .map((el) => {
-              const textChunks: string[] = [];
-              const links: Array<{ text: string; url: string }> = [];
-              const images: Array<{
-                src: string;
-                alt: string;
-                width: number;
-                height: number;
-              }> = [];
+        const structuredTextRaw = candidates
+          .map((el) => {
+            const textChunks: string[] = [];
+            const links: Array<{ text: string; url: string }> = [];
+            const images: Array<{
+              src: string;
+              alt: string;
+              width: number;
+              height: number;
+            }> = [];
 
-              const traverse = (node: Element | ChildNode) => {
-                if (
-                  node.nodeType === Node.TEXT_NODE &&
-                  node.textContent?.trim()
-                ) {
-                  textChunks.push(node.textContent.trim());
-                }
-                if (node instanceof HTMLElement) {
-                  if (node.tagName === "A") {
-                    const anchor = node as HTMLAnchorElement;
-                    if (anchor.href) {
-                      links.push({
-                        text: anchor.innerText.trim(),
-                        url: anchor.href,
-                      });
-                    }
-                  }
-                  if (node.tagName === "IMG") {
-                    const img = node as HTMLImageElement;
-                    images.push({
-                      src: img.src,
-                      alt: img.alt || "No alt text",
-                      width: img.width,
-                      height: img.height,
+            const traverse = (node: Element | ChildNode) => {
+              if (
+                node.nodeType === Node.TEXT_NODE &&
+                node.textContent?.trim()
+              ) {
+                textChunks.push(node.textContent.trim());
+              }
+              if (node instanceof HTMLElement) {
+                if (node.tagName === "A") {
+                  const anchor = node as HTMLAnchorElement;
+                  if (anchor.href) {
+                    links.push({
+                      text: anchor.innerText.trim(),
+                      url: anchor.href,
                     });
                   }
-                  Array.from(node.childNodes).forEach(traverse);
                 }
-              };
+                if (node.tagName === "IMG") {
+                  const img = node as HTMLImageElement;
+                  images.push({
+                    src: img.src,
+                    alt: img.alt || "No alt text",
+                    width: img.width,
+                    height: img.height,
+                  });
+                }
+                Array.from(node.childNodes).forEach(traverse);
+              }
+            };
 
-              traverse(el);
+            traverse(el);
 
-              const text = textChunks.join("\n\n");
+            const text = textChunks.join("\n\n");
 
-              if (text.length > 5000 && el.childElementCount > 5) return null;
+            if (text.length > 5000 && el.childElementCount > 5) return null;
 
-              return {
-                text,
-                path: getElementPath(el as HTMLElement),
-                links,
-                images,
-              };
-            })
-            .filter(
-              (block): block is Exclude<typeof block, null> =>
-                !!block && block.text.length > 30
-            );
-
-          const structuredText = dedupeBlocks(structuredTextRaw);
-
-          // Send to API route (on trigger, should be after deduping and new page change) 
-          // Need to use MutationObserver to avoid spam updates
-          fetch("/api/pinecone-update", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              blocks: structuredText,
-              url: window.location.href,
-            }),
+            return {
+              text,
+              path: getElementPath(el as HTMLElement),
+              links,
+              images,
+            };
           })
-            .then((res) => res.json())
-            .then((data) => {
-              console.log("Pinecone upload successful:", data);
-            })
-            .catch((err) => {
-              console.error("Pinecone upload failed:", err);
-            });
+          .filter(
+            (block): block is Exclude<typeof block, null> =>
+              !!block && block.text.length > 30
+          );
 
-          const links = Array.from(document.querySelectorAll("a[href]"))
-            .filter((link) => !isPartOfChatbot(link as HTMLElement))
-            .map((link) => ({
-              text: (link as HTMLElement).innerText.trim(),
-              url: (link as HTMLAnchorElement).href,
-              path: getElementPath(link as HTMLElement),
-            }))
-            .filter((link) => link.text);
+        const structuredText = dedupeBlocks(structuredTextRaw);
 
-          const images = Array.from(document.querySelectorAll("img"))
-            .filter((img) => !isPartOfChatbot(img as HTMLElement))
-            .map((img) => {
-              const image = img as HTMLImageElement;
-              return {
-                src: image.src,
-                alt: image.alt || "No alt text",
-                width: image.width,
-                height: image.height,
-                path: getElementPath(image),
-              };
-            });
+        const links = Array.from(document.querySelectorAll("a[href]"))
+          .filter((link) => !isPartOfChatbot(link as HTMLElement))
+          .map((link) => ({
+            text: (link as HTMLElement).innerText.trim(),
+            url: (link as HTMLAnchorElement).href,
+            path: getElementPath(link as HTMLElement),
+          }))
+          .filter((link) => link.text);
 
-          setPageData({
-            url: window.location.href,
-            title: document.title,
-            structuredText,
-            links,
-            buttons,
-            images,
+        const images = Array.from(document.querySelectorAll("img"))
+          .filter((img) => !isPartOfChatbot(img as HTMLElement))
+          .map((img) => {
+            const image = img as HTMLImageElement;
+            return {
+              src: image.src,
+              alt: image.alt || "No alt text",
+              width: image.width,
+              height: image.height,
+              path: getElementPath(image),
+            };
           });
 
-          if (options?.debug) {
-            console.log("Updated Page Data:", {
-              url: currentUrl,
-              title: document.title,
-              textCount: structuredText.length,
-              linksCount: links.length,
-              buttonsCount: buttons.length,
-              imagesCount: images.length,
-            });
-          }
-        } catch (error) {
-          console.error("Error extracting page data:", error);
-        } finally {
-          updatingRef.current = false;
+        setPageData({
+          url: window.location.href,
+          title: document.title,
+          structuredText,
+          links,
+          buttons,
+          images,
+        });
+
+        if (options?.debug) {
+          console.log("Updated Page Data:", {
+            url: currentUrl,
+            title: document.title,
+            textCount: structuredText.length,
+            linksCount: links.length,
+            buttonsCount: buttons.length,
+            imagesCount: images.length,
+          });
         }
-      }, 300);
+      } catch (error) {
+        console.error("Error extracting page data:", error);
+      } finally {
+        updatingRef.current = false;
+      }
     };
 
     extractPageData();
@@ -340,6 +318,7 @@ export const usePageData = (options?: { debug?: boolean }) => {
 
     return () => {
       observer.disconnect();
+
       clearInterval(urlCheckInterval);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("popstate", handlePopState);

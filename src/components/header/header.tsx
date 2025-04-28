@@ -128,7 +128,7 @@ export function Header() {
 
         <div className="flex items-center md:space-x-24" suppressHydrationWarning>
           <Button className="hidden sm:inline-flex bg-purple-600 hover:bg-purple-500 text-white shadow-lg shadow-purple-900/20 transition-all hover:shadow-purple-800/30">
-            Request Demo
+            Get Started
           </Button>
           
           {/* Mobile menu button */}

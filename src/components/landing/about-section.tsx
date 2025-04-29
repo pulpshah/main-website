@@ -1,13 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { Github, XIcon, Linkedin, Mail, ChevronRight } from "lucide-react";
-
 import { Dock, DockIcon } from "@/components/magicui/dock";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import { AnimatedGradientText } from "@/components/magicui/animated-gradient-text";
 import { BoxReveal } from "@/components/magicui/box-reveal";
 import { WarpBackground } from "@/components/magicui/warp-background";
+
+import Link from "next/link";
+import { Github, XIcon, Linkedin, Mail, ChevronRight } from "lucide-react";
 
 import {
   Tooltip,
@@ -152,7 +152,10 @@ export function BoxRevealDemo() {
             </span>
             .
             <br />
-            -&gt; 100% satisfaction, 24/7 support.
+            <span className="mt-2.5 block">
+              {" "}
+              -&gt; 100% satisfaction, 24/7 support.{" "}
+            </span>
           </p>
         </div>
       </BoxReveal>
@@ -162,7 +165,7 @@ export function BoxRevealDemo() {
 
 export function DockDemo() {
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center -mt-5">
       <TooltipProvider>
         <Dock direction="middle">
           {/* GitHub */}

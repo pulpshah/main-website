@@ -34,6 +34,9 @@ export function Chatbot({
   const [isOpen, setIsOpen] = useState(false);
   const [hasError, setHasError] = useState(false);
   const { structuredText } = usePageData();
+  const lastUploadedStructuredTextRef = useRef<
+    PageData["structuredText"] | null
+  >(null);
 
   const {
     messages,
@@ -69,11 +72,20 @@ export function Chatbot({
     }
   }, [messages, isOpen]);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setHasError(false);
+
+    const lastUploaded = lastUploadedStructuredTextRef.current;
+
+    if (JSON.stringify(structuredText) !== JSON.stringify(lastUploaded)) {
+      await uploadPinecone(structuredText);
+      lastUploadedStructuredTextRef.current = structuredText;
+    } else {
+      console.log("Structured text unchanged — skipping Pinecone upload.");
+    }
+
     handleChatSubmit(e);
-    uploadPinecone(structuredText);
   };
 
   const handleRetry = () => {

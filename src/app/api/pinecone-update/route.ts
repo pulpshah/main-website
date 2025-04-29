@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid input" }, { status: 400 });
     }
 
-    const namespace = pc.index(INDEX_NAME, INDEX_HOST);
+    const namespace = pc.index(INDEX_NAME, INDEX_HOST).namespace("default");;
 
     const records = blocks.map((block, i) => ({
       _id: i.toString(),

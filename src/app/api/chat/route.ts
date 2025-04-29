@@ -22,7 +22,7 @@ export async function POST(req: Request) {
   const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY || "" });
 
   const indexName = "dev";
-  const index = pc.index(indexName);
+  const index = pc.index(indexName).namespace("default");;
 
   // Get the last user message to use as query
   const lastUserMessage =

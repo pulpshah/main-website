@@ -4,6 +4,7 @@ import { BellIcon, Share2Icon, RocketIcon, AwardIcon } from "lucide-react";
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import AnimatedBeamMultipleOutputDemo from "@/components/landing/animated-beam-multiple-outputs";
+import { TextAnimate } from "@/components/magicui/text-animate";
 import AnimatedListDemo from "@/components/landing/animated-list-demo";
 import { useEffect, useRef, useState } from "react";
 
@@ -72,8 +73,9 @@ export default function MarketSection() {
 
           <div className="flex flex-col justify-center order-1 md:order-2">
             <h2 className="text-4xl font-bold mb-6 text-black">
-              Unmatched Market Performance
+              <TextAnimate>Unmatched Market Performance</TextAnimate>
             </h2>
+
             <p className="text-black mb-6 leading-relaxed max-w-lg">
               {
                 "See why we're recognized as leaders in execution and market impact. Explore our latest innovations and integrations powering businesses globally."

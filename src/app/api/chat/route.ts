@@ -1,13 +1,13 @@
-import { groq } from '@ai-sdk/groq';
-import { streamText } from 'ai';
-import { Pinecone } from '@pinecone-database/pinecone'
+import { groq } from "@ai-sdk/groq";
+import { streamText } from "ai";
+import { Pinecone } from "@pinecone-database/pinecone";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
 // Define message type
 interface ChatMessage {
-  role: 'user' | 'assistant' | 'system';
+  role: "user" | "assistant" | "system";
   content: string;
 }
 
@@ -18,20 +18,19 @@ interface PineconeHitFields {
 }
 
 export async function POST(req: Request) {
-  const { messages } = await req.json() as { messages: ChatMessage[] };
-  const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY || '' });
+  const { messages } = (await req.json()) as { messages: ChatMessage[] };
+  const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY || "" });
 
-  const indexName = 'main-website';
+  const indexName = "dev";
   const index = pc.index(indexName);
 
   // Get the last user message to use as query
-  const lastUserMessage = messages
-    .filter(msg => msg.role === 'user')
-    .pop()?.content || '';
+  const lastUserMessage =
+    messages.filter((msg) => msg.role === "user").pop()?.content || "";
 
   // Query Pinecone for relevant context
   let contextFromPinecone: string[] = [];
-  
+
   try {
     const results = await index.searchRecords({
       query: {
@@ -40,23 +39,23 @@ export async function POST(req: Request) {
       },
     });
 
-    console.log('Pinecone results:', results.result.hits);
-    
+    console.log("Pinecone results:", results.result.hits);
+
     // Extract text from the fields.text property based on the console output
     if (results.result.hits && results.result.hits.length > 0) {
       contextFromPinecone = results.result.hits
-        .map(hit => {
+        .map((hit) => {
           const fields = hit.fields as PineconeHitFields;
-          return fields?.text || '';
+          return fields?.text || "";
         })
         .filter(Boolean);
     }
-    
-    console.log('Pinecone context:', contextFromPinecone);
+
+    console.log("Pinecone context:", contextFromPinecone);
   } catch (error) {
-    console.error('Error querying Pinecone:', error);
+    console.error("Error querying Pinecone:", error);
   }
-  
+
   const mainSystemMessage = `
   You are the conversational concierge and strategic guide for Pulp — a premium communication intelligence suite that helps businesses turn language into leverage. Your job is to listen carefully, respond accurately, and help users understand what Pulp does, how it works, and why it matters. Prioritize user intent and understanding, not just literal interpretation. Your replies should be grounded, confident, and clear — like someone who understands both product and people.
 
@@ -103,21 +102,26 @@ If they mention their team, role, or company, tailor your reply with context-spe
 Final principle:
 
 Accuracy comes first. But how you deliver it — tone, structure, vocabulary — should be optimized for the moment. Help people understand and feel the value of Pulp. Be clear, grounded, and appropriately persuasive.
-  `
+  `;
 
   // Prepare system message with context
   const systemMessageWithContext: ChatMessage = {
-    role: 'system',
-    content: mainSystemMessage+`Answer the user's question based on this context if it makes sense. Context: ${contextFromPinecone.join('\n\n')}`
+    role: "system",
+    content:
+      mainSystemMessage +
+      `Answer the user's question based on this context if it makes sense. Context: ${contextFromPinecone.join(
+        "\n\n"
+      )}`,
   };
-  
+
   // Add system message to beginning if we have context
-  const messagesWithContext: ChatMessage[] = contextFromPinecone.length > 0 
-    ? [systemMessageWithContext, ...messages]
-    : messages;
+  const messagesWithContext: ChatMessage[] =
+    contextFromPinecone.length > 0
+      ? [systemMessageWithContext, ...messages]
+      : messages;
 
   const result = streamText({
-    model: groq('llama-3.3-70b-versatile'),
+    model: groq("llama-3.3-70b-versatile"),
     messages: messagesWithContext,
   });
 

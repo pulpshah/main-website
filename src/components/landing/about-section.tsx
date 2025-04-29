@@ -9,7 +9,12 @@ import { AnimatedGradientText } from "@/components/magicui/animated-gradient-tex
 import { BoxReveal } from "@/components/magicui/box-reveal";
 import { WarpBackground } from "@/components/magicui/warp-background";
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -17,14 +22,24 @@ export default function AboutSection() {
   return (
     <section className="w-full text-white px-6 py-40 flex flex-col items-center justify-center relative">
       <div className="flex flex-col md:flex-row items-start justify-between w-full max-w-7xl gap-20 md:gap-40 items-stretch">
-        
         {/* Left Column */}
         <div className="flex flex-col justify-start max-w-2xl space-y-12 text-gray-300 text-center md:text-left">
           <h2 className="text-4xl md:text-6xl font-semibold leading-tight tracking-tight break-keep">
-            <div className="text-left"> <span className = "tracking-widest ml-3 "> › › </span> Empower Your <br /> Conversations <span className="text-gray-400 tracking-widest ml-3">  › › › </span></div> 
+            <div className="text-left">
+              {" "}
+              <span className="tracking-widest ml-3 "> › › </span> Empower Your{" "}
+              <br /> Conversations{" "}
+              <span className="text-gray-400 tracking-widest ml-3">
+                {" "}
+                › › ›{" "}
+              </span>
+            </div>
             <div className="text-right">
               <span className="bg-gradient-to-r from-[#D8B4F8] to-primary bg-clip-text text-transparent font-semibold">
-              <span className="text-gray-400 tracking-widest  "> </span> Engineer Your <span className=" tracking-widest ml-2">  ‹ ‹ ‹ </span> Engagement 
+                <span className="text-gray-400 tracking-widest  "> </span>{" "}
+                Engineer Your{" "}
+                <span className=" tracking-widest ml-2"> ‹ ‹ ‹ </span>{" "}
+                Engagement
               </span>
             </div>
           </h2>
@@ -47,7 +62,8 @@ export default function AboutSection() {
               craft, deploy, and monitor conversations — ensuring every message{" "}
               <span className="bg-gradient-to-r from-pink-400 to-amber-300 bg-clip-text text-transparent font-semibold">
                 reaches, resonates, and converts
-              </span>.
+              </span>
+              .
             </p>
 
             <p>
@@ -60,24 +76,22 @@ export default function AboutSection() {
 
         {/* Right Column */}
         <div className="flex flex-col items-center gap-8 w-full max-w-lg">
-          
           {/* Card */}
-          <WarpBackground className="w-full bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden flex flex-col text-black p-0">            <div className="w-full p-6 pb-0">
+          <WarpBackground className="w-full bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden flex flex-col text-black p-0">
+            {" "}
+            <div className="w-full p-6 pb-0">
               <div className="aspect-video rounded-xl overflow-hidden bg-gray-800 flex items-center justify-center">
                 <span className="text-gray-400 text-sm">
                   [ Live Demo Placeholder ]
                 </span>
               </div>
             </div>
-
             <div className="p-6 flex flex-col gap-4">
               <h3 className="text-2xl font-semibold">Your Personal AI Agent</h3>
               <p className="text-black text-base leading-relaxed">
-                Discover advanced features designed to empower your
-                business.
+                Discover advanced features designed to empower your business.
               </p>
             </div>
-
             <div className="flex gap-4 p-6 pt-0">
               <InteractiveHoverButton className="flex-1 bg-black text-white text-base py-2 rounded-full hover:bg-gray-800 transition">
                 Request Demo
@@ -127,13 +141,17 @@ export function AnimatedGradientTextDemo() {
 export function BoxRevealDemo() {
   return (
     <div className="w-full flex flex-col items-center justify-center overflow-hidden gap-4">
-
       <BoxReveal boxColor={"#5046e6"} duration={0.5}>
         <div className="mt-6 text-center">
           <p>
             -&gt; 20+ agents and 5+ products built with
-            <span className="font-semibold text-primary"> state-of-the-art technology, over 5,000 hours of relentless fine-tuning, and a dedicated team of 10 people.</span>.
-            <br/>
+            <span className="font-semibold text-primary">
+              {" "}
+              state-of-the-art technology, over 5,000 hours of relentless
+              fine-tuning, and a dedicated team of 10 people.
+            </span>
+            .
+            <br />
             -&gt; 100% satisfaction, 24/7 support.
           </p>
         </div>
@@ -154,7 +172,10 @@ export function DockDemo() {
                 <Link
                   href="https://github.com/yourprofile"
                   aria-label="GitHub"
-                  className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "size-12 rounded-full")}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "icon" }),
+                    "size-12 rounded-full"
+                  )}
                 >
                   <Github className="size-5" />
                 </Link>
@@ -171,7 +192,10 @@ export function DockDemo() {
                 <Link
                   href="https://x.com/yourprofile"
                   aria-label="X"
-                  className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "size-12 rounded-full")}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "icon" }),
+                    "size-12 rounded-full"
+                  )}
                 >
                   <XIcon className="size-5" />
                 </Link>
@@ -188,7 +212,10 @@ export function DockDemo() {
                 <Link
                   href="https://linkedin.com/in/yourprofile"
                   aria-label="LinkedIn"
-                  className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "size-12 rounded-full")}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "icon" }),
+                    "size-12 rounded-full"
+                  )}
                 >
                   <Linkedin className="size-5" />
                 </Link>
@@ -205,7 +232,10 @@ export function DockDemo() {
                 <Link
                   href="mailto:youremail@example.com"
                   aria-label="Email"
-                  className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "size-12 rounded-full")}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "icon" }),
+                    "size-12 rounded-full"
+                  )}
                 >
                   <Mail className="size-5" />
                 </Link>

@@ -6,6 +6,8 @@ import { CardTitle, CardDescription } from "@/components/ui/card";
 import { SparklesTitle } from "@/components/landing/title";
 import { MagicCard } from "@/components/magicui/magic-card";
 
+import Image from "next/image";
+
 interface LensCardProps {
   imageSrc: string;
   title: string;
@@ -101,37 +103,43 @@ export default function LensCardGrid() {
                 flippedCards[index] ? "rotate-y-180" : ""
               }`}
             >
-              {/* (Back Card) */}
+              {/* Hidden Card */}
               <div className="absolute w-full h-full backface-hidden flex items-center justify-center shadow-md border border-white/10 backdrop-blur-md bg-white/5 p-4 rounded-2xl">
-                <img
-                  src="/horizontal-logo.svg"
-                  alt="Card Back"
-                  className="w-32 h-32 object-contain"
-                />
+                <div className="relative w-32 h-32">
+                  <Image
+                    src="/horizontal-logo.svg"
+                    alt="Card Back"
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
               </div>
 
-              {/* (Real Card) */}
-              
+              {/* Shown Card */}
+
               <MagicCard className="absolute w-full h-full backface-hidden rotate-y-180 flex flex-col shadow-md border border-white/10 backdrop-blur-md bg-white/5 p-4 rounded-2xl">
-                <div className="flex justify-center mb-4">
-                  <img
+                <div className="flex justify-center">
+                  <Image
                     src={card.imageSrc}
                     alt={card.title}
                     width={240}
-                    height={240}
+                    height={160}
                     className="rounded-lg object-cover"
                   />
                 </div>
-                <div className="flex flex-col flex-1">
-                  <CardTitle className="text-lg">{card.title}</CardTitle>
-                  <CardDescription className="text-sm text-gray-300 mt-2">
-                    {card.description}
-                  </CardDescription>
-                  <div className="mt-auto">
-                    <Button size="sm" className="w-full mt-4">
-                      {card.primaryAction}
-                    </Button>
+
+                <div className="flex flex-col justify-between flex-1 mt-4">
+                  <div>
+                    <CardTitle className="text-lg">{card.title}</CardTitle>
+                    <CardDescription className="text-sm text-gray-300 mt-2 leading-relaxed">
+                      {card.description}
+                    </CardDescription>
                   </div>
+
+                  <Button size="sm" className="w-full mt-4">
+                    {card.primaryAction}
+                  </Button>
                 </div>
               </MagicCard>
             </div>

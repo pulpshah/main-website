@@ -91,9 +91,9 @@ export default function MarketSection() {
         <div className="flex flex-col md:grid md:grid-cols-2 gap-12 mt-16">
           <div className="flex flex-col justify-center order-1 md:order-1 ">
             <h2 className="text-4xl font-bold mb-6 text-black">
-              The Benefits of Language Accelerated Automation
+            <TextAnimate>The Benefits of Language Accelerated Automation</TextAnimate>
             </h2>
-            <p className="text-black mb-6 leading-relaxed max-w-lg">
+             <p className="text-black mb-6 leading-relaxed max-w-lg">
               Pulp’s Momentum by the Numbers: Real Stats, Real Progress, Real
               Impact. Our natural language AI enhances comprehension and
               streamlines workflows for both technical and non-technical teams

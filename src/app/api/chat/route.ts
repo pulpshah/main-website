@@ -46,7 +46,11 @@ export async function POST(req: Request) {
       contextFromPinecone = results.result.hits
         .map((hit) => {
           const fields = hit.fields as PineconeHitFields;
-          return fields?.text || "";
+
+          const text = fields?.text || "";
+          const styles = fields?.styledText ? `\n\nStyled text:  ${fields?.styledText} ` : "";
+
+          return text + styles;
         })
         .filter(Boolean);
     }

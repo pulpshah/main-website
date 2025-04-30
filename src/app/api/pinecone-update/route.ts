@@ -16,13 +16,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid input" }, { status: 400 });
     }
 
-    const namespace = pc.index(INDEX_NAME, INDEX_HOST);;
+    const namespace = pc.index(INDEX_NAME, INDEX_HOST);
 
     const records = blocks.map((block, i) => ({
       _id: i.toString(),
       text: block.text,
       path: block.path,
       url: url,
+      styledText: block.styledText,
     }));
 
     await namespace.upsertRecords(records);

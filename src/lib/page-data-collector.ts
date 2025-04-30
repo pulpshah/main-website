@@ -12,6 +12,7 @@ export interface PageData {
     path: string;
     links: Array<{ text: string; url: string }>;
     images: Array<{ src: string; alt: string; width: number; height: number }>;
+    styledText?: Array<string>;
   }>;
   links: Array<{ text: string; url: string; path: string }>;
   buttons: Array<{ text: string; action: string; path: string }>;
@@ -174,13 +175,30 @@ export const usePageData = (options?: { debug?: boolean }) => {
               height: number;
             }> = [];
 
+            const styledChunks: Array<string> = [];
+
             const traverse = (node: Element | ChildNode) => {
               if (
                 node.nodeType === Node.TEXT_NODE &&
                 node.textContent?.trim()
               ) {
                 textChunks.push(node.textContent.trim());
+
+                if (node.parentElement) {
+                  const styles = window.getComputedStyle(node.parentElement);
+                  const text = node.textContent.trim();
+
+                  const color = styles.color;
+                  const fontWeight = styles.fontWeight;
+                  const textDecoration = styles.textDecoration;
+                  const fontStyle = styles.fontStyle;
+
+                  styledChunks.push(
+                    `'${text}' has color [${color}], weight [${fontWeight}], decoration [${textDecoration}], style [${fontStyle}]`
+                  );
+                }
               }
+
               if (node instanceof HTMLElement) {
                 if (node.tagName === "A") {
                   const anchor = node as HTMLAnchorElement;
@@ -191,6 +209,7 @@ export const usePageData = (options?: { debug?: boolean }) => {
                     });
                   }
                 }
+
                 if (node.tagName === "IMG") {
                   const img = node as HTMLImageElement;
                   images.push({
@@ -215,6 +234,7 @@ export const usePageData = (options?: { debug?: boolean }) => {
               path: getElementPath(el as HTMLElement),
               links,
               images,
+              styledText: styledChunks,
             };
           })
           .filter(

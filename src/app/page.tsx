@@ -9,106 +9,66 @@ import MarketSection from "@/components/landing/bento-grid-section";
 export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white relative pb-20 overflow-x-hidden" suppressHydrationWarning>
-      
       {/* Background Pattern */}
       <div className="absolute inset-0 overflow-hidden z-0 opacity-30" suppressHydrationWarning>
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[radial-gradient(#8A3FFC_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" suppressHydrationWarning></div>
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[radial-gradient(#8A3FFC_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" suppressHydrationWarning></div>
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[radial-gradient(#8A3FFC_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" suppressHydrationWarning />
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[radial-gradient(#8A3FFC_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" suppressHydrationWarning />
       </div>
-      
+
       <div className="relative z-10 w-full overflow-hidden" suppressHydrationWarning>
         <div className="w-full max-w-full mx-auto" suppressHydrationWarning>
-
-        {/* About Section*/}
-        <div className="w-full h-px bg-neutral-800" />
-        <AboutSection />
-        </div>
-        <div className="w-full max-w-full px-4 sm:px-6 md:px-8 lg:px-12  mx-auto" suppressHydrationWarning>
-
-        {/* Section Separator - Purple */}
-        <div className="w-full py-4 md:py-6 relative" suppressHydrationWarning>
-          <div className="max-w-sm mx-auto bg-gradient-to-r from-transparent via-purple-500/40 to-transparent h-[2px] shadow-[0_0_8px_rgba(168,85,247,0.5)]" suppressHydrationWarning></div>
-          <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-black border-2 border-purple-500/30 rounded-full flex items-center justify-center" suppressHydrationWarning>
-            <div className="w-3 h-3 bg-purple-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.8)]" suppressHydrationWarning></div>
-          </div>
+          {/* Hero Section */}
+          <div className="w-full h-px bg-neutral-800" />
+          <section data-section="hero">
+            <AboutSection />
+          </section>
         </div>
 
-        {/* Features Section - Blue */}
-        <div className="py-6 md:py-10 w-full" suppressHydrationWarning>
-          <div className="max-w-full mx-auto" suppressHydrationWarning>
-            <FeaturesSection />
-          </div>
-        </div>
+        <div className="w-full max-w-full px-4 sm:px-6 md:px-8 lg:px-12 mx-auto" suppressHydrationWarning>
 
-        {/* Section Separator - Purple */}
-        <div className="w-full py-4 md:py-6 relative" suppressHydrationWarning>
-          <div className="max-w-sm mx-auto bg-gradient-to-r from-transparent via-purple-500/40 to-transparent h-[2px] shadow-[0_0_8px_rgba(168,85,247,0.5)]" suppressHydrationWarning></div>
-          <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-black border-2 border-purple-500/30 rounded-full flex items-center justify-center" suppressHydrationWarning>
-            <div className="w-3 h-3 bg-purple-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.8)]" suppressHydrationWarning></div>
-          </div>
-        </div>
+          {/* Features Section */}
+          <section data-section="features" className="py-6 md:py-10 w-full">
+            <div className="max-w-full mx-auto">
+              <FeaturesSection />
+            </div>
+          </section>
 
-        {/* Bento Grid Section - Blue */}
-        <div className="mt-20 py-6 md:py-10 w-full bg-[#fefefe] rounded-4xl shadow-inner shadow-black/50" suppressHydrationWarning>
-          <div className="width-screen px-8" suppressHydrationWarning>
-            <MarketSection />
-          </div>
-        </div>
-        
-        {/* Risk Section - Red/Purple */}
-        <div className="py-6 md:py-10 w-full" suppressHydrationWarning>
-          <div className="max-w-full mx-auto" suppressHydrationWarning>
-            <RiskSection />
-          </div>
-        </div>
-        
-        {/* Section Separator - Red */}
-        <div className="w-full py-4 md:py-6 relative" suppressHydrationWarning>
-          <div className="max-w-sm mx-auto bg-gradient-to-r from-transparent via-red-500/40 to-transparent h-[2px] shadow-[0_0_8px_rgba(239,68,68,0.5)]" suppressHydrationWarning></div>
-          <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-black border-2 border-red-500/30 rounded-full flex items-center justify-center" suppressHydrationWarning>
-            <div className="w-3 h-3 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.8)]" suppressHydrationWarning></div>
-          </div>
-        </div>
-        
-        {/* Coverage Section - Green */}
-        <div className="py-6 md:py-10 w-full" suppressHydrationWarning>
-          <div className="max-w-full mx-auto" suppressHydrationWarning>
-            <CoverageSection />
-          </div>
-        </div>
-        
-        {/* Section Separator - Green to Purple */}
-        <div className="w-full py-4 md:py-6 relative" suppressHydrationWarning>
-          <div className="max-w-sm mx-auto bg-gradient-to-r from-transparent via-purple-500/40 to-transparent h-[2px] shadow-[0_0_8px_rgba(168,85,247,0.5)]" suppressHydrationWarning></div>
-          <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-black border-2 border-purple-500/30 rounded-full flex items-center justify-center" suppressHydrationWarning>
-            <div className="w-3 h-3 bg-purple-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.8)]" suppressHydrationWarning></div>
-          </div>
-        </div>
-        
-        {/* Disengagement Section - Purple */}
-        <div className="py-6 md:py-10 w-full" suppressHydrationWarning>
-          <div className="max-w-full mx-auto" suppressHydrationWarning>
-            <DisengagementSection />
-          </div>
-        </div>
-        
-        {/* Section Separator - Purple to Pink */}
-        <div className="w-full py-4 md:py-6 relative" suppressHydrationWarning>
-          <div className="max-w-sm mx-auto bg-gradient-to-r from-transparent via-pink-500/40 to-transparent h-[2px] shadow-[0_0_8px_rgba(236,72,153,0.5)]" suppressHydrationWarning></div>
-          <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-black border-2 border-pink-500/30 rounded-full flex items-center justify-center" suppressHydrationWarning>
-            <div className="w-3 h-3 bg-pink-500 rounded-full shadow-[0_0_8px_rgba(236,72,153,0.8)]" suppressHydrationWarning></div>
-          </div>
-        </div>
-        
-        {/* CTA Section */}
-        <div className="py-10 md:py-16 w-full" suppressHydrationWarning>
-          <div className="max-w-full mx-auto" suppressHydrationWarning>
-            <CtaSection />
-          </div>
-        </div>
+          {/* Market Section */}
+          <section data-section="market" className="mt-20 py-6 md:py-10 w-full bg-[#fefefe] rounded-4xl shadow-inner shadow-black/50">
+            <div className="width-screen px-8">
+              <MarketSection />
+            </div>
+          </section>
 
+          {/* Risk Section */}
+          <section data-section="risk" className="py-6 md:py-10 w-full">
+            <div className="max-w-full mx-auto">
+              <RiskSection />
+            </div>
+          </section>
+
+          {/* Coverage Section */}
+          <section data-section="coverage" className="py-6 md:py-10 w-full">
+            <div className="max-w-full mx-auto">
+              <CoverageSection />
+            </div>
+          </section>
+
+          {/* Disengagement Section */}
+          <section data-section="disengagement" className="py-6 md:py-10 w-full">
+            <div className="max-w-full mx-auto">
+              <DisengagementSection />
+            </div>
+          </section>
+
+          {/* CTA Section */}
+          <section data-section="cta" className="py-10 md:py-16 w-full">
+            <div className="max-w-full mx-auto">
+              <CtaSection />
+            </div>
+          </section>
+        </div>
       </div>
     </div>
-  </div>
   );
 }

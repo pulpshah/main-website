@@ -48,9 +48,9 @@ export async function POST(req: Request) {
           const fields = hit.fields as PineconeHitFields;
 
           const text = fields?.text || "";
-          const styles = fields?.styledText ? `\n\nStyled text:  ${fields?.styledText} ` : "";
+          const styles = fields?.styledText || "None";
 
-          return text + styles;
+          return `\n\nFull Context: ${text}\n\nText styles: ${styles}`;
         })
         .filter(Boolean);
     }

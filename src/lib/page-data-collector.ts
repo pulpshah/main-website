@@ -189,12 +189,26 @@ export const usePageData = (options?: { debug?: boolean }) => {
                   const text = node.textContent.trim();
 
                   const color = styles.color;
+
                   const fontWeight = styles.fontWeight;
                   const textDecoration = styles.textDecoration;
                   const fontStyle = styles.fontStyle;
 
+                  // Walk the DOM upwards to find nearest data-section
+                  const getNearestSectionLabel = (node: Node): string => {
+                    let el = node.parentElement;
+                    while (el && el !== document.body) {
+                      const label = el.getAttribute("data-section");
+                      if (label) return label;
+                      el = el.parentElement;
+                    }
+                    return "unknown";
+                  };
+
+                  const section = getNearestSectionLabel(node);
+
                   styledChunks.push(
-                    `'${text}' has color [${color}], weight [${fontWeight}], decoration [${textDecoration}], style [${fontStyle}]`
+                    `'${text}' has color [${color}], weight [${fontWeight}], decoration [${textDecoration}], style [${fontStyle}], and likely appears in the [${section}] section`
                   );
                 }
               }

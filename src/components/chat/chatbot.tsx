@@ -81,6 +81,7 @@ export function Chatbot({
     if (JSON.stringify(structuredText) !== JSON.stringify(lastUploaded)) {
       await uploadPinecone(structuredText);
       lastUploadedStructuredTextRef.current = structuredText;
+      await new Promise((res) => setTimeout(res, 1000)); // Replace with a proper DB update confirmation when available (non-arbitrary delay)
     } else {
       console.log("Structured text unchanged — skipping Pinecone upload.");
     }

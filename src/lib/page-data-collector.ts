@@ -251,7 +251,15 @@ export const usePageData = (options?: { debug?: boolean }) => {
                   const styles = window.getComputedStyle(node.parentElement);
                   const text = node.textContent.trim();
 
-                  const color = styles.color;
+                  let color = styles.color;
+
+                  if (color === "transparent" || styles.webkitTextFillColor === "transparent") {
+                    const bgImage = styles.backgroundImage;
+                    if (bgImage && bgImage.includes("gradient")) {
+                      color = `gradient: ${bgImage}`;
+                    }
+                  }
+                  
                   const fontWeight = styles.fontWeight;
                   const textDecoration = styles.textDecoration;
                   const fontStyle = styles.fontStyle;

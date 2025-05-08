@@ -251,15 +251,21 @@ export const usePageData = (options?: { debug?: boolean }) => {
                   const styles = window.getComputedStyle(node.parentElement);
                   const text = node.textContent.trim();
 
+                  const isTransparent = (val: string) =>
+                    val === "transparent" || val === "rgba(0, 0, 0, 0)";
+
                   let color = styles.color;
 
-                  if (color === "transparent" || styles.webkitTextFillColor === "transparent") {
+                  if (
+                    isTransparent(styles.color) ||
+                    isTransparent(styles.webkitTextFillColor || "")
+                  ) {
                     const bgImage = styles.backgroundImage;
                     if (bgImage && bgImage.includes("gradient")) {
                       color = `gradient: ${bgImage}`;
                     }
                   }
-                  
+
                   const fontWeight = styles.fontWeight;
                   const textDecoration = styles.textDecoration;
                   const fontStyle = styles.fontStyle;

@@ -12,7 +12,7 @@ export interface PageData {
     path: string;
     links: Array<{ text: string; url: string }>;
     images: Array<{ src: string; alt: string; width: number; height: number }>;
-    styledText?: Array<string>;
+    styledText?: string;
   }>;
   links: Array<{ text: string; url: string; path: string }>;
   buttons: Array<{ text: string; action: string; path: string }>;
@@ -83,6 +83,63 @@ const dedupeBlocks = (
   });
 
   return deduped;
+};
+
+const mergeStyledText = (
+  chunks: Array<{
+    text: string;
+    color: string;
+    weight: string;
+    decoration: string;
+    style: string;
+    section: string;
+  }>
+) => {
+  const merged: typeof chunks = [];
+
+  for (const chunk of chunks) {
+    const last = merged[merged.length - 1];
+    if (
+      last &&
+      last.color === chunk.color &&
+      last.weight === chunk.weight &&
+      last.decoration === chunk.decoration &&
+      last.style === chunk.style &&
+      last.section === chunk.section
+    ) {
+      last.text += " " + chunk.text;
+    } else {
+      merged.push({ ...chunk });
+    }
+  }
+
+  return merged;
+};
+
+const serializeStyledText = (
+  chunks: Array<{
+    text: string;
+    color: string;
+    weight: string;
+    decoration: string;
+    style: string;
+    section: string;
+  }>
+): string => {
+  return chunks
+    .slice(0, 20)
+    .map(({ text, color, weight, decoration, style, section }) => {
+      const cleanText = text.replace(/\s+/g, " ").trim();
+      return JSON.stringify({
+        text: cleanText,
+        color,
+        weight,
+        decoration,
+        style,
+        section,
+      });
+    })
+    .join("\n");
 };
 
 export const usePageData = (options?: { debug?: boolean }) => {
@@ -175,7 +232,14 @@ export const usePageData = (options?: { debug?: boolean }) => {
               height: number;
             }> = [];
 
-            const styledChunks: Array<string> = [];
+            const styledChunks: Array<{
+              text: string;
+              color: string;
+              weight: string;
+              decoration: string;
+              style: string;
+              section: string;
+            }> = [];
 
             const traverse = (node: Element | ChildNode) => {
               if (
@@ -189,12 +253,10 @@ export const usePageData = (options?: { debug?: boolean }) => {
                   const text = node.textContent.trim();
 
                   const color = styles.color;
-
                   const fontWeight = styles.fontWeight;
                   const textDecoration = styles.textDecoration;
                   const fontStyle = styles.fontStyle;
 
-                  // Walk the DOM upwards to find nearest data-section
                   const getNearestSectionLabel = (node: Node): string => {
                     let el = node.parentElement;
                     while (el && el !== document.body) {
@@ -207,9 +269,14 @@ export const usePageData = (options?: { debug?: boolean }) => {
 
                   const section = getNearestSectionLabel(node);
 
-                  styledChunks.push(
-                    `'${text}' has color [${color}], weight [${fontWeight}], decoration [${textDecoration}], style [${fontStyle}], and likely appears in the [${section}] section`
-                  );
+                  styledChunks.push({
+                    text,
+                    color,
+                    weight: fontWeight,
+                    decoration: textDecoration,
+                    style: fontStyle,
+                    section,
+                  });
                 }
               }
 
@@ -248,7 +315,7 @@ export const usePageData = (options?: { debug?: boolean }) => {
               path: getElementPath(el as HTMLElement),
               links,
               images,
-              styledText: styledChunks,
+              styledText: serializeStyledText(mergeStyledText(styledChunks)),
             };
           })
           .filter(

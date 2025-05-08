@@ -127,7 +127,6 @@ const serializeStyledText = (
   }>
 ): string => {
   return chunks
-    .slice(0, 20)
     .map(({ text, color, weight, decoration, style, section }) => {
       const cleanText = text.replace(/\s+/g, " ").trim();
       return JSON.stringify({

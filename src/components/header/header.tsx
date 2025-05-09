@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, X } from "lucide-react";
+import { ChevronDown, X, Search } from "lucide-react";
 import { OfferItemsDrawer, offerItems, OfferItemsMobile } from "@/components/header/offer-items-drawer";
 import { 
   ServeItemsDrawer, 
@@ -13,6 +13,7 @@ import {
   businessSizeItems, 
   teamsItems 
 } from "@/components/header/serve-items-drawer";
+import { SearchOverlay } from '@/components/ui/search-overlay';
 
 interface NavigationItem {
   title: string;
@@ -39,6 +40,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMobileSection, setExpandedMobileSection] = useState<string | null>(null);
   const [whoWeServeTab, setWhoWeServeTab] = useState<'industries' | 'business-size' | 'teams'>('industries');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -70,7 +72,7 @@ export function Header() {
 
   return (
     <header className={`sticky top-0 z-50 w-full border-b border-zinc-800 ${isMobileMenuOpen ? 'bg-black' : 'bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/25'}`}>
-      <div className="container flex h-16 items-center justify-between px-4 max-w-full md:mx-12">
+      <div className="container flex h-16 items-center justify-between px-4 max-w-7xl mx-auto">
         <div className="flex items-center" suppressHydrationWarning>
           <Link href="/" className="">
             <Image 
@@ -126,7 +128,16 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center md:space-x-24" suppressHydrationWarning>
+        <div className="flex items-center gap-6" suppressHydrationWarning>
+          {/* Search button */}
+          <button
+            onClick={() => setIsSearchOpen(true)}
+            className="flex items-center justify-center w-10 h-10 text-zinc-400 hover:text-white transition-colors"
+            aria-label="Search"
+          >
+            <Search className="h-5 w-5" />
+          </button>
+          
           <Button className="hidden sm:inline-flex bg-purple-600 hover:bg-purple-500 text-white shadow-lg shadow-purple-900/20 transition-all hover:shadow-purple-800/30">
             Get Started
           </Button>
@@ -186,6 +197,18 @@ export function Header() {
                 <X className="h-6 w-6" />
               </button>
             </div>
+            
+            {/* Add search button to mobile menu */}
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setIsSearchOpen(true);
+              }}
+              className="flex items-center space-x-2 text-zinc-400 hover:text-white transition-colors mb-6"
+            >
+              <Search className="h-5 w-5" />
+              <span>Search</span>
+            </button>
             
             <nav className="flex flex-col space-y-6 mt-4">
               {navItems.map((item) => (
@@ -335,6 +358,12 @@ export function Header() {
           `}</style>
         </div>
       )}
+
+      {/* Search overlay */}
+      <SearchOverlay 
+        isOpen={isSearchOpen} 
+        onClose={() => setIsSearchOpen(false)} 
+      />
     </header>
   );
 }

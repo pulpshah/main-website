@@ -87,7 +87,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -20, opacity: 0 }}
-            className="relative h-full"
+            className="relative h-full overflow-auto"
             onClick={e => e.stopPropagation()}
           >
             {/* Close button */}

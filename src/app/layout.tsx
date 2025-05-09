@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   title: "Pulp",
   description:
     "Pulp is the AI-powered platform for full-cycle communications and engagement strategy. Unlock deep audience insights, optimize messaging, and drive impact with real-time data, NLP, and interaction design. Elevate your strategy with adaptive AI for personal, commercial, and civic applications.",
+  other: {
+    "algolia-site-verification": "6B737321A2046FA0"
+  }
 };
 
 export const viewport: Viewport = {

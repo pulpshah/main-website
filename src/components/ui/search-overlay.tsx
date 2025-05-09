@@ -31,9 +31,9 @@ interface Hit {
 }
 
 const Hit = ({ hit }: { hit: Hit }) => (
-  <div className="p-4 border-b border-zinc-800 last:border-0 hover:bg-zinc-900/50 transition-colors">
-    <h3 className="font-bold text-white">{hit.title}</h3>
-    <p className="text-sm text-zinc-400">{hit.description}</p>
+  <div>
+    <h3 className="font-bold text-black">{hit.title}</h3>
+    <p className="text-sm text-black">{hit.description}</p>
   </div>
 );
 

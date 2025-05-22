@@ -30,10 +30,18 @@ interface Hit {
   description: string;
 }
 
-const Hit = ({ hit }: { hit: Hit }) => (
-  <div>
-    <h3 className="font-bold text-black">{hit.title}</h3>
-    <p className="text-sm text-black">{hit.description}</p>
+const Hit = ({ hit }: { hit: Record<string, unknown> }) => (
+  <div className="text-black">
+    {Object.entries(hit).map(([key, value]) => (
+      <div key={key} className="mb-1">
+        <strong>{key}:</strong>{' '}
+        <span>
+          {typeof value === 'object' && value !== null
+            ? JSON.stringify(value)
+            : String(value)}
+        </span>
+      </div>
+    ))}
   </div>
 );
 

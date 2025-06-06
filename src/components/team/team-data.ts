@@ -21,15 +21,13 @@ export const teamMembers: TeamMember[] = [
     category: "team"
   },
   {
-    id: "bea-dimaculangan",
-    name: "Bea Dimaculangan",
-    position: "Co-Founder & COO",
-    photoUrl: "/team/Bea_Dimaculangan.jpeg",
-    bio: "Bea Dimaculangan is the Chief Operating Officer at Pulp, bringing a wealth of entrepreneurial experience and operational expertise to the team. With a background in co-founding and managing early-stage companies across creative industries, she has played a pivotal role in structuring business operations from the ground up. As co-owner of Darkside Industries, Bea has built a thriving multimedia production studio that has engaged hundreds of artists through professional services and event programming. Her ability to scale creative ventures, design efficient workflows, and execute complex projects positions her as a key driver of Pulp's strategic and operational success.\n\nAt Pulp, Bea ensures that high-level vision translates into actionable execution. With a deep understanding of startup operations, she structures processes to keep projects aligned, streamlined, and scalable. Her experience in managing multidisciplinary teams, developing educational initiatives, and pioneering tech-driven events, such as the world's first Music & Tech Summit in the Metaverse, demonstrates her ability to navigate the intersection of technology, strategy, and creative industries. Bea's leadership ensures that Pulp's operations remain agile, efficient, and positioned for long-term impact.",
+    id: "hannah-peyton",
+    name: "Hannah Peyton",
+    position: "Chief Operations Officer",
+    photoUrl: "/team/Hannah_Peyton.jpeg",
+    bio: "Hannah is an experienced government affairs professional with deep experience in federal policy, civic engagement, and political strategy. She served as a presidential appointee in the Biden Administration for three years, most recently as Deputy White House Liaison at the U.S. Department of Agriculture. There, she helped coordinate agency leadership and advised on the USDA's historic $19.5 billion investment in climate-smart agriculture and carbon capture. With nine years of campaign experience, including national field operations for Biden for President, she brings a sharp understanding of political communications, stakeholder engagement, and public affairs. Her strong relationships in D.C. and with elected officials nationwide make her a trusted connector between technology and government.\n\nAt Pulp, Hannah drives strategic partnerships and business development, leveraging her deep government experience to build relationships across public and private sectors. She identifies and cultivates opportunities for growth while ensuring Pulp's AI solutions meet the complex needs of enterprise clients, from federal agencies to Fortune 500 companies. Her strong network and understanding of institutional decision-making help position Pulp as a trusted partner in digital transformation.",
     category: "team"
   },
-  
-  // Team
   {
     id: "uday-turakhia",
     name: "Uday Turakhia",
@@ -47,13 +45,14 @@ export const teamMembers: TeamMember[] = [
     category: "team"
   },
   {
-    id: "hannah-peyton",
-    name: "Hannah Peyton",
-    position: "VP of Business Development",
-    photoUrl: "/team/Hannah_Peyton.jpeg",
-    bio: "Hannah is an experienced government affairs professional with deep experience in federal policy, civic engagement, and political strategy. She served as a presidential appointee in the Biden Administration for three years, most recently as Deputy White House Liaison at the U.S. Department of Agriculture. There, she helped coordinate agency leadership and advised on the USDA's historic $19.5 billion investment in climate-smart agriculture and carbon capture. With nine years of campaign experience, including national field operations for Biden for President, she brings a sharp understanding of political communications, stakeholder engagement, and public affairs. Her strong relationships in D.C. and with elected officials nationwide make her a trusted connector between technology and government.\n\nAt Pulp, Hannah drives strategic partnerships and business development, leveraging her deep government experience to build relationships across public and private sectors. She identifies and cultivates opportunities for growth while ensuring Pulp's AI solutions meet the complex needs of enterprise clients, from federal agencies to Fortune 500 companies. Her strong network and understanding of institutional decision-making help position Pulp as a trusted partner in digital transformation.",
+    id: "bea-dimaculangan",
+    name: "Bea Dimaculangan",
+    position: "VP of Operations",
+    photoUrl: "/team/Bea_Dimaculangan.jpeg",
+    bio: "Bea Dimaculangan brings a wealth of entrepreneurial experience and operational expertise to the team. With a background in co-founding and managing early-stage companies across creative industries, she has played a pivotal role in structuring business operations from the ground up. As co-owner of Darkside Industries, Bea has built a thriving multimedia production studio that has engaged hundreds of artists through professional services and event programming. Her ability to scale creative ventures, design efficient workflows, and execute complex projects positions her as a key driver of Pulp's strategic and operational success.\n\nAt Pulp, Bea ensures that high-level vision translates into actionable execution. With a deep understanding of startup operations, she structures processes to keep projects aligned, streamlined, and scalable. Her experience in managing multidisciplinary teams, developing educational initiatives, and pioneering tech-driven events, such as the world's first Music & Tech Summit in the Metaverse, demonstrates her ability to navigate the intersection of technology, strategy, and creative industries. Bea's leadership ensures that Pulp's operations remain agile, efficient, and positioned for long-term impact.",
     category: "team"
   },
+  // Team
   {
     id: "damani-thomas",
     name: "Damani Thomas",
@@ -70,7 +69,6 @@ export const teamMembers: TeamMember[] = [
     bio: "Nafiz Mannan is a seasoned UX researcher, product designer, and entrepreneur with a deep passion for the intersection of music and technology. As the founder and CEO of Melabel, he has developed a platform that empowers artists with the tools and insights they need to navigate the evolving digital music landscape. With over 15 years of experience in UX design, he has worked on 100+ projects, spanning AI-driven interfaces, workflow automation, and media engagement strategies. His tenure as Senior UX Designer at Nielsen further solidified his expertise in data visualization, design thinking, and strategic user experience research.\n\nAt Pulp, Nafiz applies his extensive experience to shaping intuitive and impactful AI-driven user experiences. His deep understanding of how technology influences engagement allows him to create research-driven UX strategies that enhance Pulp's platform. By blending AI, user psychology, and strategic design, he ensures Pulp delivers seamless, data-informed experiences that optimize decision-making and communication. His ability to bridge the gap between technology, creativity, and business makes him an invaluable leader in building AI solutions that empower users to interact more effectively with language and media.",
     category: "team"
   },
-  
   // Board of Directors
   {
     id: "jeff-harris",

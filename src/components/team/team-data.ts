@@ -39,7 +39,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: "robin-isenstadt",
     name: "Robin Isenstadt",
-    position: "VP of Student Apprenticeships",
+    position: "Chief People Officer",
     photoUrl: "/team/Robin_Isenstadt.jpeg",
     bio: "Robin leads Pulp's student apprenticeship program, ensuring that students gain hands-on experience in AI, technology, and business while preparing for their future careers. She designs and oversees initiatives that connect students with real-world projects, matching them to the right opportunities based on their skills and career goals. Her expertise in workforce development ensures that apprentices at Pulp are not only learning but also making meaningful contributions to the company.\n\nWith a background in nonprofit leadership and youth career programs, Robin understands how to build scalable, impactful apprenticeship programs. She has successfully launched and managed workforce initiatives in New York City, helping students transition from education to employment. Her passion for mentorship and program design ensures that Pulp's apprenticeship program is structured for success, benefiting both the students and the company.",
     category: "team"
@@ -104,6 +104,14 @@ export const teamMembers: TeamMember[] = [
   },
   
   // Advisors
+  {
+    id: "clarisel-paulino",
+    name: "Clarisel Paulino",
+    position: "Senior Technical Advisor",
+    photoUrl: "/team/Clarisel_Paulino.jpeg",
+    bio: "Clarisel Paulino, as Senior Technical Advisor, guides the design, scalability, and reliability of Pulp’s language intelligence platform. With a background in software consulting and focus in DevOps, Clarisel brings her systems-focused approach and experience enabling engineering teams across industries like healthcare, multimedia, wholesale distribution, and market research.\n\nAt Pulp, Clarisel advises on best practices for system design, technical strategy, and operational reliability, while also leading efforts to evaluate and integrate emerging technologies that promote growth and innovation.\n\n Driven by a passion for building systems that last, Clarisel mentors engineers, bridges strategy with execution, and champions continuous improvement across the organization. \nHer goal is to ensure that every interaction powered by Pulp’s technology rests on a foundation of technical excellence.",
+    category: "advisors"
+  },
   {
     id: "kamy-akhavan",
     name: "Kamy Akhavan",
